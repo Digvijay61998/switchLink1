@@ -14,6 +14,7 @@ const ActiveScene = require("../../assets/icons/activeScene.png");
 const edit = require("../../assets/icons/edit.png");
 const editRoom = require("../../assets/icons/editRoom.png");
 const deleteRoom = require("../../assets/icons/deleteRoom.png");
+const arrow = require("../../assets/icons/arrow.png")
 
 
 
@@ -36,5 +37,6 @@ export default {
     scene,
     edit,
     editRoom,
-    deleteRoom
+    deleteRoom,
+    arrow
 }

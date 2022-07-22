@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View ,TouchableOpacity,} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import React from 'react'
 import { CustomHeader } from '../../common/component';
 import CustomRooms from './CustomRooms';
+import SetWifiCredentials from './SetWifi';
+import CreateNewRoom from './New Room'
+import AddRoom from './Add Device';
 
 const Home = (props) => {
   console.log("props",props);
@@ -39,7 +42,12 @@ const {navigation} = props;
   return (
     <View>
       <CustomHeader navigation={navigation}/>
-      {CustomRooms (props)}
+    {/* <  SetWifiCredentials props /> */}
+    {/* <CreateNewRoom props /> */}
+
+        <AddRoom prop />
+
+      {/* {CustomRooms (props)} */}
       {/* {renderHederComponents()} */}
     </View>
   )
