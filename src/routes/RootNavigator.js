@@ -33,7 +33,7 @@ const SplashStackScreen = (props) => {
 const RootNavigator = () => (
   <stack.Navigator
     screenOptions={{ headerShown: false }}
-    initialRouteName="SplashStackScreen"
+    initialRouteName="HomeNavigator"
   >
     <stack.Screen name="SplashStackScreen" component={SplashStackScreen} />
     <stack.Screen name="AuthStackScreen" component={AuthNavigator} />

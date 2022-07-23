@@ -1,7 +1,7 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
-import {Image} from 'react-native';
-import CustomDrawer from '../common/component/CustomDrawer';
+import {Image,View} from 'react-native';
+import {CustomDrawer,CustomHome} from '../common/component';
 import HomeScreen from '../screens/HomeScreen';
 import Scheduler from '../screens/Scheduler';
 import Scene from '../screens/Scene';
@@ -34,6 +34,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditRoom from '../screens/HomeScreen/EditRoom';
 import BoardName from '../screens/HomeScreen/BoardName';
+import { CustomHeader } from '../common/component';
 // import StoreInformastion from '../screens/Dashboard/StoreInformastion';
 // import MyOrder from '../screens/Dashboard/MyOrder';
 // import AddProduct from '../screens/Dashboard/AddProduct';
@@ -44,12 +45,39 @@ const RootStackNavigator = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+const AddStackRoom =()=>{
+  return(
+  < View style={{flex:1 }}>
+        <CustomHome prop />
+<RootStackNavigator.Navigator
+initialRouteName="EditRoom">
+<RootStackNavigator.Screen
+  name="EditRoom"
+  component={EditRoom}
+  options={{gestureEnabled: false, headerShown: false}}
+/>
+<RootStackNavigator.Screen
+  name="BoardName"
+  component={BoardName}
+  options={{gestureEnabled: false, headerShown: false}}
+/>
+{/* <RootStackNavigator.Screen
+  name="CustomRooms"
+  component={CustomRooms}
+  options={{gestureEnabled: false, headerShown: false}}
+/> */}
+</RootStackNavigator.Navigator>
+</View>
+  )
+}
+
 const EditRoomBoard = props => {
   return (
+    <>
     <RootStackNavigator.Navigator
     options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="EditRoom">
-      <RootStackNavigator.Screen
+      {/* <RootStackNavigator.Screen
         name="EditRoom"
         component={EditRoom}
         options={{gestureEnabled: false, headerShown: false}}
@@ -58,8 +86,9 @@ const EditRoomBoard = props => {
         name="BoardName"
         component={BoardName}
         options={{gestureEnabled: false, headerShown: false}}
-      />
+      /> */}
     </RootStackNavigator.Navigator>
+    </>
   );
 };
 const RootBottomTabStack = props => {
@@ -73,8 +102,8 @@ const RootBottomTabStack = props => {
         options={{gestureEnabled: false, headerShown: false}}
       />
         <RootStackNavigator.Screen
-        name="EditRoomBoard"
-        component={EditRoomBoard}
+        name="AddStackRoom"
+        component={AddStackRoom}
         options={{gestureEnabled: false, headerShown: false}}
       />
     </RootStackNavigator.Navigator>
@@ -139,6 +168,8 @@ const FourthBottomTabStack = props => {
 
 const BottomTabsStackScreen = props => {
   return (
+    <>
+    <CustomHeader navigation={props.navigation}/>
     <Tab.Navigator
       initialRouteName="RootBottomTabStack"
       tabBarOptions={{
@@ -261,6 +292,7 @@ const BottomTabsStackScreen = props => {
         }}
       />
     </Tab.Navigator>
+    </>
   );
 };
 

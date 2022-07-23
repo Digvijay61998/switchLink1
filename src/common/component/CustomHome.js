@@ -58,6 +58,7 @@ import { FlipInEasyX } from 'react-native-reanimated';
 
 import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 import { animatedStyles, scrollInterpolator } from '../../utils/animation';
+import { COLORS, Scale, verticalScale } from '../constants';
 
 // import { scrollInterpolator, animatedStyles } from './utils/animations';
 
@@ -134,21 +135,19 @@ export default class CustomHome extends Component {
   render() {
     return (
       <>
-      <View style={{height:"100%",backgroundColor:"rgba(99, 91, 255, 0.15)"}}>
+      <View style={{height:verticalScale(220),backgroundColor:COLORS.secondary}}>
 
-      <View style={{height:"20%",backgroundColor:'#b5aae4',borderBottomLeftRadius:50,position: "relative"}}>
-      <Text style={{color:"black",fontSize:30,fontWeight:"700",padding:20,}}>Add Device</Text>
-      
+      <View style={{height:verticalScale(130),backgroundColor:'#b5aae4',borderBottomLeftRadius:Scale(50),position: "relative"}}>
       </View>
       <View style={{ position: "absolute",
-    zIndex: 1,top:100
+    zIndex: 1,top:verticalScale(50)
     }}>
         <Carousel
           ref={(c) => this.carousel = c}
           data={DATA}
           renderItem={this._renderItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
+          sliderWidth={Scale(375)}
+          itemWidth={Scale(300)}
           containerCustomStyle={styles.carouselContainer}
           inactiveSlideShift={0}
           onSnapToItem={(index) => this.setState({ index })}
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   itemContainer: {
-    width: ITEM_WIDTH,
+    width: Scale(300),
     height: 150,
     backgroundColor: 'white',
     borderRadius:34,

@@ -82,7 +82,7 @@ const renderSwitches = (item) => {
       />
       <View style={{width:Scale(45),flexDirection:"row",justifyContent:"space-between",marginLeft:Scale(80)}}>
           <TouchableOpacity
-          onPress={() => props.navigation.navigate("EditRoomBoard")}
+          onPress={() => props.navigation.navigate("AddStackRoom")}
           >
         <Image source={ICONS.editRoom} resizeMode="contain" />
         </TouchableOpacity>

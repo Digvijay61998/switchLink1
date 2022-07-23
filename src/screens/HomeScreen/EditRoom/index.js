@@ -59,6 +59,8 @@ const EditRoom = (props) => {
             // navigation: "UserChat",
           },
     ]
+
+// add new custom room
     const addnewDevice =(item)=>{
         return(
             <View style={{width:Scale(330),height:verticalScale(70),backgroundColor:"white",marginBottom:Scale(20),alignItems:"center",justifyContent:"space-around",flexDirection:"row",borderRadius:Scale(10)}}>
@@ -74,16 +76,10 @@ const EditRoom = (props) => {
             </View>
         )
     }
-    const Carouscel =()=>{
-        return(
-            <View style={{width:Scale(375),height:verticalScale(170),backgroundColor:"white"}}>
-              
-            </View>
-        )
-    }
+// custom room switch
     const Devices =()=>{
         return(
-            <View style={{width:Scale(375),height:verticalScale(650),backgroundColor:"#d3c1fe",flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
+            <View style={{width:Scale(375),height:verticalScale(430),backgroundColor:COLORS.secondary,flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
             <View style={{width:Scale(375),height:verticalScale(70),flexDirection:"row",justifyContent:"space-around",alignItems:"center"}}> 
                 <Text style={{fontWeight:"500",fontSize:Scale(20),color:"black"}}>Devices</Text>
                 <TouchableOpacity 
@@ -110,11 +106,7 @@ const EditRoom = (props) => {
         )
     }
   return (
-    <>
-    <CustomHeader navigation={navigation}/>
-    <Carouscel />
     <Devices/>
-    </>
   )
 }
 

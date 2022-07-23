@@ -1,83 +1,59 @@
-import { StyleSheet, Text, View ,TouchableOpacity,} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-import React from 'react'
-import { CustomHeader } from '../../common/component';
+import React from 'react';
+import {CustomHome} from '../../common/component';
 import CustomRooms from './CustomRooms';
 import SetWifiCredentials from './SetWifi';
-import CreateNewRoom from './New Room'
+import CreateNewRoom from './New Room';
 import AddRoom from './Add Device';
+import {createStackNavigator} from '@react-navigation/stack';
+import EditRoom from './EditRoom';
+import BoardName from './BoardName';
 
-const Home = (props) => {
-  console.log("props",props);
-const {navigation} = props;
-    const renderHederComponents = () => {
-        return (
-          <LinearGradient
-            colors={["#3B70C0", "#A44296"]}
-            style={styles.renderHeaderContainer}
-          >
-            <View style={styles.headerContainerLogo}>
-              <TouchableOpacity
-                style={styles.menuIconContainer}
-                onPress={() => props.navigation.goBack(null)}
-              >
-                {/* <Image style={styles.menuIcon} source={IMAGECONST.LEFTICON} /> */}
-              </TouchableOpacity>
-              <Text style={styles.storeTextName}>Profile</Text>
-              <TouchableOpacity
-                style={styles.menuIconRightContainer}
-                onPress={() => navigation.navigate("Notifications")}
-              >
-                {/* <Image
-                  style={[styles.menuIcon, { width: SWidth(15) }]}
-                  source={IMAGECONST.NOTFICON}
-                /> */}
-              </TouchableOpacity>
-            </View>
-          </LinearGradient>
-        );
-      };
-      
+const HomeStackNavigator = createStackNavigator();
+
+const Home = props => {
+  console.log('props', props);
+  const {navigation} = props;
+
   return (
-    <View>
-      <CustomHeader navigation={navigation}/>
-    {/* <  SetWifiCredentials props /> */}
-    {/* <CreateNewRoom props /> */}
+    <View style={{flex: 1}}>
+      {/* <SetWifiCredentials props /> */}
+      {/* <CreateNewRoom props /> */}
 
-        <AddRoom prop />
-
-      {/* {CustomRooms (props)} */}
+      <AddRoom prop />
+      {/* {CustomRooms(props)} */}
       {/* {renderHederComponents()} */}
     </View>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 const styles = StyleSheet.create({
-    // renderHeaderContainer: {
-    //     paddingBottom: SHeight(2),
-    //     borderBottomLeftRadius: Scale(10),
-    //     borderBottomRightRadius: Scale(10),
-    //   },
-    //   headerContainerLogo: {
-    //     alignItems: "center",
-    //     marginTop: SHeight(3),
-    //   },
-    //   menuIconContainer: {
-    //     position: "absolute",
-    //     left: SWidth(2.5),
-    //   },
-    //   storeTextName: {
-    //     fontSize: Scale(22),
-    //     fontWeight: "600",
-    //     lineHeight: Scale(30),
-    //     fontFamily: "Metropolis-SemiBold",
-    //     color: "#FFFFFF",
-    //   },
-    //   menuIconRightContainer: {
-    //     position: "absolute",
-    //     right: SWidth(2.5),
-    //   },
-})
+  // renderHeaderContainer: {
+  //     paddingBottom: SHeight(2),
+  //     borderBottomLeftRadius: Scale(10),
+  //     borderBottomRightRadius: Scale(10),
+  //   },
+  //   headerContainerLogo: {
+  //     alignItems: "center",
+  //     marginTop: SHeight(3),
+  //   },
+  //   menuIconContainer: {
+  //     position: "absolute",
+  //     left: SWidth(2.5),
+  //   },
+  //   storeTextName: {
+  //     fontSize: Scale(22),
+  //     fontWeight: "600",
+  //     lineHeight: Scale(30),
+  //     fontFamily: "Metropolis-SemiBold",
+  //     color: "#FFFFFF",
+  //   },
+  //   menuIconRightContainer: {
+  //     position: "absolute",
+  //     right: SWidth(2.5),
+  //   },
+});
