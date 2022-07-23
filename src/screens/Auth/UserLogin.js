@@ -30,7 +30,7 @@ export default function UserLogin (props){
         email: input,
         password: val.password
       }
-      props.navigation.navigate("HomeScreen");
+      props.navigation.replace("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
     }

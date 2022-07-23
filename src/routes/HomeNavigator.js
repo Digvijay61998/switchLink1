@@ -33,6 +33,7 @@ import {ICONS, Scale,verticalScale} from "../common/constants";
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditRoom from '../screens/HomeScreen/EditRoom';
+import BoardName from '../screens/HomeScreen/BoardName';
 // import StoreInformastion from '../screens/Dashboard/StoreInformastion';
 // import MyOrder from '../screens/Dashboard/MyOrder';
 // import AddProduct from '../screens/Dashboard/AddProduct';
@@ -43,10 +44,28 @@ const RootStackNavigator = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+const EditRoomBoard = props => {
+  return (
+    <RootStackNavigator.Navigator
+    options={{gestureEnabled: false, headerShown: false}}
+      initialRouteName="EditRoom">
+      <RootStackNavigator.Screen
+        name="EditRoom"
+        component={EditRoom}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+        <RootStackNavigator.Screen
+        name="BoardName"
+        component={BoardName}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+    </RootStackNavigator.Navigator>
+  );
+};
 const RootBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="HomeScreen">
       <RootStackNavigator.Screen
         name="HomeScreen"
@@ -54,8 +73,8 @@ const RootBottomTabStack = props => {
         options={{gestureEnabled: false, headerShown: false}}
       />
         <RootStackNavigator.Screen
-        name="EditRoom"
-        component={EditRoom}
+        name="EditRoomBoard"
+        component={EditRoomBoard}
         options={{gestureEnabled: false, headerShown: false}}
       />
     </RootStackNavigator.Navigator>
@@ -121,7 +140,7 @@ const FourthBottomTabStack = props => {
 const BottomTabsStackScreen = props => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="RootBottomTabStack"
       tabBarOptions={{
         style: {
           height: verticalScale(30),

@@ -5,7 +5,9 @@ export const COLORS = {
     primary: "#FFFF",     // background Color
     secondary: "#0C2F81",   // Dark purple
     button:["#A75FFF","#A75FFF","#635BFF","#635BFF"],
-    purple:"#A75FFF"
+    purple:"#A75FFF",
+    lightPurple:"#635BFF",
+    link:"#5e75ec"
     
 };
 export const CONTAINER = {

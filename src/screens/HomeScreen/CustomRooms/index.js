@@ -8,7 +8,8 @@ const CustomRooms = (props) => {
     console.log("props",props);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-const data =[
+
+    const data =[
     {
         id: 1,
         // image: IMAGECONST.HOME_IN_ACT,
@@ -81,7 +82,7 @@ const renderSwitches = (item) => {
       />
       <View style={{width:Scale(45),flexDirection:"row",justifyContent:"space-between",marginLeft:Scale(80)}}>
           <TouchableOpacity
-          onPress={() => props.navigation.navigate("EditRoom")}
+          onPress={() => props.navigation.navigate("EditRoomBoard")}
           >
         <Image source={ICONS.editRoom} resizeMode="contain" />
         </TouchableOpacity>
