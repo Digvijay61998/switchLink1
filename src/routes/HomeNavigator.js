@@ -35,6 +35,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditRoom from '../screens/HomeScreen/EditRoom';
 import BoardName from '../screens/HomeScreen/BoardName';
 import { CustomHeader } from '../common/component';
+// import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
 // import StoreInformastion from '../screens/Dashboard/StoreInformastion';
 // import MyOrder from '../screens/Dashboard/MyOrder';
 // import AddProduct from '../screens/Dashboard/AddProduct';
@@ -48,7 +49,7 @@ const Tab = createBottomTabNavigator();
 const AddStackRoom =()=>{
   return(
   < View style={{flex:1 }}>
-        <CustomHome prop />
+        <CustomHome props />
 <RootStackNavigator.Navigator
 initialRouteName="EditRoom">
 <RootStackNavigator.Screen
@@ -57,10 +58,16 @@ initialRouteName="EditRoom">
   options={{gestureEnabled: false, headerShown: false}}
 />
 <RootStackNavigator.Screen
-  name="BoardName"
-  component={BoardName}
+       name="BoardName"
+        component={BoardName}
+       options={{gestureEnabled: false, headerShown: false}}
+     /> 
+{/* <RootStackNavigator.Screen
+  name="BarCodeScanner"
+  component={BarCodeScanner}
   options={{gestureEnabled: false, headerShown: false}}
-/>
+/> */}
+
 {/* <RootStackNavigator.Screen
   name="CustomRooms"
   component={CustomRooms}
@@ -82,15 +89,18 @@ const EditRoomBoard = props => {
         component={EditRoom}
         options={{gestureEnabled: false, headerShown: false}}
       />
-        <RootStackNavigator.Screen
-        name="BoardName"
-        component={BoardName}
-        options={{gestureEnabled: false, headerShown: false}}
-      /> */}
+      //   <RootStackNavigator.Screen
+      //   name="BoardName"
+      //   component={BoardName}
+      //   options={{gestureEnabled: false, headerShown: false}}
+      // /> */}
+  
     </RootStackNavigator.Navigator>
     </>
   );
 };
+
+
 const RootBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
@@ -106,6 +116,11 @@ const RootBottomTabStack = props => {
         component={AddStackRoom}
         options={{gestureEnabled: false, headerShown: false}}
       />
+      {/* <RootStackNavigator.Screen
+  name="BarCodeScanner"
+  component={BarCodeScanner}
+  options={{gestureEnabled: false, headerShown: false}}
+/> */}
     </RootStackNavigator.Navigator>
   );
 };

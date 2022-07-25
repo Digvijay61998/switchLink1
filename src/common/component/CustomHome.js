@@ -103,9 +103,9 @@ const DATA = [
     },
     
 ];
-for (let i = 0; i < 10; i++) {
-  DATA.push(i)
-}
+// for (let i = 0; i < 10; i++) {
+//   DATA.push(i)
+// }
 
 export default class CustomHome extends Component {
   

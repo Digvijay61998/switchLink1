@@ -5,6 +5,7 @@ import { COLORS, Scale, verticalScale } from '../../../common/constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const EditRoom = (props) => {
+  console.log("editProps",props);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
