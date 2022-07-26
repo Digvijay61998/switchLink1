@@ -16,7 +16,13 @@ const editRoom = require('../../assets/icons/editRoom.png');
 const deleteRoom = require('../../assets/icons/deleteRoom.png');
 const arrow = require('../../assets/icons/arrow.png');
 const bulb = require('../../assets/icons/bulb.png');
+<<<<<<< HEAD
 const switchBoard = require('../../assets/icons/switchboard.png');
+=======
+const unTick = require('../../assets/icons/unTick.png');
+const tick = require('../../assets/icons/tick.png');
+
+>>>>>>> devlopment
 
 export default {
   SwitchLogo,
@@ -37,5 +43,10 @@ export default {
   deleteRoom,
   arrow,
   bulb,
+<<<<<<< HEAD
   switchBoard
+=======
+  unTick,
+  tick
+>>>>>>> devlopment
 };

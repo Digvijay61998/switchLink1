@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View ,Image,FlatList,Switch} from 'react-native'
+import { StyleSheet, Text, View ,Image,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale } from '../../../common/constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const CustomRooms = (props) => {
     console.log("props",props);

@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View ,Image,FlatList,Switch,TextInput} from 'react-native'
+import { StyleSheet, Text, View ,Image,FlatList,TouchableOpacity,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../common/constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
