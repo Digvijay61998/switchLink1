@@ -49,14 +49,12 @@ const ConfirmBoardDetails = () => {
     return(
         <>
         <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450),justifyContent:'center'}}>
-    <View style={{padding:13,display:'flex',flexDirection:'column',justifyContent:"space-around",height:Scale(130)}}>
-<View>
-<Text style={{fontSize:25,color:"black"}}>Confirm Board Details</Text>
-
-</View>
-     <View style={styles.box}>
+    <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130),paddingLeft:20}}>
+<Text style={{fontSize:25,color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
+<View style={styles.box}>
      <Text style={{fontSize:18,color:"black",paddingLeft:Scale(10)}}>Board 1</Text>
      </View>
+    
     </View>
     <Text style={{fontSize:16,color:"grey",paddingLeft:Scale(20),marginBottom:Scale(10)}}>Switches on the board</Text>
 
@@ -81,11 +79,10 @@ export default ConfirmBoardDetails
 const styles = StyleSheet.create({
    box:{
     height: Scale(50),
-    width: Scale(320),
+    width: Scale(330),
     borderRadius: 8,
     backgroundColor: 'white',
-    position: 'relative',
-    justifyContent: 'center',
+    justifyContent: 'center', 
    },
    switchIcons: {
     width: Scale(30),
