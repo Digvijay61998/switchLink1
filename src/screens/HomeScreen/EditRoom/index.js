@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View ,FlatList,Switch} from 'react-native'
+import { StyleSheet, Text, View ,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
 import { CustomHeader } from "../../../common/component";
 import { COLORS, Scale, verticalScale } from '../../../common/constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const EditRoom = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);

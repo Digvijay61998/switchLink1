@@ -8,7 +8,9 @@ export const COLORS = {
   purple: '#A75FFF',
   lightPurple: '#635BFF',
   link: '#5e75ec',
-  black: 'black',
+    black: 'black',
+    input: '#F8FAFD',
+    time:'#939598'
 };
 export const CONTAINER = {
   flex: 1,

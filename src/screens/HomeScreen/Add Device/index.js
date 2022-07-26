@@ -13,7 +13,7 @@ const AddRoom = props => {
   return (
     <>
       <CustomHome />
-      {/* <View style={{paddingLeft:20,paddingBottom:15}}>
+      <View style={{paddingLeft:20,paddingBottom:15}}>
         <Text style={{color:"black",fontSize:30}}>
             Select Device
         </Text>
@@ -42,9 +42,9 @@ const AddRoom = props => {
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
-    </View> */}
+    </View>
 
-      <View style={{paddingLeft: 20, paddingBottom: 15}}>
+      {/* <View style={{paddingLeft: 20, paddingBottom: 15}}>
         <Text style={{color: 'black', fontSize: 30}}>Add Board</Text>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -61,7 +61,7 @@ const AddRoom = props => {
             <Text style={{color: 'white', fontSize: 17}}>Scan Board</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
     </>
   );
 };
