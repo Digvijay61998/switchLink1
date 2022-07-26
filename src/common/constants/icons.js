@@ -19,6 +19,11 @@ const bulb = require('../../assets/icons/bulb.png');
 const switchBoard = require('../../assets/icons/switchboard.png');
 const unTick = require('../../assets/icons/unTick.png');
 const tick = require('../../assets/icons/tick.png');
+const tv = require('../../assets/icons/tv.png');
+const fan = require('../../assets/icons/fan.png');
+const camera = require('../../assets/icons/camera.png');
+const alarm = require('../../assets/icons/alarm.png');
+
 
 
 export default {
@@ -43,4 +48,8 @@ export default {
   switchBoard,
   unTick,
   tick,
+  tv,
+  fan,
+  camera,
+  alarm
 };

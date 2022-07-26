@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {CustomHome, SetSchedule,Confirmation,ConfirmPin} from '../../common/component';
+import {CustomHome, SetSchedule,Confirmation,ConfirmPin,EditSwitch} from '../../common/component';
 import {COLORS, Scale, verticalScale, ICONS} from '../../common/constants';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 const Scheduler = props => {
@@ -162,6 +162,7 @@ const Scheduler = props => {
       <SetSchedule setSchedule={false} />
       <Confirmation confirm={false} />
       <ConfirmPin confirmPin={false}/>
+      <EditSwitch editSwitch={true}/>
     </>
   );
 };

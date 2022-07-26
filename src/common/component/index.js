@@ -5,4 +5,5 @@ import SetSchedule from './SetSchedule';
 import Confirmation from "./Confirmation"
 import ConfirmPin from './ConfirmPin'
 import AddFavSwitch from './AddFavSwitch'
-export {CustomDrawer, CustomHeader, CustomHome, SetSchedule,Confirmation,ConfirmPin,AddFavSwitch};
+import EditSwitch from './EditSwitch';
+export {CustomDrawer, CustomHeader, CustomHome, SetSchedule,Confirmation,ConfirmPin,AddFavSwitch,EditSwitch};

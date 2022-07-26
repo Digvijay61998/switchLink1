@@ -71,9 +71,10 @@ const ConfirmBoardDetails = () => {
 </View>
     </>
     )
-}
-export default ConfirmBoardDetails
-;
+    
+};
+
+export default ConfirmBoardDetails;
 
 
 const styles = StyleSheet.create({
