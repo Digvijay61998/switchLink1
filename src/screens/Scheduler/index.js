@@ -43,6 +43,11 @@ const Scheduler = props => {
         day: 'SUN',
         active: true,
       },
+      {
+        id: 7,
+        day: 'SUN',
+        active: true,
+      },
     ];
     // shows the number of boards with there details
     const ScheduleBoard = () => {
@@ -162,7 +167,7 @@ const Scheduler = props => {
       <SetSchedule setSchedule={false} />
       <Confirmation confirm={false} />
       <ConfirmPin confirmPin={false}/>
-      <EditSwitch editSwitch={true}/>
+      <EditSwitch editSwitch={false}/>
     </>
   );
 };

@@ -19,6 +19,14 @@ const data =[
         id: 4,
          Switch: "Switch 4",
       },
+      {
+        id: 5,
+         Switch: "Switch 5",
+      },
+      {
+        id: 6,
+         Switch: "Switch 6",
+      },
       
 ]
 
@@ -58,7 +66,7 @@ const ConfirmBoardDetails = () => {
     </View>
     <Text style={{fontSize:16,color:"grey",paddingLeft:Scale(20),marginBottom:Scale(10)}}>Switches on the board</Text>
 
-<View style={{alignItems:"center"}}>
+<View style={{alignItems:"center",height: verticalScale(240),marginBottom:verticalScale(30)}}>
 <FlatList
               data={data}
               keyExtractor={(item) => item.id}
