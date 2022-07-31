@@ -7,6 +7,7 @@ import Scheduler from '../screens/Scheduler';
 import Scene from '../screens/Scene';
 import Favorites from "../screens/Favorites"
 import Setting from '../screens/Setting';
+import ContactUs from '../screens/ContactUs';
 // import GetStartedScreen from '../screens/OnBoarding/GetStartedScreen';
 // import SelectRoleScreen from '../screens/OnBoarding/SelectRoleScreen';
 // import UserChat from '../screens/Dashboard/UserChat';
@@ -169,15 +170,24 @@ const ThardBottomTabStack = props => {
 };
 const FourthBottomTabStack = props => {
   return (
+    // <RootStackNavigator.Navigator
+    //   headerMode="none"
+    //   initialRouteName="Setting">
+    //   <RootStackNavigator.Screen
+    //     name="Setting"
+    //     component={Setting}
+    //     options={{gestureEnabled: false, headerShown: false}}
+    //   />
+    // </RootStackNavigator.Navigator>
     <RootStackNavigator.Navigator
-      headerMode="none"
-      initialRouteName="Setting">
-      <RootStackNavigator.Screen
-        name="Setting"
-        component={Setting}
-        options={{gestureEnabled: false, headerShown: false}}
-      />
-    </RootStackNavigator.Navigator>
+    headerMode="none"
+    initialRouteName="ContactUs">
+    <RootStackNavigator.Screen
+      name="ContactUs"
+      component={ContactUs}
+      options={{gestureEnabled: false, headerShown: false}}
+    />
+  </RootStackNavigator.Navigator>
   );
 };
 

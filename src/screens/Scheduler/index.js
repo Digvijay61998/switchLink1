@@ -43,6 +43,11 @@ const Scheduler = props => {
         day: 'SUN',
         active: true,
       },
+      {
+        id: 7,
+        day: 'SUN',
+        active: true,
+      },
     ];
     // shows the number of boards with there details
     const ScheduleBoard = () => {
