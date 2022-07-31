@@ -162,7 +162,7 @@ const Scheduler = props => {
       <SetSchedule setSchedule={false} />
       <Confirmation confirm={false} />
       <ConfirmPin confirmPin={false}/>
-      <EditSwitch editSwitch={true}/>
+      <EditSwitch editSwitch={false}/>
     </>
   );
 };

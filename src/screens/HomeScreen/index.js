@@ -3,13 +3,13 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import React from 'react';
 import {CustomHome} from '../../common/component';
-import CustomRooms from './CustomRooms';
+import CustomRooms from './AddRoom/CustomRooms';
 import SetWifiCredentials from './SetWifi';
 import CreateNewRoom from './New Room';
 import AddRoom from './Add Device';
 import {createStackNavigator} from '@react-navigation/stack';
-import EditRoom from './EditRoom';
-import BoardName from './BoardName';
+// import EditRoom from './AddRoom/EditRoom';
+// import BoardName from './BoardName';
 
 const HomeStackNavigator = createStackNavigator();
 
@@ -22,8 +22,8 @@ const Home = props => {
       {/* <SetWifiCredentials props /> */}
       {/* <CreateNewRoom props /> */}
 
-      <AddRoom prop />
-      {/* {CustomRooms(props)} */}
+      {/* <AddRoom prop /> */}
+      {CustomRooms(props)}
       {/* {renderHederComponents()} */}
     </View>
   );

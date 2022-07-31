@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     height: 150,
     backgroundColor: 'white',
     borderRadius:34,
-    display:"flex",
     flexDirection:'column',
     padding:17,
     
