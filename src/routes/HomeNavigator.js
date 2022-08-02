@@ -129,7 +129,7 @@ const RootBottomTabStack = props => {
 const FristBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Scheduler">
       <RootStackNavigator.Screen
         name="Scheduler"
@@ -144,7 +144,7 @@ const FristBottomTabStack = props => {
 const SecandBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Scene">
       <RootStackNavigator.Screen
         name="Scene"
@@ -158,7 +158,7 @@ const SecandBottomTabStack = props => {
 const ThardBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Favorites">
       <RootStackNavigator.Screen
         name="Favorites"
@@ -173,15 +173,16 @@ const FourthBottomTabStack = props => {
     // <RootStackNavigator.Navigator
     //   headerMode="none"
     //   initialRouteName="Setting">
-    //   <RootStackNavigator.Screen
-    //     name="Setting"
-    //     component={Setting}
-    //     options={{gestureEnabled: false, headerShown: false}}
-    //   />
+ 
     // </RootStackNavigator.Navigator>
     <RootStackNavigator.Navigator
-    headerMode="none"
-    initialRouteName="ContactUs">
+    options={{gestureEnabled: false, headerShown: false}}
+      initialRouteName="Setting">
+      <RootStackNavigator.Screen
+        name="Setting"
+        component={Setting}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
     <RootStackNavigator.Screen
       name="ContactUs"
       component={ContactUs}

@@ -20,15 +20,15 @@ const Home = props => {
   return (
     <View style={{flex: 1}}>
       {/* <SetWifiCredentials props /> */}
-      {/* <CreateNewRoom props /> */}
+      <CreateNewRoom props />
 
       {/* <AddRoom prop /> */}
-      {CustomRooms(props)}
+      {/* {CustomRooms(props)} */}
       {/* {renderHederComponents()} */}
     </View>
   );
 };
-
+// #635BFF26
 export default Home;
 
 const styles = StyleSheet.create({

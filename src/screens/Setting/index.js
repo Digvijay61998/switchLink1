@@ -2,24 +2,43 @@ import { StyleSheet, Text, View ,Image,Switch} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS, ICONS, Scale, verticalScale } from '../../common/constants'
+import { COLORS,DARKCOLORS, ICONS, Scale, verticalScale ,appTheme} from '../../common/constants'
+import { useDispatch, useSelector } from "react-redux";
+import {
+  themeChange
+} from "../../redux/state/Theme/Actions";
 const Setting = (props) => {
-const {navigation} = props;
-const [isEnabled, setIsEnabled] = useState(false);
-const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  console.log("props", props);
+  const { navigation } = props;
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.Theme);
+  console.log("theme", theme);
+  dispatch(
+    themeChange({
+      data: { theme: isEnabled }
+    }),
+  );
+  const THEMECOLOR = (theme == true ? DARKCOLORS : COLORS)
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
     <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
+      style={{flex: 1}}
+    colors={appTheme('secondary')}
+    start={{ x: 1, y:0 }}
+    end={{ x: 0, y: 1 }}
+    >
+    <LinearGradient
+    colors={appTheme('header')}
       start={{ x: 0, y:1 }}
       end={{ x: 1, y: 0 }}
       style={styles.header}
       >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Scene</Text>
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Scene</Text>
       </LinearGradient>
     <View style={[styles.container, { flex: 1 }]}>
-        <View style={styles.userName}>
+        <View style={[styles.userName,{backgroundColor: appTheme('purple'),}]}>
           <Text style={{fontSize:Scale(18),fontWeight:'700'}}>AD</Text>
         </View>
         <Text style={{marginTop:verticalScale(10),fontSize:Scale(18)}}>Ashutosh Deshmukh</Text>
@@ -50,17 +69,17 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
         <Text style={{fontSize:15,color:'black'}}>Switch To Dark Mode</Text>
         <Switch
                     trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
-                    thumbColor={isEnabled ? "#A75FFF" : "#939598"}
+                    thumbColor={theme ? "#A75FFF" : "#939598"}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={toggleSwitch}
-                    value={isEnabled}
+                    value={theme}
                     style={{width:Scale(40)}}
                 />
         </View>
     </View>
       </View>
     
-      </View>
+      </LinearGradient>
   )
 }
 
@@ -88,7 +107,6 @@ const styles = StyleSheet.create({
     width: Scale(54),
     height: verticalScale(54),
     borderRadius: Scale(50),
-    backgroundColor: COLORS.purple,
     justifyContent: "center",
     alignItems:"center",
   }
