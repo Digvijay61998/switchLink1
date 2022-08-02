@@ -36,6 +36,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditRoom from '../screens/HomeScreen/EditRoom';
 import BoardName from '../screens/HomeScreen/BoardName';
 import { CustomHeader } from '../common/component';
+import AddBoard from '../screens/HomeScreen/Add Device/Add Board';
+import SelectDevice from '../screens/HomeScreen/Add Device/SelectDevice';
+import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
+import ConfirmBoardDetails from '../screens/HomeScreen/Add Device/ConfirmBoardDetails';
+import CreateNewRoom from '../screens/HomeScreen/New Room';
+import SetWifiCredentials from '../screens/HomeScreen/SetWifi';
 // import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
 // import StoreInformastion from '../screens/Dashboard/StoreInformastion';
 // import MyOrder from '../screens/Dashboard/MyOrder';
@@ -79,23 +85,72 @@ initialRouteName="EditRoom">
   )
 }
 
+const AddDeviceStack =()=>{
+  return(
+<RootStackNavigator.Navigator
+initialRouteName="CreateNewRoom">
+{/* <RootStackNavigator.Screen
+  name="SetWifiCredentials"
+  component={SetWifiCredentials}
+  options={{gestureEnabled: false, headerShown: false}}
+/> */}
+<RootStackNavigator.Screen
+       name="CreateNewRoom"
+        component={CreateNewRoom}
+       options={{gestureEnabled: false, headerShown: false}}
+     />
+     <RootStackNavigator.Screen
+       name="SelectDevice"
+        component={SelectDevice}
+       options={{gestureEnabled: false, headerShown: false}}
+     />
+<RootStackNavigator.Screen
+       name="AddBoard"
+        component={AddBoard}
+       options={{gestureEnabled: false, headerShown: false}}
+     /> 
+
+<RootStackNavigator.Screen
+       name="BarCodeScanner"
+        component={BarCodeScanner}
+       options={{gestureEnabled: false, headerShown: false}}
+     /> 
+<RootStackNavigator.Screen
+       name="ConfirmBoardDetails"
+        component={ConfirmBoardDetails}
+       options={{gestureEnabled: false, headerShown: false}}
+     /> 
+{/* <RootStackNavigator.Screen
+  name="BarCodeScanner"
+  component={BarCodeScanner}
+  options={{gestureEnabled: false, headerShown: false}}
+/> */}
+
+{/* <RootStackNavigator.Screen
+  name="CustomRooms"
+  component={CustomRooms}
+  options={{gestureEnabled: false, headerShown: false}}
+/> */}
+</RootStackNavigator.Navigator>
+  )
+}
+
 const EditRoomBoard = props => {
   return (
     <>
     <RootStackNavigator.Navigator
     options={{gestureEnabled: false, headerShown: false}}
-      initialRouteName="EditRoom">
-      {/* <RootStackNavigator.Screen
-        name="EditRoom"
-        component={EditRoom}
+      initialRouteName="CreateNewRoom">
+       {/* <RootStackNavigator.Screen
+        name="SetWifiCredentials"
+        component={SetWifiCredentials}
         options={{gestureEnabled: false, headerShown: false}}
-      />
-      //   <RootStackNavigator.Screen
-      //   name="BoardName"
-      //   component={BoardName}
-      //   options={{gestureEnabled: false, headerShown: false}}
-      // /> */}
-  
+      /> */}
+        <RootStackNavigator.Screen
+        name="CreateNewRoom"
+        component={CreateNewRoom}
+        options={{gestureEnabled: false, headerShown: false}}
+      /> 
     </RootStackNavigator.Navigator>
     </>
   );
@@ -115,6 +170,11 @@ const RootBottomTabStack = props => {
         <RootStackNavigator.Screen
         name="AddStackRoom"
         component={AddStackRoom}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+        <RootStackNavigator.Screen
+        name="AddDeviceStack"
+        component={AddDeviceStack}
         options={{gestureEnabled: false, headerShown: false}}
       />
       {/* <RootStackNavigator.Screen

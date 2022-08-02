@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, LogBox} from 'react-native';
 import React from 'react';
 import {CustomHome, SetSchedule,Confirmation,ConfirmPin,EditSwitch} from '../../common/component';
 import {COLORS, Scale, verticalScale, ICONS} from '../../common/constants';
@@ -50,7 +50,8 @@ const Scheduler = props => {
       },
     ];
     // shows the number of boards with there details
-    const ScheduleBoard = () => {
+    const ScheduleBoard = (props) => {
+      console.log('PROPS',props);
       return (
         <View style={styles.weeklyContainer}>
           <View style={styles.weeklyColumn}>

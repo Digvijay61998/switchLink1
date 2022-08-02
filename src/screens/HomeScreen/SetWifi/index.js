@@ -13,6 +13,8 @@ const data = [
     
   ];
 const SetWifiCredentials = (props) => {
+  console.log('propsasas',props);
+
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
     
@@ -91,7 +93,8 @@ const SetWifiCredentials = (props) => {
       />
       </View>
       <View style={{paddingTop:25}}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button}
+      onPress={()=> props.navigation.navigate('AddDeviceStack')}>
       <Text style={{color:'white'}}>Save</Text>
 
       </TouchableOpacity>

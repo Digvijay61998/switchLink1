@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+// import CreateNewRoom from "../screens/HomeScreen/New Room/index.js";
 // import AddAddress from "../screens/AddCard/AddAddress";
 // import AddCard from "../screens/AddCard/AddCard";
 // import MyAddress from "../screens/AddCard/MyAddress";
@@ -55,6 +56,8 @@ const RootNavigator = () => (
     <stack.Screen name="AddAddress" component={AddAddress} />
     <stack.Screen name="AddCard" component={AddCard} />
     <stack.Screen name="MyCart" component={MyCart} /> */}
+    {/* <stack.Screen name="CreateNewRoom" component={CreateNewRoom} /> */}
+
   </stack.Navigator>
 );
 

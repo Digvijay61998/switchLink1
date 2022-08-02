@@ -19,11 +19,11 @@ const Home = props => {
 
   return (
     <View style={{flex: 1}}>
-      {/* <SetWifiCredentials props /> */}
+      {SetWifiCredentials (props)}
       {/* <CreateNewRoom props /> */}
 
-      <AddRoom prop />
-      {/* {CustomRooms(props)} */}
+      {/* <AddRoom prop /> */}
+      {CustomRooms(props)}
       {/* {renderHederComponents()} */}
     </View>
   );

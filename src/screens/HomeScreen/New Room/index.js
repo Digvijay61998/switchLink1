@@ -90,7 +90,9 @@ const CreateNewRoom = (props) => {
       />
       </View>
       <View style={{paddingTop:25}}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button}
+          onPress={() => props.navigation.navigate("SelectDevice")}
+      >
       <Text style={{color:'white'}}>Save</Text>
 
       </TouchableOpacity>
