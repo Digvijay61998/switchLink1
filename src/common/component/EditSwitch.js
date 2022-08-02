@@ -3,6 +3,7 @@ import React from 'react'
 import { COLORS, Scale, verticalScale,ICONS } from '../constants';
 
 const EditSwitch = (props) => {
+    console.log('props',props);
     return props.editSwitch ? (
         <Modal transparent={true} visible={true}>
             <View style={styles.container}>
@@ -71,6 +72,7 @@ const EditSwitch = (props) => {
                           <Text style={{color:COLORS.black,fontSize:Scale(18)}}>Cancel</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
+                      onPress={()=>props.navigation.replace('ConfirmBoardDetails',{callbackConfirm:('callbackConfirm')})}
                       style={[styles.button,{backgroundColor:COLORS.black}]}
                       >
                           <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Done</Text>

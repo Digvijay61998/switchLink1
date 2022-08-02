@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale } from '../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale } from '../../../../common/constants'
 
 const CustomRooms = (props) => {
     console.log("props",props);
@@ -60,10 +60,12 @@ const CustomRooms = (props) => {
 ]
 const addNewRoom = () => {
     return(
-        <View style={styles.Fixbox}>
+        <TouchableOpacity 
+        onPress={()=>props.navigation.navigate('CreateNewRoom')}
+        style={styles.Fixbox}>
         <Image source={ICONS.edit} resizeMode="contain" style={{height:verticalScale(40), width:Scale(40)}}/>
         <Text style={styles.label}>Add New Room</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 const renderSwitches = (item) => {
@@ -81,7 +83,8 @@ const renderSwitches = (item) => {
       />
       <View style={{width:Scale(45),flexDirection:"row",justifyContent:"space-between",marginLeft:Scale(80)}}>
           <TouchableOpacity
-          onPress={() => props.navigation.navigate("AddStackRoom")}
+          // onPress={() => props.navigation.jumpTo("ConfirmBoardDetails")}
+          onPress={() => props.navigation.navigate('AddDeviceStack', { screen: 'ConfirmBoardDetails' })}
           >
         <Image source={ICONS.editRoom} resizeMode="contain" />
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,TouchableOpacity,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../../common/constants'
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
@@ -61,7 +61,15 @@ const CreateNewRoom = (props) => {
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
      <Text style={{fontFamily:'Montserrat -Thin',fontStyle: 'normal',fontWeight:'500',fontSize:24,color:"black"}}> Create a new screen </Text> 
      <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
-        <Dropdown
+     
+         <TextInput
+                        style={styles.dropdown}
+                        // onChangeText={onChangeNumber}
+                        // value={number}
+                        placeholder="Enter Room Name"
+                        keyboardType="alphabet"
+      />
+         <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
@@ -81,17 +89,10 @@ const CreateNewRoom = (props) => {
           }}
           
         />
-         <TextInput
-                        style={styles.dropdown}
-                        // onChangeText={onChangeNumber}
-                        // value={number}
-                        placeholder="Enter Password"
-                        keyboardType="numeric"
-      />
       </View>
       <View style={{paddingTop:25}}>
       <TouchableOpacity style={styles.button}
-          onPress={() => props.navigation.navigate("SelectDevice")}
+          onPress={() => props.navigation.navigate("AddDeviceStack")}
       >
       <Text style={{color:'white'}}>Save</Text>
 
@@ -167,7 +168,9 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
-        backgroundColor:'white'
+        backgroundColor:'white',
+        fontSize:Scale(16),
+        color:"#A7B0C0"
       },
       icon: {
         marginRight: 5,
@@ -194,6 +197,7 @@ const styles = StyleSheet.create({
       inputSearchStyle: {
         height: 40,
         fontSize: 16,
+
       },  
       button:{
         height: Scale(50),

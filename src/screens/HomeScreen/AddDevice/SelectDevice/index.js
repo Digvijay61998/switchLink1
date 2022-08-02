@@ -1,9 +1,9 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View ,TouchableOpacity} from "react-native";
 import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
 
 
-const SelectDevice = () => {
+const SelectDevice = (props) => {
 
     return(
         <>
@@ -14,11 +14,12 @@ const SelectDevice = () => {
         </Text>
         </View>
         <View style={{justifyContent:"center",alignItems:'center'}}>
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <TouchableOpacity 
+        onPress={()=>props.navigation.navigate('AddBoard')} style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:'black'}}>Switch Board</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
-        </View>
+        </TouchableOpacity>
 
         <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:'black'}}>Monitor Sensor</Text>

@@ -54,17 +54,11 @@
 
 import React, { Component } from 'react';
 import { Text, View, Dimensions, StyleSheet } from 'react-native';
-import { FlipInEasyX } from 'react-native-reanimated';
-
 import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 import { animatedStyles, scrollInterpolator } from '../../utils/animation';
 import { COLORS, Scale, verticalScale } from '../constants';
 
 // import { scrollInterpolator, animatedStyles } from './utils/animations';
-
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
 const DATA = [
  
@@ -172,7 +166,6 @@ const styles = StyleSheet.create({
     height: 150,
     backgroundColor: 'white',
     borderRadius:34,
-    display:"flex",
     flexDirection:'column',
     padding:17,
     

@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import {COLORS, ICONS, Scale, verticalScale} from '../../../common/constants';
 import CustomHome from '../../../common/component/CustomHome';
-import AddBoard from './Add Board';
+import AddBoard from './AddBoard';
 import SelectDevice from './SelectDevice';
 import BarCodeScanner from './BarCodeScanner';
 import ConfirmBoardDetails from './ConfirmBoardDetails';

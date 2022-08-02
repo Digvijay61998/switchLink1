@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,Switch,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../../common/constants'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Dropdown } from 'react-native-element-dropdown';
 
@@ -94,7 +94,7 @@ const SetWifiCredentials = (props) => {
       </View>
       <View style={{paddingTop:25}}>
       <TouchableOpacity style={styles.button}
-      onPress={()=> props.navigation.navigate('AddDeviceStack')}>
+      onPress={()=> props.navigation.navigate('CreateNewRoom')}>
       <Text style={{color:'white'}}>Save</Text>
 
       </TouchableOpacity>

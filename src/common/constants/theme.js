@@ -1,16 +1,36 @@
 import {Dimensions} from 'react-native';
 import Scale, {verticalScale} from './Scale';
+import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
-export const COLORS = {
+
+ 
+export const COLORS={
   primary: '#FFFF', // background Color
-  secondary: 'rgba(99, 91, 255, 0.15)', // Dark purple
+  secondary: ['#E5DFED', '#E5DFED'], // Dark purple
+  button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
+  header: ["#c5c0fe", "#edc1fe", "#ed86ff"],
+  headerFont:'black',
+  purple: '#A75FFF',
+  lightPurple: '#635BFF',
+  link: '#5e75ec',
+  black: 'black',
+  input: '#F8FAFD',
+  time: '#939598'
+}
+
+export const DARKCOLORS = {
+  primary: 'black', // background Color
+  secondary: ["#c5c0fe", "#edc1fe", "#ed86ff"], // Dark purple
+  header: ['#0D0D0D', "#0D0D0D", "#0D0D0D"],
+  headerFont:'white',
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   purple: '#A75FFF',
   lightPurple: '#635BFF',
   link: '#5e75ec',
-    black: 'black',
-    input: '#F8FAFD',
-    time:'#939598'
+  black: 'black',
+  input: '#F8FAFD',
+  time:'#939598'
 };
 export const CONTAINER = {
   flex: 1,
@@ -47,7 +67,13 @@ export const FONTS = {
     lineHeight: Scale(17),
   },
 };
+export const appTheme = (appTheme) => {
+  console.log("props#######################", appTheme);
+	var THEME = appTheme
+  const { theme } = useSelector((state) => state.Theme);
+      console.log("theme", theme);
+    const APPCOLORS = (theme == true ? DARKCOLORS[THEME] : COLORS[THEME])
+ return APPCOLORS
+  }
 
-const appTheme = {COLORS, FONTS, CONTAINER};
-
-export default appTheme;
+// export default {COLORS, FONTS, CONTAINER,appTheme};

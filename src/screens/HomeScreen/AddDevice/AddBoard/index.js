@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
 
 
-const AddBoard = () => {
+const AddBoard = (props) => {
 
     return(
         <>
@@ -23,7 +23,7 @@ const AddBoard = () => {
 
         <View style={{paddingTop: 25}}>
           <TouchableOpacity style={styles.button}
-          onPress={() => navigation.navigate("BarCodeScanner")}>
+          onPress={() => props.navigation.navigate("BarCodeScanner")}>
             <Text style={{color: 'white', fontSize: 17}}>Scan Board</Text>
           </TouchableOpacity>
         </View>

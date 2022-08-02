@@ -33,15 +33,18 @@ import ContactUs from '../screens/ContactUs';
 import {ICONS, Scale,verticalScale} from "../common/constants";
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import EditRoom from '../screens/HomeScreen/EditRoom';
-import BoardName from '../screens/HomeScreen/BoardName';
+import EditRoom from '../screens/HomeScreen/AddRoom/EditRoom';
+import BoardName from '../screens/HomeScreen/AddRoom/BoardName';
 import { CustomHeader } from '../common/component';
-import AddBoard from '../screens/HomeScreen/Add Device/Add Board';
-import SelectDevice from '../screens/HomeScreen/Add Device/SelectDevice';
-import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
-import ConfirmBoardDetails from '../screens/HomeScreen/Add Device/ConfirmBoardDetails';
-import CreateNewRoom from '../screens/HomeScreen/New Room';
-import SetWifiCredentials from '../screens/HomeScreen/SetWifi';
+import AddBoard from '../screens/HomeScreen/AddDevice/AddBoard';
+import SelectDevice from '../screens/HomeScreen/AddDevice/SelectDevice';
+import BarCodeScanner from '../screens/HomeScreen/AddDevice/BarCodeScanner';
+import ConfirmBoardDetails from '../screens/HomeScreen/AddDevice/ConfirmBoardDetails';
+import CreateNewRoom from '../screens/HomeScreen/AddDevice/NewRoom';
+import SetWifiCredentials from '../screens/HomeScreen/AddDevice/SetWifi';
+import CustomRooms from '../screens/HomeScreen/AddRoom/CustomRooms';
+// import CreateNewRoom from '../screens/HomeScreen/NewRoom';
+// import SetWifiCredentials from '../screens/HomeScreen/SetWifi';
 // import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
 // import StoreInformastion from '../screens/Dashboard/StoreInformastion';
 // import MyOrder from '../screens/Dashboard/MyOrder';
@@ -87,18 +90,16 @@ initialRouteName="EditRoom">
 
 const AddDeviceStack =()=>{
   return(
+  < View style={{flex:1 }}>
+    <CustomHome props />
 <RootStackNavigator.Navigator
-initialRouteName="CreateNewRoom">
+initialRouteName="SelectDevice">
+
 {/* <RootStackNavigator.Screen
-  name="SetWifiCredentials"
-  component={SetWifiCredentials}
-  options={{gestureEnabled: false, headerShown: false}}
-/> */}
-<RootStackNavigator.Screen
        name="CreateNewRoom"
         component={CreateNewRoom}
        options={{gestureEnabled: false, headerShown: false}}
-     />
+     /> */}
      <RootStackNavigator.Screen
        name="SelectDevice"
         component={SelectDevice}
@@ -126,36 +127,11 @@ initialRouteName="CreateNewRoom">
   options={{gestureEnabled: false, headerShown: false}}
 /> */}
 
-{/* <RootStackNavigator.Screen
-  name="CustomRooms"
-  component={CustomRooms}
-  options={{gestureEnabled: false, headerShown: false}}
-/> */}
+
 </RootStackNavigator.Navigator>
+</View>
   )
 }
-
-const EditRoomBoard = props => {
-  return (
-    <>
-    <RootStackNavigator.Navigator
-    options={{gestureEnabled: false, headerShown: false}}
-      initialRouteName="CreateNewRoom">
-       {/* <RootStackNavigator.Screen
-        name="SetWifiCredentials"
-        component={SetWifiCredentials}
-        options={{gestureEnabled: false, headerShown: false}}
-      /> */}
-        <RootStackNavigator.Screen
-        name="CreateNewRoom"
-        component={CreateNewRoom}
-        options={{gestureEnabled: false, headerShown: false}}
-      /> 
-    </RootStackNavigator.Navigator>
-    </>
-  );
-};
-
 
 const RootBottomTabStack = props => {
   return (
@@ -167,6 +143,16 @@ const RootBottomTabStack = props => {
         component={HomeScreen}
         options={{gestureEnabled: false, headerShown: false}}
       />
+      <RootStackNavigator.Screen
+       name="CreateNewRoom"
+        component={CreateNewRoom}
+       options={{gestureEnabled: false, headerShown: false}}
+     />
+       <RootStackNavigator.Screen
+          name="SetWifiCredentials"
+          component={SetWifiCredentials}
+          options={{gestureEnabled: false, headerShown: false}}
+        />
         <RootStackNavigator.Screen
         name="AddStackRoom"
         component={AddStackRoom}
@@ -177,6 +163,11 @@ const RootBottomTabStack = props => {
         component={AddDeviceStack}
         options={{gestureEnabled: false, headerShown: false}}
       />
+      <RootStackNavigator.Screen
+  name="CustomRooms"
+  component={CustomRooms}
+  options={{gestureEnabled: false, headerShown: false}}
+/>
       {/* <RootStackNavigator.Screen
   name="BarCodeScanner"
   component={BarCodeScanner}
@@ -189,7 +180,7 @@ const RootBottomTabStack = props => {
 const FristBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Scheduler">
       <RootStackNavigator.Screen
         name="Scheduler"
@@ -204,7 +195,7 @@ const FristBottomTabStack = props => {
 const SecandBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Scene">
       <RootStackNavigator.Screen
         name="Scene"
@@ -218,7 +209,7 @@ const SecandBottomTabStack = props => {
 const ThardBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
-      headerMode="none"
+    options={{gestureEnabled: false, headerShown: false}}
       initialRouteName="Favorites">
       <RootStackNavigator.Screen
         name="Favorites"
@@ -233,15 +224,16 @@ const FourthBottomTabStack = props => {
     // <RootStackNavigator.Navigator
     //   headerMode="none"
     //   initialRouteName="Setting">
-    //   <RootStackNavigator.Screen
-    //     name="Setting"
-    //     component={Setting}
-    //     options={{gestureEnabled: false, headerShown: false}}
-    //   />
+ 
     // </RootStackNavigator.Navigator>
     <RootStackNavigator.Navigator
-    headerMode="none"
-    initialRouteName="ContactUs">
+    options={{gestureEnabled: false, headerShown: false}}
+      initialRouteName="Setting">
+      <RootStackNavigator.Screen
+        name="Setting"
+        component={Setting}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
     <RootStackNavigator.Screen
       name="ContactUs"
       component={ContactUs}
@@ -402,6 +394,7 @@ const HomeNavigator = () => (
       // component={props => <MainStackScreen {...props}/>}
       component={BottomTabsStackScreen}
     />
+    
     {/* <DrawerStack.Screen name="HomeScreen" component={HomeScreen} /> */}
   </DrawerStack.Navigator>
 );

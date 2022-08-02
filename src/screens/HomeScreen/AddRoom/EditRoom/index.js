@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
-import { CustomHeader } from "../../../common/component";
-import { COLORS, Scale, verticalScale } from '../../../common/constants';
+import { CustomHeader } from "../../../../common/component";
+import { COLORS, Scale, verticalScale } from '../../../../common/constants';
 
 const EditRoom = (props) => {
   console.log("editProps",props);

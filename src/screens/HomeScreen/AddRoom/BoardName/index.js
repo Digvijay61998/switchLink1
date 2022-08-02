@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image, Switch} from 'react-native';
 import React, {useState} from 'react';
-import {COLORS, ICONS, Scale, verticalScale} from '../../../common/constants';
+import {COLORS, ICONS, Scale, verticalScale} from '../../../../common/constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const BoardName = () => {
