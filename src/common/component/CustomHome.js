@@ -56,7 +56,7 @@ import React, { Component } from 'react';
 import { Text, View, Dimensions, StyleSheet } from 'react-native';
 import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 import { animatedStyles, scrollInterpolator } from '../../utils/animation';
-import { COLORS, Scale, verticalScale } from '../constants';
+import { COLORS, Scale, verticalScale ,appTheme} from '../constants';
 
 // import { scrollInterpolator, animatedStyles } from './utils/animations';
 

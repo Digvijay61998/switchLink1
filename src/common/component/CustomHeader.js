@@ -1,22 +1,21 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import {Scale,verticalScale,IMAGE,ICONS } from "../constants"
-// import * as IMAGECONST from "../../src/theme/ImageConstants";
-const CustomHeader = ({navigation}) => {
+import { View,TouchableOpacity, StyleSheet, Image } from "react-native";
+import {Scale,verticalScale,appTheme,appImage,appIcons} from "../constants"
+
+const CustomHeader = ({ navigation }) => {
   
   return (
-      <View style={styles.buttonContainer}>
+      <View style={[styles.buttonContainer,{backgroundColor:appTheme('primary')}]}>
         <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Image style={styles.avatarIcon} source={ICONS.backButton} />
+          <Image style={styles.avatarIcon} source={appIcons('backButton')} />
         </TouchableOpacity>
         <View style={styles.headerTextContainer}>
-        <Image style={styles.headerLogo} source={IMAGE.SwitchlinkLogo} />
+        <Image style={styles.headerLogo} source={appImage('SwitchlinkLogo')} />
         </View>
           <TouchableOpacity
           onPress={() =>navigation.openDrawer()}
           >
-            <Image style={styles.notfIcon} source={ICONS.drower} />
+            <Image style={styles.notfIcon} source={appIcons('drower')} />
           </TouchableOpacity>
     </View>
   );

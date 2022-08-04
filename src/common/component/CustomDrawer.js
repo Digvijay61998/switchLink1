@@ -8,9 +8,11 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import {Scale,verticalScale,IMAGE } from "../constants"
+import {Scale,verticalScale,IMAGE ,appTheme} from "../constants"
 // import * as IMAGECONST from "../theme/ImageConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 
 const drawerData = [
   {
@@ -63,17 +65,15 @@ const drawerData = [
   },
 ];
 
-export default class CustomDrawer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+ 
+export default function CustomDrawer (props) {
 
 
-  renderTopConatiner = () => {
+  const RenderTopConatiner = () => {
     return (
       <View style={styles.menuWrapper}>
         <View>
-          <TouchableOpacity onPress={() => this.props.navigation.closeDrawer()}>
+          <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
             {/* <Image
               style={styles.closeDrawerIcon}
               source={IMAGE.profile}
@@ -99,7 +99,7 @@ export default class CustomDrawer extends React.Component {
     );
   };
 
-  renderDrawerCell = (item) => {
+  const renderDrawerCell = (item) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -114,12 +114,12 @@ export default class CustomDrawer extends React.Component {
     );
   };
 
-  renderDrawerContainer = () => {
+  const RenderDrawerContainer = () => {
     return (
       <View style={styles.renderCategoriesListContainer}>
         <FlatList
           data={drawerData}
-          renderItem={({ item }) => this.renderDrawerCell(item)}
+          renderItem={({ item }) => renderDrawerCell(item)}
           // horizontal={true}
           scrollEnabled={false}
           numColumns={1}
@@ -129,17 +129,15 @@ export default class CustomDrawer extends React.Component {
     );
   };
 
-  render() {
     return (
       <>
-        {this.renderTopConatiner()}
+        <RenderTopConatiner />
         <ScrollView style={{ flex: 1 }}>
-          {this.renderDrawerContainer()}
+          <RenderDrawerContainer />
         </ScrollView>
       </>
     );
   }
-}
 
 const styles = StyleSheet.create({
   menuWrapper: {

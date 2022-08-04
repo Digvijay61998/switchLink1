@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View, Image, LogBox} from 'react-native';
 import React from 'react';
 import {CustomHome, SetSchedule,Confirmation,ConfirmPin,EditSwitch} from '../../common/component';
-import {COLORS, Scale, verticalScale, ICONS} from '../../common/constants';
-import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import {COLORS, Scale, verticalScale, ICONS,appTheme} from '../../common/constants';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient'
+
 const Scheduler = props => {
   const {navigation} = props;
 
@@ -46,13 +48,12 @@ const Scheduler = props => {
     ];
     // shows the number of boards with there details
     const ScheduleBoard = (props) => {
-      console.log('PROPS',props);
       return (
-        <View style={styles.weeklyContainer}>
+        <View style={[styles.weeklyContainer,{backgroundColor:appTheme('primary')}]}>
           <View style={styles.weeklyColumn}>
             <Text
               style={{
-                color: COLORS.purple,
+                color: appTheme('purple'),
                 fontWeight: '400',
                 fontSize: Scale(16),
               }}>
@@ -70,7 +71,7 @@ const Scheduler = props => {
                 style={{
                   fontSize: Scale(16),
                   fontWeight: '400',
-                  color: COLORS.black,
+                  color: appTheme('font'),
                 }}>
                 Main Tubelight
               </Text>
@@ -126,20 +127,24 @@ const Scheduler = props => {
       );
     };
     return (
-      <View style={styles.container}>
+      <LinearGradient
+      colors={appTheme('secondary')}
+        start={{ x: 0, y:1 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.container}>
         <View style={styles.headerContainer}>
           <Text
             style={{
               fontSize: Scale(24),
               fontWeight: '500',
-              color: COLORS.black,
+              color: appTheme('font'),
             }}>
             Schedules
           </Text>
           <TouchableOpacity>
             <Text
               style={{
-                color: COLORS.link,
+                color: appTheme('navigationLink'),
                 fontSize: Scale(18),
                 fontWeight: '600',
               }}>
@@ -152,7 +157,7 @@ const Scheduler = props => {
           keyExtractor={item => item.id}
           renderItem={({item, index}) => <ScheduleBoard item />}
         />
-      </View>
+      </LinearGradient>
     );
   };
 
@@ -174,7 +179,6 @@ const styles = StyleSheet.create({
   container: {
     width: Scale(375),
     height: verticalScale(440),
-    backgroundColor: COLORS.secondary,
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: Scale(20),
@@ -190,7 +194,6 @@ const styles = StyleSheet.create({
     height: verticalScale(173),
     marginTop: verticalScale(10),
     borderRadius: Scale(12),
-    backgroundColor: COLORS.primary,
     justifyContent: 'space-evenly',
     alignItems: 'center',
     padding: Scale(15),

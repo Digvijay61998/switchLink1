@@ -1,6 +1,7 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
-import {Image,View} from 'react-native';
+import { Image, View } from 'react-native';
+import {Scale,verticalScale,appTheme,appIcons} from "../common/constants";
 import {CustomDrawer,CustomHome} from '../common/component';
 import HomeScreen from '../screens/HomeScreen';
 import Scheduler from '../screens/Scheduler';
@@ -8,29 +9,6 @@ import Scene from '../screens/Scene';
 import Favorites from "../screens/Favorites"
 import Setting from '../screens/Setting';
 import ContactUs from '../screens/ContactUs';
-// import GetStartedScreen from '../screens/OnBoarding/GetStartedScreen';
-// import SelectRoleScreen from '../screens/OnBoarding/SelectRoleScreen';
-// import UserChat from '../screens/Dashboard/UserChat';
-// import TransactionScreen from '../screens/Dashboard/Transaction';
-// import TermsCondistion from '../screens/Dashboard/TermsCondistion';
-// import QusAnsScreen from '../screens/Dashboard/QusAnsScreen';
-// import ContactScreen from '../screens/Contact/ContactScreen';
-// import UserProfile from '../screens/UserProfile/Profile';
-// import BuyerProfile from '../screens/UserProfile/BuyerProfile';
-// import SessionScreen from '../screens/Dashboard/SessionScreen';
-// import LiveReels from '../screens/Dashboard/LiveStreamVideo/LiveReels';
-// import TopCategories from '../screens/Dashboard/TopCategories';
-// import AllStores from '../screens/Dashboard/AllStores';
-// import AllLiveStreams from '../screens/Dashboard/AllLiveStreams/AllLiveStreams';
-// import StoreManagementNew from '../screens/Dashboard/StoreManagementNew';
-// import UplaodProduct from '../screens/UplaodProduct/UplaodProduct';
-// import TopSellingCategories from '../screens/Dashboard/TopSellingCategories/TopSellingCategories';
-// import OrderDetails from '../screens/Dashboard/OrderDetails';
-// import ProductDecription from '../screens/Dashboard/ProductDecription';
-// import ProductDescriptionSeller from '../screens/Dashboard/ProductDescriptionSeller/ProductDescriptionSeller';
-// import Notifications from '../screens/Notifications/Notifications';
-// import * as IMAGECONST from '../theme/ImageConstants';
-import {ICONS, Scale,verticalScale} from "../common/constants";
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditRoom from '../screens/HomeScreen/AddRoom/EditRoom';
@@ -234,6 +212,12 @@ const SecandBottomTabStack = props => {
         component={Scene}
         options={{gestureEnabled: false, headerShown: false}}
       />
+            <RootStackNavigator.Screen
+        name="EditScene"
+        component={EditScene}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      
     </RootStackNavigator.Navigator>
   );
 };
@@ -296,26 +280,9 @@ const BottomTabsStackScreen = props => {
     <CustomHeader navigation={props.navigation}/>
     <Tab.Navigator
       initialRouteName="RootBottomTabStack"
-      tabBarOptions={{
-        style: {
-          height: verticalScale(30),
-          paddingVertical: 5,
-          backgroundColor: '#FFFFFF',
-          width: Scale(380),
-          paddingBottom: Scale(5),
-          justifyContent: 'center',
-          elevation: 10,
-          shadowColor: '#000',
-          shadowOffset: {width: 0, height: 1},
-          shadowOpacity: 0.2,
-          shadowRadius: 8,
-          borderColor: '#000',
-          borderWidth: 1,
-          borderStyle: 'solid',
-        },
-        indicatorStyle: {
-          borderBottomColor: 'red',
-          borderBottomWidth: 125552,
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor:appTheme('primary') ,
         },
       }}>
 
@@ -333,7 +300,7 @@ const BottomTabsStackScreen = props => {
                 height: Scale(25),
                 resizeMode: 'contain',
               }}
-              source={focused ? ICONS.ActiveTime : ICONS.time}
+              source={focused ? appIcons('ActiveTime') : appIcons('time')}
             />
           ),
         }}
@@ -353,7 +320,7 @@ const BottomTabsStackScreen = props => {
                 height: Scale(25),
                 resizeMode: 'contain',
               }}
-              source={focused ? ICONS.ActiveScene : ICONS.scene}
+              source={focused ? appIcons('ActiveScene') : appIcons('scene')}
             />
           ),
         }}
@@ -372,7 +339,7 @@ const BottomTabsStackScreen = props => {
                 height: Scale(25),
                 resizeMode: 'contain',
               }}
-              source={focused ? ICONS.Activehome : ICONS.home}
+              source={focused ? appIcons('Activehome') : appIcons('home')}
             />
           ),
         }}
@@ -391,7 +358,7 @@ const BottomTabsStackScreen = props => {
                 height: Scale(25),
                 resizeMode: 'contain',
               }}
-              source={focused ? ICONS.ActiveFavorites : ICONS.favorites}
+              source={focused ? appIcons('ActiveFavorites') : appIcons('favorites')}
             />
           ),
         }}
@@ -410,7 +377,7 @@ const BottomTabsStackScreen = props => {
                 height: Scale(25),
                 resizeMode: 'contain',
               }}
-              source={focused ? ICONS.ActiveSetting : ICONS.setting}
+              source={focused ? appIcons('ActiveSetting') : appIcons('setting')}
             />
           ),
         }}
@@ -424,12 +391,13 @@ const HomeNavigator = () => (
   <DrawerStack.Navigator
     initialRouteName="BottomTabsStackScreen"
     drawerWidth={Scale(200)}
-    screenOptions={{ drawerPosition: 'right' ,headerShown: false
+    screenOptions={{
+      drawerPosition: 'right', headerShown: false,
+      
   }}
-  
     drawerStyle={{
       flex: 1,
-      backgroundColor: '#F6F6F6',
+      backgroundColor: appTheme('primary'),
       width: Scale(100),
       borderRadius: Scale(25),
     }}

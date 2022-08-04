@@ -58,19 +58,22 @@ const Scene = (props) => {
       // navigation: "UserChat",
     },
 ]
-const addNewRoom = () => {
+const AddNewRoom = () => {
   return(
-      <View style={styles.Fixbox}>
+      <TouchableOpacity
+      onPress={() => props.navigation.navigate("EditScene")}
+      style={styles.Fixbox}>
       <Image source={ICONS.edit} resizeMode="contain" style={{height:verticalScale(40), width:Scale(40)}}/>
       <Text style={styles.label}>Add New Room</Text>
-      </View>
+      </TouchableOpacity>
   )
 }
-const renderSwitches = (item) => {
+  const RenderSwitches = (props) => {
+  console.log("props",props);
   return(
     <View style={styles.box}>
-      <Text style={{fontWeight:"700",fontSize:Scale(18),color:"black",letterSpacing:1}}>{item.boxText}</Text>
-      <Text style={{color:COLORS.purple,fontWeight:"600",fontSize:Scale(16)}}>{item.id}  Devices</Text>
+      <Text style={{fontWeight:"700",fontSize:Scale(18),color:"black",letterSpacing:1}}>{props.item.boxText}</Text>
+      <Text style={{color:COLORS.purple,fontWeight:"600",fontSize:Scale(16)}}>{props.item.id}  Devices</Text>
       <Switch
       trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
       thumbColor={isEnabled ? "#A75FFF" : "#A75FFF"}
@@ -80,7 +83,7 @@ const renderSwitches = (item) => {
     />
     <View style={{width:Scale(45),flexDirection:"row",justifyContent:"space-between",marginLeft:Scale(100)}}>
         <TouchableOpacity
-        // onPress={() => props.navigation.navigate("AddStackRoom")}
+        // onPress={() => props.navigation.navigate("EditScene")}
         >
       <Image source={ICONS.deleteRoom} resizeMode="contain" />
       </TouchableOpacity>
@@ -90,29 +93,29 @@ const renderSwitches = (item) => {
   )
 }
   return (
-    // <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    // <LinearGradient
-    // colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-    //   start={{ x: 0, y:1 }}
-    //   end={{ x: 1, y: 0 }}
-    //   style={styles.header}
-    //   >
-    //     <Text style={{fontSize:Scale(24),color:COLORS.black}}>Scene</Text>
-    //   </LinearGradient>
-    // <View style={[styles.container, { flex: 1 }]}>
+    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
+    <LinearGradient
+    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
+      start={{ x: 0, y:1 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.header}
+      >
+        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Scene</Text>
+      </LinearGradient>
+    <View style={[styles.container, { flex: 1 }]}>
       
-    //   <FlatList
-    //       data={data}
-    //       keyExtractor={(item) => item.id}
-    //       renderItem={({ item, index }) => (
-    //           renderSwitches(item)
-    //       )}
-    //       numColumns={2}
-    //       ListHeaderComponent={addNewRoom()}
-    //     />
-    //   </View>
-    //   </View>
-    <EditScene/>
+      <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item, index }) => (
+            < RenderSwitches item={item} />
+          )}
+          numColumns={2}
+          ListHeaderComponent={<AddNewRoom />}
+        />
+      </View>
+      </View>
+    // <EditScene/>
   )
 }
 

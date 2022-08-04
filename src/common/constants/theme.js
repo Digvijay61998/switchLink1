@@ -8,11 +8,14 @@ import React from "react";
 export const COLORS={
   primary: '#FFFF', // background Color
   secondary: ['#E5DFED', '#E5DFED'], // Dark purple
-  button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   header: ["#c5c0fe", "#edc1fe", "#ed86ff"],
-  headerFont:'black',
+  lightPurple: ['#E5DFED', '#E5DFED'],
   purple: '#A75FFF',
-  lightPurple: '#635BFF',
+  navigationLink:'#4D57EA',
+  font: 'black',
+
+  button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
+  headerFont:'black',
   link: '#5e75ec',
   black: 'black',
   input: '#F8FAFD',
@@ -21,12 +24,15 @@ export const COLORS={
 
 export const DARKCOLORS = {
   primary: 'black', // background Color
-  secondary: ["#c5c0fe", "#edc1fe", "#ed86ff"], // Dark purple
+  secondary: ["#c5c1ff", "#edc1fe", "#ed86ff"], // Dark purple
   header: ['#0D0D0D', "#0D0D0D", "#0D0D0D"],
+  lightPurple:["#c5c0fe", "#edc1fe", "#ed86ff"],
+  purple: '#A75FFF',
+  navigationLink:'#4D57EA',
+  font: 'white',
+  
   headerFont:'white',
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
-  purple: '#A75FFF',
-  lightPurple: '#635BFF',
   link: '#5e75ec',
   black: 'black',
   input: '#F8FAFD',
