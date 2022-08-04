@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   themeChange
 } from "../../redux/state/Theme/Actions";
+import { TouchableOpacity } from 'react-native-gesture-handler'
 const Setting = (props) => {
   console.log("props", props);
   const { navigation } = props;
@@ -35,7 +36,7 @@ const Setting = (props) => {
       end={{ x: 1, y: 0 }}
       style={styles.header}
       >
-        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Scene</Text>
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Settings</Text>
       </LinearGradient>
     <View style={[styles.container, { flex: 1 }]}>
         <View style={[styles.userName,{backgroundColor: appTheme('purple'),}]}>
@@ -48,23 +49,35 @@ const Setting = (props) => {
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
-
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <View style={{justifyContent:'center',width:'85%'}}>
+      <TouchableOpacity
+      onPress={() => props.navigation.navigate('ChangePassword')}
+      style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:'black'}}>Change Password</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
+        </TouchableOpacity>
         </View>
 
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15, color:'black'}}>Forgot Password</Text>
+        <View style={{justifyContent:'center',width:'85%'}}>
+      <TouchableOpacity 
+      onPress={()=> props.navigation.navigate('ForgotPassword')}
+      style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:15,color:'black'}}>Forgot Password</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
+        </TouchableOpacity>
         </View>
 
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <View style={{justifyContent:'center',width:'85%'}}>
+      <TouchableOpacity
+      onPress={()=> props.navigation.navigate('ResetPin')}
+      style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:'black'}}>Reset Pin</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
-          </View>
+
+        </TouchableOpacity>
+        </View>
           <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:'black'}}>Switch To Dark Mode</Text>
         <Switch

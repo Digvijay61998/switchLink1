@@ -43,6 +43,11 @@ import ConfirmBoardDetails from '../screens/HomeScreen/AddDevice/ConfirmBoardDet
 import CreateNewRoom from '../screens/HomeScreen/AddDevice/NewRoom';
 import SetWifiCredentials from '../screens/HomeScreen/AddDevice/SetWifi';
 import CustomRooms from '../screens/HomeScreen/AddRoom/CustomRooms';
+import ChangePassword from '../screens/Setting/ChangePassword';
+import InsertEmail from '../screens/Setting/ForgotPassword/InsertEmail';
+import Verification from '../screens/Setting/ForgotPassword/Verification';
+import ResetPin from '../screens/Setting/ForgotPassword/ResetPin';
+import PasswordConfirmation from '../screens/Setting/ForgotPassword/PasswordConfirmation';
 // import CreateNewRoom from '../screens/HomeScreen/NewRoom';
 // import SetWifiCredentials from '../screens/HomeScreen/SetWifi';
 // import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';
@@ -177,6 +182,33 @@ const RootBottomTabStack = props => {
   );
 };
 
+const ForgotPassword = props => {
+
+  return(
+    <RootStackNavigator.Navigator
+    options={{gestureEnabled: false, headerShown: false}}
+      initialRouteName="InsertEmail">
+      <RootStackNavigator.Screen
+        name="InsertEmail"
+        component={InsertEmail}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      <RootStackNavigator.Screen
+        name="Verification"
+        component={Verification}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      <RootStackNavigator.Screen
+        name="PasswordConfirmation"
+        component={PasswordConfirmation}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+
+    </RootStackNavigator.Navigator>
+  )
+
+}
+
 const FristBottomTabStack = props => {
   return (
     <RootStackNavigator.Navigator
@@ -237,6 +269,21 @@ const FourthBottomTabStack = props => {
     <RootStackNavigator.Screen
       name="ContactUs"
       component={ContactUs}
+      options={{gestureEnabled: false, headerShown: false}}
+    />
+    <RootStackNavigator.Screen
+      name="ChangePassword"
+      component={ChangePassword}
+      options={{gestureEnabled: false, headerShown: false}}
+    />
+    <RootStackNavigator.Screen
+      name="ForgotPassword"
+      component={ForgotPassword}
+      options={{gestureEnabled: false, headerShown: false}}
+    />
+     <RootStackNavigator.Screen
+      name="ResetPin"
+      component={ResetPin}
       options={{gestureEnabled: false, headerShown: false}}
     />
   </RootStackNavigator.Navigator>
