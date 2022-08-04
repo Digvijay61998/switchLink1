@@ -26,8 +26,8 @@ const Setting = (props) => {
     <LinearGradient
       style={{flex: 1}}
     colors={appTheme('secondary')}
-    start={{ x: 1, y:0 }}
-    end={{ x: 0, y: 1 }}
+    start={{ x:0, y:1 }}
+    end={{ x:1, y: 0 }}
     >
     <LinearGradient
     colors={appTheme('header')}
@@ -35,7 +35,7 @@ const Setting = (props) => {
       end={{ x: 1, y: 0 }}
       style={styles.header}
       >
-        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Scene</Text>
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Settings</Text>
       </LinearGradient>
     <View style={[styles.container, { flex: 1 }]}>
         <View style={[styles.userName,{backgroundColor: appTheme('purple'),}]}>
