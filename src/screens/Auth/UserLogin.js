@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, useFormik } from 'formik';
 import LinearGradient from 'react-native-linear-gradient'
 import * as yup from 'yup';
+import {
+  loginAccount,
+} from "../../redux/state/Login/Actions";
 
 export default function UserLogin (props){
 
@@ -21,15 +24,18 @@ export default function UserLogin (props){
 
 
   const handleSubmit = async (val) => {
-    console.log("val", val);
     const input = val.email
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (input.match(regexEmail)) {
       // console.log("true~~~~~~~~>");
-      const data = {
-        email: input,
-        password: val.password
-      }
+      // dispatch(
+      //   loginAccount({
+      //      data:{
+      //       email: input,
+      //       password: val.password
+      //     }
+      //   })
+      // )
       props.navigation.replace("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
@@ -67,15 +73,14 @@ export default function UserLogin (props){
        </View>
        </View>
      
-       <View style={{borderBottomColor:"#EBEBEB",borderBottomWidth:2,width:Scale(320),paddingLeft:Scale(10),flexDirection:"row",alignItems:"baseline",marginTop:Scale(40)}}>
+       <TouchableOpacity 
+            onPress={() => props.navigation.navigate("UserSignUp")}
+         style={{borderBottomColor:"#EBEBEB",borderBottomWidth:2,width:Scale(320),paddingLeft:Scale(10),flexDirection:"row",alignItems:"baseline",marginTop:Scale(40)}}>
      
          <Text style={{color:"#7F7F7F",lineHeight:Scale(17)}}>Don't have an account?</Text>
-         <TouchableOpacity 
-         onPress={()=>props.navigation.replace("UserSignUp")}
-         >
+      
         <Text style={[FONTS.Link,{fontWeight:"600"}]}> Create an account</Text>
       </TouchableOpacity>
-      </View>
       <Formik
         initialValues={{
            email: "" ,

@@ -6,13 +6,17 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  SafeAreaView
 } from 'react-native';
 import {CONTAINER,Scale,verticalScale,COLORS,FONTS,ICONS} from "../../common/constants"
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, useFormik } from 'formik';
 import LinearGradient from 'react-native-linear-gradient'
 import * as yup from 'yup';
+import {
+  signUserAccount,
+} from "../../redux/state/Login/Actions";
 
 const UserSignUp = (props) => {
     const dispatch = useDispatch();
@@ -25,11 +29,18 @@ const UserSignUp = (props) => {
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (input.match(regexEmail)) {
       // console.log("true~~~~~~~~>");
-      const data = {
-        email: input,
-        password: val.password
-      }
-      props.navigation.replace("UserSignUp");
+      // dispatch(
+      //   signUserAccount({
+      //      data:{
+      //       name: val.Name,
+      //       email:val.email,
+      //       password:val.Set_Password,
+      //       confirmPassword:val.confirm_password,
+      //       pin:val.Set_Pin
+      //     }
+      //   })
+      // )
+      props.navigation.replace("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
     }
@@ -73,7 +84,7 @@ const UserSignUp = (props) => {
   })
   })
   return (
-    <View style={CONTAINER}>
+    <SafeAreaView style={CONTAINER}>
         <View style={{width:Scale(200),right:Scale(50),marginTop:Scale(20)}}>
         <Text style={FONTS.textTittle}>Welcome to</Text>
         <View style={{flexDirection:"row"}}><Image
@@ -98,7 +109,7 @@ const UserSignUp = (props) => {
            Set_Pin: "" ,
            Confirm_Pin: '',
           }}
-          validationSchema={validationSchema}
+          // validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({ values, handleChange, onKeyPress, errors, setFieldTouched, touched, isValid, handleSubmit }) => {
@@ -147,7 +158,7 @@ const UserSignUp = (props) => {
                    style={[FONTS.textstyle, { color: "black",paddingLeft:Scale(10), width: "100%"}]}
                    name="Set_Password"
                    keyboardType='email-address'
-                   value={values.email}
+                   value={values.Set_Password}
                    onChangeText={handleChange('Set_Password')}
                    placeholder="Set_Password"
                    placeholderTextColor="#A7B0C0"
@@ -164,7 +175,7 @@ const UserSignUp = (props) => {
                    style={[FONTS.textstyle, { color: "black",paddingLeft:Scale(10), width: "100%"}]}
                    name="confirm_password"
                    keyboardType='email-address'
-                   value={values.email}
+                   value={values.confirm_password}
                    onChangeText={handleChange('confirm_password')}
                    placeholder="confirm_password"
                    placeholderTextColor="#A7B0C0"
@@ -180,7 +191,7 @@ const UserSignUp = (props) => {
                 <TextInput
                     style={[FONTS.textstyle, { color: "black", width: "100%",fontSize: 18,paddingLeft:Scale(10) }]}
                     name="Set_Pin"
-                    value={values.password}
+                    value={values.Set_Pin}
                     onChangeText={handleChange('Set_Pin')}
                     secureTextEntry={true}
                     placeholder="Set_Pin"
@@ -197,7 +208,7 @@ const UserSignUp = (props) => {
                 <TextInput
                     style={[FONTS.textstyle, { color: "black", width: "100%",fontSize: 18,paddingLeft:Scale(10) }]}
                     name="Confirm_Pin"
-                    value={values.password}
+                    value={values.Confirm_Pin}
                     onChangeText={handleChange('Confirm_Pin')}
                     secureTextEntry={true}
                     placeholder="Confirm_Pin"
@@ -224,7 +235,7 @@ const UserSignUp = (props) => {
                 title="Request OTP"
                 color="#f5871f00"
                 elevation="2"
-                disabled={isFetching}
+                // disabled={isFetching}
                 onPress={handleSubmit}
               ><Text style={[FONTS.textstyle,{fontSize:Scale(20),color:"white",letterSpacing:0,fontWeight:"600" }]}>Sign Up</Text>
               </TouchableOpacity>
@@ -243,7 +254,7 @@ const UserSignUp = (props) => {
           )
         }}
       </Formik>
-      </View>
+      </SafeAreaView>
   )
 }
 

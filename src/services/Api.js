@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'https://sheideo.ae/api/v1',
+    baseURL: 'http://192.168.1.16:8080/api/switchlink/',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });
@@ -49,10 +49,10 @@ const executeRequest = async (method, pathname, data, options) => {
   const reqObj = options?.query
     ? {method, url: pathname, params: options.query, ...body}
     : {method, url: pathname, ...body};
-  // console.log('@@@Api Request reqObj=====', reqObj);
+  console.log('@@@Api Request reqObj=====', reqObj);
 
   const baseAxiosRequest = await baseAxios(options);
-  // console.log("@@@Api baseAxiosRequest reqObj=====", baseAxiosRequest);
+  console.log("@@@Api baseAxiosRequest reqObj=====", baseAxiosRequest);
 
   return new Promise(async (resolve, reject) => {
     return baseAxiosRequest
@@ -118,7 +118,7 @@ export default {
   handleLoginResponse(response) {
     if (response) {
       // console.log('@@@ Handle Res=======', response);
-      if (response.data && response.data.success == true) {
+      if (response.data && response.status == 200) {
         return {success: true, data: response.data};
       } else {
         let message =

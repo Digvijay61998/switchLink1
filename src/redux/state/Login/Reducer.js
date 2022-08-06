@@ -1,9 +1,12 @@
 import Immutable from "seamless-immutable";
 import {
+  SIGNUP_USERS_ACCOUNT,
   LOGIN_ACCOUNT,
+
+
+
   LOGIN_ACCOUNT_ERROR,
   LOGIN_ACCOUNT_SUCCESS,
-  SIGNUP_BUYER_ACCOUNT,
   SIGNUP_BUYER_SUCCESS,
   SIGNUP_BUYER_ERROR,
   SIGNUP_SELLER_ACCOUNT,
@@ -41,9 +44,19 @@ const INITIAL_STATE = Immutable({
 });
 
 const reducers = {
+  [SIGNUP_USERS_ACCOUNT]: (state, action) => {
+    return Immutable.merge(state, { loginData: null, isFetching: true });
+  },
+
   [LOGIN_ACCOUNT]: (state, action) => {
     return Immutable.merge(state, { loginData: null, isFetching: true });
   },
+
+
+
+
+
+  
 
   [SOCIAL_LOGIN_ACCOUNT]: (state, action) => {
     return Immutable.merge(state, { socialLoginData: null, isFetching: true });
@@ -79,9 +92,7 @@ const reducers = {
     });
   },
 
-  [SIGNUP_BUYER_ACCOUNT]: (state, action) => {
-    return Immutable.merge(state, { loginData: null, isFetching: true });
-  },
+
 
   [SIGNUP_BUYER_SUCCESS]: (state, { data }) => {
     return Immutable.merge(state, {

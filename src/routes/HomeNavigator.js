@@ -26,6 +26,7 @@ import InsertEmail from '../screens/Setting/ForgotPassword/InsertEmail';
 import Verification from '../screens/Setting/ForgotPassword/Verification';
 import ResetPin from '../screens/Setting/ForgotPassword/ResetPin';
 import PasswordConfirmation from '../screens/Setting/ForgotPassword/PasswordConfirmation';
+import EditScene from '../screens/Scene/EditScene';
 // import CreateNewRoom from '../screens/HomeScreen/NewRoom';
 // import SetWifiCredentials from '../screens/HomeScreen/SetWifi';
 // import BarCodeScanner from '../screens/HomeScreen/Add Device/BarCodeScanner';

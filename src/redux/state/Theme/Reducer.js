@@ -8,7 +8,6 @@ const INITIAL_STATE = Immutable({
 
 const reducers = {
   [THEME_SUCCESS]: (state,action) => {
-    console.log("action",action);
     return Immutable.merge(state, {theme:action.payload.data.theme});
   },
 };

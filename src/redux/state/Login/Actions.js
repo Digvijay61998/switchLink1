@@ -1,8 +1,34 @@
 import * as ActionTypes from '../ActionTypes';
 
+// Login Auth
 export const loginAccount = payloadData => ({
   type: ActionTypes.LOGIN_ACCOUNT,
   payload: payloadData,
+});
+
+
+
+// Sign Auth
+export const signUserAccount = payloadData => ({
+  type: ActionTypes.SIGNUP_USERS_ACCOUNT,
+  payload: payloadData,
+});
+
+
+
+
+
+
+
+
+export const loginAccountSuccess = data => ({
+  type: ActionTypes.LOGIN_ACCOUNT_SUCCESS,
+  data,
+});
+
+export const loginAccountError = (error, id) => ({
+  type: ActionTypes.LOGIN_ACCOUNT_ERROR,
+  error,
 });
 
 export const SocialLoginGoogleAccount = payloadData => ({
@@ -20,20 +46,8 @@ export const SocialLoginGoogleError = (error, id) => ({
   error,
 });
 
-export const loginAccountSuccess = data => ({
-  type: ActionTypes.LOGIN_ACCOUNT_SUCCESS,
-  data,
-});
 
-export const loginAccountError = (error, id) => ({
-  type: ActionTypes.LOGIN_ACCOUNT_ERROR,
-  error,
-});
 
-export const signUpBuyerAccount = payloadData => ({
-  type: ActionTypes.SIGNUP_BUYER_ACCOUNT,
-  payload: payloadData,
-});
 
 export const signUpBuyerSuccess = data => ({
   type: ActionTypes.SIGNUP_BUYER_SUCCESS,
