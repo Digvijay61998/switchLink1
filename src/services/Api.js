@@ -12,7 +12,7 @@ const setHeader = async () => {
       "Content-Type": "application/json",
     };
     let userToken = JSON.parse(await AsyncStorage.getItem("userToken"));
-
+    console.log("token---",userToken);
     if (userToken?.accessToken) {
       defaultHeaders["authorization"] = userToken.accessToken;
       resolve(defaultHeaders);
@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'http://192.168.1.16:8080/api/switchlink/',
+    baseURL: 'http://192.168.1.19:8080/api/switchlink/',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });

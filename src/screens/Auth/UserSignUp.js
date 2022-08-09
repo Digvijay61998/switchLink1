@@ -28,19 +28,19 @@ const UserSignUp = (props) => {
     const input = val.email
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (input.match(regexEmail)) {
-      // console.log("true~~~~~~~~>");
-      // dispatch(
-      //   signUserAccount({
-      //      data:{
-      //       name: val.Name,
-      //       email:val.email,
-      //       password:val.Set_Password,
-      //       confirmPassword:val.confirm_password,
-      //       pin:val.Set_Pin
-      //     }
-      //   })
-      // )
-      props.navigation.replace("HomeNavigator");
+      console.log("true~~~~~~~~>");
+      dispatch(
+        signUserAccount({
+           data:{
+            name: val.Name,
+            email:val.email,
+            password:val.Set_Password,
+            confirmPassword:val.confirm_password,
+            pin:val.Set_Pin
+          }
+        })
+      )
+      // props.navigation.replace("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
     }

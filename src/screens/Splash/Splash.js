@@ -12,7 +12,6 @@ const Splash = (props) => {
   async function handleTheme() { 
     const userTheme = Boolean(await AsyncStorage.getItem("userTheme"));
     console.log("@@@@ User Token================", userTheme);
-    
     dispatch(
       themeChange({
         data: { theme: userTheme }
@@ -24,7 +23,8 @@ const Splash = (props) => {
  
         let userToken = (await AsyncStorage.getItem("userToken"));
         console.log("@@@@ User Token================", userToken);
-        setTimeout(() => {
+    setTimeout(() => {
+          console.log("AuthStackScreen is navigated ");
         //   if (!userToken?.accessToken) {
         //     this.props.navigation.replace("OnBoardingStackScreen");
         //   } else {
@@ -35,12 +35,12 @@ const Splash = (props) => {
             //   this.props.navigation.replace("StackScreenSeller");
             // }
         //   }
-        }, 3000);
+        },3000);
       }
 
   useEffect(() => {
+    componentDidMount()
         handleTheme()
-        componentDidMount()
       },[])
   return (<>
     <StatusBar hidden />

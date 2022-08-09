@@ -27,16 +27,16 @@ export default function UserLogin (props){
     const input = val.email
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (input.match(regexEmail)) {
-      // console.log("true~~~~~~~~>");
-      // dispatch(
-      //   loginAccount({
-      //      data:{
-      //       email: input,
-      //       password: val.password
-      //     }
-      //   })
-      // )
-      props.navigation.replace("HomeNavigator");
+      console.log("true~~~~~~~~>");
+      dispatch(
+        loginAccount({
+           data:{
+            email: input,
+            password: val.password
+          }
+        })
+      )
+      // props.navigation.replace("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
     }
@@ -150,7 +150,7 @@ export default function UserLogin (props){
                 title="Request OTP"
                 color="#f5871f00"
                 elevation="2"
-                disabled={isFetching}
+                // disabled={isFetching}
                 onPress={handleSubmit}
               ><Text style={[FONTS.textstyle,{fontSize:Scale(20),color:"white",letterSpacing:0,fontWeight:"600" }]}>Log In</Text>
               </TouchableOpacity>

@@ -44,7 +44,7 @@ const SetWifiCredentials = (props) => {
     //     /> */}
     //     </View>
     // </LinearGradient>
-    <View>
+    <View style={{marginTop:verticalScale(10)}}>
         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
         <Image
               style={styles.locationIcon}
@@ -62,7 +62,7 @@ const SetWifiCredentials = (props) => {
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-     <Text style={{fontFamily:'Montserrat -Thin',fontStyle: 'normal',fontWeight:'500',fontSize:24,color:"black"}}>Set WiFi Credentials</Text> 
+     <Text style={{fontFamily:'Montserrat-Black',fontWeight:'500',fontSize:Scale(24),color:"black"}}>Set WiFi Credentials</Text> 
      <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
         <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -95,7 +95,7 @@ const SetWifiCredentials = (props) => {
       <View style={{paddingTop:25}}>
       <TouchableOpacity style={styles.button}
       onPress={()=> props.navigation.navigate('CreateNewRoom')}>
-      <Text style={{color:'white'}}>Save</Text>
+      <Text style={{color:'white',fontWeight:'600',fontSize:Scale(18)}}>Save</Text>
 
       </TouchableOpacity>
       </View>
@@ -165,8 +165,6 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderColor: 'gray',
-        borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
         backgroundColor:'white'

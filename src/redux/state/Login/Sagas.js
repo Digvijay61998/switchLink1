@@ -24,45 +24,32 @@ function* loginAccount(action) {
   console.log("saga login account==", action.payload.data);
   try {
     const response = yield call(API.post, "/user/login", action.payload.data);
-    console.log("response",response);
-    // const result = API.handleLoginResponse(response);
-    // console.log("Result Response==", JSON.stringify(result));
-    // if (result) {
-    //   if (result) {
-    //     yield put(LoginActions.loginAccountSuccess(result.data));
-    //     try {
-    //       AsyncStorage.setItem("userToken", JSON.stringify(result.data.data));
-    //     } catch (error) {
-    //       console.log("error: ", error);
-    //     }
-    //     if (result.data.data.role === "customer") {
-    //       Snackbar.show({
-    //         text: "User Login Succesfully",
-    //         duration: 3000,
-    //       });
-    //       yield call(reset, "BuyerNavigator");
-    //     } else if (result.data.data.sellerProfileStatus === false) {
-    //       Snackbar.show({
-    //         text: "Please Complete Your Profile",
-    //         duration: 3000,
-    //       });
-    //       yield call(reset, "StoreInformastion");
-    //       Alert.alert(
-    //         "Success",
-    //         "Your Account has been registered into our  Database and our executives will review and activate your account within 24 to 48 hours"
-    //       );
-    //       // Snackbar.show({
-    //       //   text: 'User Login Succesfully',
-    //       //   duration: 3000,
-    //       // });
-    //     } else {
-    //       yield call(reset, "StackScreenSeller");
-    //     }
-    //     console.log("@@@ Login Account Api=======", result.success);
-    //   } else yield put(LoginActions.loginAccountError(result));
-    // } else {
-    //   yield put(LoginActions.loginAccountError("Some Error"));
-    // }
+    console.log("response@@@@@@@@@@@@",response);
+    const result = API.handleLoginResponse(response);
+    console.log("Result Response==", JSON.stringify(result));
+    if (result) {
+      if (result) {
+        yield put(LoginActions.loginAccountSuccess(result.data));
+        try {
+          AsyncStorage.setItem("userToken", JSON.stringify(result.data.token));
+          Snackbar.show({
+            text: "User Login Succesfully",
+            duration: 3000,
+          });
+          yield call(reset, "HomeNavigator");
+        } catch (error) {
+          console.log("error: ", error);
+        }
+          // Alert.alert(
+          //   "Success",
+          //   "Your Account has been registered into our  Database and our executives will review and activate your account within 24 to 48 hours"
+          // );
+          Snackbar.show({
+            text: 'User Login Succesfully',
+            duration: 3000,
+          });
+        } 
+      } else yield put(LoginActions.loginAccountError(result));
   } catch (error) {
     // console.log("saga login account error===", error);
     // let errorMsg = JSON.parse(error.request._response).message;
@@ -80,14 +67,14 @@ function* loginAccount(action) {
 
 
 function* signUserAccount(action) {
-  console.log("saga signUserAccount==", action.payload.data);
+  console.log("saga signUserAccount==", action);
   try {
     const response = yield call(
       () => API.post("user", action.payload.data),
     );
-    console.log("response SignUp Response@@@@@@@@@@==", response);
-    // const result = API.handleLoginResponse(response);
-    // console.log("Buyer Response==", result);
+    console.log("SignUp response@@@@@@@@@==", response);
+    const result = API.handleLoginResponse(response);
+    console.log("SignUp Response@@@@@@@@@==", result);
     // if (result) {
     //   if (result) {
     //     yield put(LoginActions.signUpBuyerSuccess(result.data));
@@ -101,7 +88,7 @@ function* signUserAccount(action) {
     //       alert(
     //         `Welcome ${action.payload.data.name} You have been successfully registered to the Switch Link Application,`
     //       );
-    //       yield call(navigate, "HomeNavigator");
+    //       // yield call(navigate, "HomeNavigator");
     //     }
     //     console.log("@@@ Buyer Account Api=======", result);
     //   } else yield put(LoginActions.signUpBuyerError(result));
@@ -168,6 +155,6 @@ export default function* root() {
     yield takeLatest(LOGIN_ACCOUNT, loginAccount),
     // yield takeLatest(SOCIAL_LOGIN_ACCOUNT, SocialLoginGoogleAccount),
     yield takeLatest(SIGNUP_USERS_ACCOUNT, signUserAccount),
-    yield takeLatest(RECOVER_PASSWORD_ACCOUNT, recoverPasswordAccount),
+    // yield takeLatest(RECOVER_PASSWORD_ACCOUNT, recoverPasswordAccount),
   ];
 }

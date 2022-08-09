@@ -1,21 +1,49 @@
 import { StyleSheet, Text, View ,Image,FlatList,TouchableOpacity,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale, IMAGE ,appTheme} from '../../../../common/constants'
 import { Dropdown } from 'react-native-element-dropdown';
+import {
+  createBoardProcess,createBoardError
+} from "../../../../redux/state/Board/Action";
+import { useDispatch, useSelector } from "react-redux";
 
 const data = [
-    { label: 'wireless LAN', value: '1' },
-    { label: 'wireless MAN', value: '2' },
-    { label: 'wireless PAN', value: '3' },
-    { label: 'wireless WAN', value: '4' },
-    
+    { label: 'Living Room', value: '1' },
+    { label: 'Bed room', value: '2' },
+    { label: 'Kitchen', value: '3' },
+  { label: 'Bath Room', value: '4' },
+  { label: 'Dining Room', value: '5' },
+  { label: 'Kids Room', value: '6' },
   ];
 const CreateNewRoom = (props) => {
-    const [value, setValue] = useState(null);
+  const dispatch = useDispatch();
+  const {  isFetching, error } = useSelector((state) => state.board);
+console.log("error",error);
+  const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+  const [roomName, setRoomName] = useState('')
+  console.log("value",value?.label);
+  const handleRoomsubmit = () => {
+    try{
+      dispatch(
+        createBoardProcess({
+          data: { 
+            boardName:roomName,
+            boardType:value.label,
+           }
+        }),
+      );
+         props.navigation.navigate("AddDeviceStack")
+    } catch {
+      dispatch(
+        createBoardError({
+            error:'please select the field first',
+        }),
+      );
+    }
     
-    
+  }
   return (
     // <LinearGradient
     // colors={["#c5c0fe","#edc1fe","#ed86ff"]}
@@ -59,12 +87,12 @@ const CreateNewRoom = (props) => {
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-     <Text style={{fontFamily:'Montserrat -Thin',fontStyle: 'normal',fontWeight:'500',fontSize:24,color:"black"}}> Create a new screen </Text> 
-     <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
+     <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'600',fontSize:Scale(24),color:appTheme('font')}}> Create a New Room </Text> 
+     <View style={{paddingTop:verticalScale(40),justifyContent:"space-between",height:verticalScale(170)}}>
      
          <TextInput
-                        style={styles.dropdown}
-                        // onChangeText={onChangeNumber}
+                        style={[styles.dropdown,{color:appTheme('font')}]}
+                        onChangeText={(val)=>{setRoomName(val)}}
                         // value={number}
                         placeholder="Enter Room Name"
                         keyboardType="alphabet"
@@ -80,19 +108,21 @@ const CreateNewRoom = (props) => {
           valueField="value"
           placeholder={ 'Select Room Type'}
           searchPlaceholder="Search..."
-          value={value}
+          value={value?.value}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
-            setValue(item.value);
+            setValue(item);
             setIsFocus(false);
           }}
           
         />
       </View>
       <View style={{paddingTop:25}}>
-      <TouchableOpacity style={styles.button}
-          onPress={() => props.navigation.navigate("AddDeviceStack")}
+            <TouchableOpacity style={styles.button}
+              onPress={() =>handleRoomsubmit()
+                // props.navigation.navigate("AddDeviceStack")
+              }
       >
       <Text style={{color:'white'}}>Save</Text>
 
@@ -164,13 +194,10 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderColor: 'gray',
-        borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
         backgroundColor:'white',
         fontSize:Scale(16),
-        color:"#A7B0C0"
       },
       icon: {
         marginRight: 5,

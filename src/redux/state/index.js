@@ -6,6 +6,7 @@ export default () => {
   const rootReducer = combineReducers({
     auth: require("./Login/Reducer").reducer,
     Theme: require("./Theme/Reducer").reducer,
+    board: require("./Board/Reducer").reducer,
     // stockManag: require("./StockManagement/Reducer").reducer,
     // termConditions: require("./TermConditions/Reducer").reducer,
     // contactUs: require("./ContactUs/Reducer").reducer,

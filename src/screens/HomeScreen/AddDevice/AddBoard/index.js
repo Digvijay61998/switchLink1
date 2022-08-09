@@ -17,7 +17,8 @@ const AddBoard = (props) => {
           style={styles.dropdown}
           // onChangeText={onChangeNumber}
           // value={number}
-          placeholder="Enter Password"
+              placeholder="Enter Board Name"
+              placeholderTextColor="#000"
           keyboardType="alphabet"
         />
 
@@ -39,12 +40,11 @@ const styles = StyleSheet.create({
     dropdown: {
       height: Scale(50),
       width: Scale(320),
-      borderColor: 'gray',
-      borderWidth: 0.5,
-      borderRadius: 8,
       paddingHorizontal: 8,
       backgroundColor: 'white',
-      fontSize: 17,
+    fontSize: Scale(17),
+    fontWeight:'700',
+      color:'black',
       fontFamily: 'Montserrat-Thin',
     },
     button: {

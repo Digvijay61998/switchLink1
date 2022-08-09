@@ -5,8 +5,14 @@ export const loginAccount = payloadData => ({
   type: ActionTypes.LOGIN_ACCOUNT,
   payload: payloadData,
 });
-
-
+export const loginAccountSuccess = data => ({
+  type: ActionTypes.LOGIN_ACCOUNT_SUCCESS,
+  data,
+});
+export const loginAccountError = (error, id) => ({
+  type: ActionTypes.LOGIN_ACCOUNT_ERROR,
+  error,
+});
 
 // Sign Auth
 export const signUserAccount = payloadData => ({
@@ -21,15 +27,9 @@ export const signUserAccount = payloadData => ({
 
 
 
-export const loginAccountSuccess = data => ({
-  type: ActionTypes.LOGIN_ACCOUNT_SUCCESS,
-  data,
-});
 
-export const loginAccountError = (error, id) => ({
-  type: ActionTypes.LOGIN_ACCOUNT_ERROR,
-  error,
-});
+
+
 
 export const SocialLoginGoogleAccount = payloadData => ({
   type: ActionTypes.SOCIAL_LOGIN_ACCOUNT,

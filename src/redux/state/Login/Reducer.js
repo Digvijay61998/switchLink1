@@ -35,21 +35,31 @@ import { createReducer } from "../CreateReducer";
 
 const INITIAL_STATE = Immutable({
   loginData: null,
-  socialLoginData: null,
-  phoneVerifyData: null,
   isFetching: false,
-  facebookSuccess: null,
   error: null,
   userId: null,
 });
 
 const reducers = {
-  [SIGNUP_USERS_ACCOUNT]: (state, action) => {
-    return Immutable.merge(state, { loginData: null, isFetching: true });
+  [LOGIN_ACCOUNT]: (state, action) => {
+    return Immutable.merge(state, { loginData:null, isFetching: true });
+  },
+  [LOGIN_ACCOUNT_SUCCESS]: (state, { data }) => {
+    return Immutable.merge(state, {
+      loginData: data,
+      isFetching: false,
+      error: null,
+    });
+  },
+  [LOGIN_ACCOUNT_ERROR]: (state, error) => {
+    return Immutable.merge(state, {
+      isFetching: false,
+      error: error,
+    });
   },
 
-  [LOGIN_ACCOUNT]: (state, action) => {
-    return Immutable.merge(state, { loginData: null, isFetching: true });
+  [SIGNUP_USERS_ACCOUNT]: (state, data) => {
+    return Immutable.merge(state, { loginData:null, isFetching: true });
   },
 
 
@@ -77,20 +87,9 @@ const reducers = {
     });
   },
 
-  [LOGIN_ACCOUNT_SUCCESS]: (state, { data }) => {
-    return Immutable.merge(state, {
-      loginData: data,
-      isFetching: false,
-      error: null,
-    });
-  },
 
-  [LOGIN_ACCOUNT_ERROR]: (state, error) => {
-    return Immutable.merge(state, {
-      isFetching: false,
-      error: error,
-    });
-  },
+
+
 
 
 
