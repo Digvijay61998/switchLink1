@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
+import { appTheme, COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
 
 
 const AddBoard = (props) => {
@@ -14,17 +14,18 @@ const AddBoard = (props) => {
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TextInput
-          style={styles.dropdown}
+          style={[styles.dropdown,{backgroundColor: appTheme('primary'),}]}
           // onChangeText={onChangeNumber}
           // value={number}
-          placeholder="Enter Password"
+          placeholderTextColor= {appTheme('font')}
+          placeholder="Enter Board Name"
           keyboardType="alphabet"
         />
 
         <View style={{paddingTop: 25}}>
-          <TouchableOpacity style={styles.button}
+          <TouchableOpacity style={[styles.button,{backgroundColor: appTheme('scanboard')}]}
           onPress={() => props.navigation.navigate("BarCodeScanner")}>
-            <Text style={{color: 'white', fontSize: 17}}>Scan Board</Text>
+            <Text style={{color: appTheme('primary'), fontSize: 17}}>Scan Board</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -39,22 +40,18 @@ const styles = StyleSheet.create({
     dropdown: {
       height: Scale(50),
       width: Scale(320),
-      borderColor: 'gray',
-      borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 8,
-      backgroundColor: 'white',
+      
       fontSize: 17,
       fontFamily: 'Montserrat-Thin',
     },
     button: {
       height: Scale(50),
       width: Scale(320),
-      borderColor: 'gray',
-      borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 8,
-      backgroundColor: 'black',
+      
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
