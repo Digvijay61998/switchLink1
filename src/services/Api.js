@@ -13,8 +13,8 @@ const setHeader = async () => {
     };
     let userToken = JSON.parse(await AsyncStorage.getItem("userToken"));
     console.log("token---",userToken);
-    if (userToken?.accessToken) {
-      defaultHeaders["authorization"] = userToken.accessToken;
+    if (userToken) {
+      defaultHeaders["token"] = userToken;
       resolve(defaultHeaders);
     } else {
       reject(defaultHeaders);
@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'http://192.168.1.19:8080/api/switchlink/',
+    baseURL: 'http://192.168.1.19:8080/api/switchlink',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });
@@ -154,32 +154,29 @@ export default {
   handleResponseForMessage(response) {
     if (response) {
       // console.log('handleResponseForMessage==', response.message);
-      if (response && response.code == 200) {
-        const message = response.message;
-        Snackbar.show({
-          text: message,
-          duration: Snackbar.LENGTH_SHORT,
-        });
-        return {success: true, data: message};
-      } else {
-        let message =
-          typeof response.message === 'string'
-            ? response.message
-            : typeof response.message === 'object'
-            ? response.message.denied
-              ? this.handleError(response.message.denied)
-              : response.message.incorrect_password
-              ? this.handleError(response.message.incorrect_password)
-              : response.message.invalid_email
-              ? this.handleError(response.message.invalid_email)
-              : 'Some Error'
-            : 'Some Error!';
-        Snackbar.show({
-          text: message,
-          duration: Snackbar.LENGTH_SHORT,
-        });
-        return {success: false, data: response.message};
+      if (response && response.status == 201) {
+        const data = response.data;
+        return {success: true, data: data};
       }
+      // else {
+      //   let message =
+      //     typeof response.message === 'string'
+      //       ? response.message
+      //       : typeof response.message === 'object'
+      //       ? response.message.denied
+      //         ? this.handleError(response.message.denied)
+      //         : response.message.incorrect_password
+      //         ? this.handleError(response.message.incorrect_password)
+      //         : response.message.invalid_email
+      //         ? this.handleError(response.message.invalid_email)
+      //         : 'Some Error'
+      //       : 'Some Error!';
+      //   Snackbar.show({
+      //     text: message,
+      //     duration: Snackbar.LENGTH_SHORT,
+      //   });
+      //   return {success: false, data: response.message};
+      // }
     }
   },
 

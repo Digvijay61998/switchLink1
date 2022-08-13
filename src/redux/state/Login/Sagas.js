@@ -4,16 +4,6 @@ import API from "../../../services/Api";
 import {
   LOGIN_ACCOUNT,
   SIGNUP_USERS_ACCOUNT,
-
-
-
-  RECOVER_EMAIL_ACCOUNT,
-  ENTER_OTP_ACCOUNT,
-  RECOVER_PASSWORD_ACCOUNT,
-  SIGNUP_SELLER_ACCOUNT,
-  CREATE_PROFILE_ACCOUNT,
-  SOCIAL_LOGIN_ACCOUNT,
-  LOGIN_FACEBOOK_ACCOUNT,
 } from "../ActionTypes";
 import * as LoginActions from "./Actions";
 import Snackbar from "react-native-snackbar";
@@ -70,7 +60,7 @@ function* signUserAccount(action) {
   console.log("saga signUserAccount==", action);
   try {
     const response = yield call(
-      () => API.post("user", action.payload.data),
+      () => API.post("/user", action.payload.data),
     );
     console.log("SignUp response@@@@@@@@@==", response);
     const result = API.handleLoginResponse(response);

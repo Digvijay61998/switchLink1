@@ -1,43 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity } from "react-native";
 import { EditSwitch } from "../../../../common/component";
 import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
+import {
+  getSwitchListSuccess
+} from "../../../../redux/state/Board/Action";
+import { useDispatch, useSelector } from "react-redux";
 
 const ConfirmBoardDetails = (props) => {
   console.log("props",props.route.params?.callbackConfirm);
   const {navigation} = props
- const [editModalVisible, setEditModalVisible] = useState(false);
-const handleEdit =()=>{
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const { boardDetails, isFetching, error,switchList } = useSelector((state) => state.board);
+console.log("boardDetails@@@@@@@@@@@@@",switchList);
+
+  const handleEdit = () => {
   setEditModalVisible(true)
 }
 
-const data =[
-  {
-      id: 1,
-      Switch: "Switch 1",
-    },
-    {
-      id: 2,
-       Switch: "Switch 2",
-    },
-    {
-      id: 3,
-      Switch: "Switch 3",
-    },
-    {
-      id: 4,
-       Switch: "Switch 4",
-    },
-    {
-      id: 5,
-       Switch: "Switch 5",
-    },
-    {
-      id: 6,
-       Switch: "Switch 6",
-    },
-    
-]
+  useEffect(() => {
+    dispatch(
+      getSwitchListSuccess({
+        data: {
+          BasketKey: boardDetails.board_key,
+        }
+      }));
+},[isFetching == true])
+
 
 const Switches =(item)=>{
 
@@ -46,7 +36,7 @@ const Switches =(item)=>{
       <View style={{width:Scale(330),height:verticalScale(50),backgroundColor:"white",marginBottom:Scale(10),flexDirection:"row",borderRadius:Scale(10),justifyContent:'space-between', position:'relative',paddingTop:Scale(10) }}>
       <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:Scale(110),paddingLeft:Scale(10)}}>
       <Image source={ICONS.switchBoard} style={styles.switchIcons} />
-       <Text style={{fontWeight:"600",color:"black",fontSize:Scale(18)}}>{item.Switch}</Text>
+       <Text style={{fontWeight:"600",color:"black",fontSize:Scale(18)}}>{item.switch_name}</Text>
       </View>
       <View style={{paddingRight:Scale(18)}}>
       <View style={{display:'flex', flexDirection:"row",width:Scale(60),justifyContent:"space-around"}}>
@@ -76,7 +66,7 @@ return(
 
 <View style={{alignItems:"center",flex:1,marginBottom:verticalScale(30)}}>
 <FlatList
-            data={data}
+            data={switchList}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
             Switches(item)

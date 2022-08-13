@@ -1,11 +1,36 @@
-import React from "react";
+import React,{useState} from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createBoardProcess,createBoardError
+} from "../../../../redux/state/Board/Action";
 
 const AddBoard = (props) => {
-
+  const [boardName, setBoardName] = useState('')
+  const dispatch = useDispatch();
+  const {  isFetching, error } = useSelector((state) => state.board);
+console.log("error",boardName);
+  const handleBoardSubmit = () => {
+    try{
+      dispatch(
+        createBoardProcess({
+          data: { 
+            boardName:boardName,
+           }
+        }),
+      );
+         props.navigation.navigate("BarCodeScanner")
+    } catch {
+      dispatch(
+        createBoardError({
+            error:'please select the field first',
+        }),
+      );
+    }
+    
+  }
     return(
         <>
         <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450)}}>
@@ -15,16 +40,15 @@ const AddBoard = (props) => {
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TextInput
           style={styles.dropdown}
-          // onChangeText={onChangeNumber}
+          onChangeText={(val)=>{setBoardName(val)}}
           // value={number}
               placeholder="Enter Board Name"
-              placeholderTextColor="#000"
-          keyboardType="alphabet"
+              keyboardType="alphabet"
         />
 
         <View style={{paddingTop: 25}}>
           <TouchableOpacity style={styles.button}
-          onPress={() => props.navigation.navigate("BarCodeScanner")}>
+                onPress={() =>handleBoardSubmit()}>
             <Text style={{color: 'white', fontSize: 17}}>Scan Board</Text>
           </TouchableOpacity>
         </View>

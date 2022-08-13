@@ -22,7 +22,7 @@ const Home = props => {
       {SetWifiCredentials (props)}
       {/* <CreateNewRoom props /> */}
       {/* <AddRoom prop /> */}
-      {CustomRooms(props)}
+      {/* {CustomRooms(props)} */}
       {/* {renderHederComponents()} */}
     </View>
   );

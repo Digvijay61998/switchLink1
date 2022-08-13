@@ -25,23 +25,23 @@ console.log("error",error);
   const [roomName, setRoomName] = useState('')
   console.log("value",value?.label);
   const handleRoomsubmit = () => {
-    try{
-      dispatch(
-        createBoardProcess({
-          data: { 
-            boardName:roomName,
-            boardType:value.label,
-           }
-        }),
-      );
+    // try{
+    //   dispatch(
+    //     createBoardProcess({
+    //       data: { 
+    //         boardName:roomName,
+    //         boardType:value.label,
+    //        }
+    //     }),
+    //   );
          props.navigation.navigate("AddDeviceStack")
-    } catch {
-      dispatch(
-        createBoardError({
-            error:'please select the field first',
-        }),
-      );
-    }
+    // } catch {
+    //   dispatch(
+    //     createBoardError({
+    //         error:'please select the field first',
+    //     }),
+    //   );
+    // }
     
   }
   return (

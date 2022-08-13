@@ -1,37 +1,75 @@
 import Immutable from "seamless-immutable";
-import {CREATE_BOARD_PROCESS,CREATE_BOARD_SUCCESS,CREATE_BOARD_ERROR} from "../ActionTypes";
+import {
+    CREATE_BOARD_PROCESS,
+     CREATE_BOARD_SUCCESS,
+    CREATE_BOARD_ERROR,
+    GET_SWITCH_LIST,
+    GET_SWITCH_LIST_SUCCESS,
+    GET_SWITCH_LIST_ERROR,
+    GET_SWITCH_LIST_DETAILS
+} from "../ActionTypes";
 import { createReducer } from "../CreateReducer";
 
 const INITIAL_STATE = Immutable({
+    switchList:null,
     boardName:null,
-    macAdress:null,
-    boardType:null,
+    macAddress:null,
+    boardDetails:null,
     isFetching: false,
     error: null,
 });
 
 const reducers = {
-    [CREATE_BOARD_PROCESS]: (state, { data }) => {
+    [CREATE_BOARD_PROCESS]: (state,action) => {
+        console.log("data",action);
         return Immutable.merge(state, {
-            boardName:null,
-            macAdress:null,
-            boardType:null,
-          isFetching: false,
+            boardName:action.payload.data.boardName,
+          isFetching: true,
           error: null,
         });
       },
     
-  [CREATE_BOARD_SUCCESS]: (state, { data }) => {
+    [CREATE_BOARD_SUCCESS]: (state, action ) => {
+        console.log("data",action);
         return Immutable.merge(state, {
-            boardName:null,
-            macAdress:null,
-            boardType:null,
-          isFetching: false,
-          error: null,
+            boardName: action.payload.data.boardName,
+            macAddress: action.payload.data.macAddress,
+           isFetching: false,
+           error: null,
         });
       },
     
   [CREATE_BOARD_ERROR]: (state, error) => {
+        return Immutable.merge(state, {
+          isFetching: false,
+          error: error,
+        });
+    },
+    [GET_SWITCH_LIST]: (state,action) => {
+        console.log("data@@@@@@@",action);
+        return Immutable.merge(state, {
+           boardDetails:action.payload.data,
+          isFetching: true,
+          error: null,
+        });
+      },
+      [GET_SWITCH_LIST_DETAILS]: (state,action) => {
+        console.log("data@@@@@@@",action);
+        return Immutable.merge(state, {
+            switchList:action.payload.switchList,
+          isFetching: false,
+          error: null,
+        });
+      },
+    [GET_SWITCH_LIST_SUCCESS]: (state, action ) => {
+        console.log("data@@@@@@@@@@@@",action);
+        return Immutable.merge(state, {
+          isFetching: false,
+          error: null,
+        });
+      },
+    
+  [GET_SWITCH_LIST_ERROR]: (state, error) => {
         return Immutable.merge(state, {
           isFetching: false,
           error: error,
