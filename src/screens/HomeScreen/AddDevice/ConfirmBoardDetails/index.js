@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity } from "react-native";
-import { EditSwitch } from "../../../../common/component";
-import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
+import { Confirmation, EditSwitch } from "../../../../common/component";
+import { appTheme, COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
 
 const ConfirmBoardDetails = (props) => {
   console.log("props",props.route.params?.callbackConfirm);
   const {navigation} = props
  const [editModalVisible, setEditModalVisible] = useState(false);
+ const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 const handleEdit =()=>{
   setEditModalVisible(true)
+}
+
+const handleDelete =() => {
+  setDeleteModalVisible(true)
 }
 
 const data =[
@@ -39,26 +44,31 @@ const data =[
     
 ]
 
-const Switches =(item)=>{
-
+const Switches =({props})=>{
+  console.log("props",props);
   return(
-    
-      <View style={{width:Scale(330),height:verticalScale(50),backgroundColor:"white",marginBottom:Scale(10),flexDirection:"row",borderRadius:Scale(10),justifyContent:'space-between', position:'relative',paddingTop:Scale(10) }}>
+    <>
+      <View style={[styles.switchBox,{backgroundColor:appTheme('primary')}]}>
       <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:Scale(110),paddingLeft:Scale(10)}}>
-      <Image source={ICONS.switchBoard} style={styles.switchIcons} />
-       <Text style={{fontWeight:"600",color:"black",fontSize:Scale(18)}}>{item.Switch}</Text>
+      <Image source={ICONS.switchBoard} style={[styles.switchIcons,{tintColor:appTheme('font')}]} />
+       <Text style={{fontWeight:"600",color:appTheme('font'),fontSize:Scale(18)}}>{props.Switch}</Text>
       </View>
       <View style={{paddingRight:Scale(18)}}>
       <View style={{display:'flex', flexDirection:"row",width:Scale(60),justifyContent:"space-around"}}>
-   <TouchableOpacity
-   onPress={()=>handleEdit()}
-   >
+      <TouchableOpacity
+      onPress={()=>handleEdit()}
+      >
       <Image source={ICONS.editRoom} style={styles.icons} />
    </TouchableOpacity>
-      <Image source={ICONS.deleteRoom} style={styles.icons} />
+   <TouchableOpacity
+   onPress={()=>handleDelete()}>
+   <Image source={ICONS.deleteRoom} style={styles.icons} />
+
+   </TouchableOpacity>
       </View>
       </View>
       </View>
+      </>
   )
 }
 
@@ -67,19 +77,22 @@ return(
   <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450),justifyContent:'center',alignItems:'center'}}>
   <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130),paddingLeft:20}}>
 <Text style={{fontSize:25,color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
-<View style={styles.box}>
-   <Text style={{fontSize:18,color:"black",paddingLeft:Scale(10)}}>Board 1</Text>
+<View style={[styles.box,{backgroundColor:appTheme('primary')}]}>
+   <Text style={{fontSize:18,color:appTheme('font'),paddingLeft:Scale(10)}}>Board 1</Text>
    </View>
   
   </View>
-  <Text style={{fontSize:16,color:"grey",paddingLeft:Scale(20),marginBottom:Scale(10)}}>Switches on the board</Text>
+  <View style={{right:Scale(77)}}>
+  <Text style={{fontSize:16,color:"#353535",marginBottom:Scale(10)}}>Switches on the board</Text>
+
+  </View>
 
 <View style={{alignItems:"center",flex:1,marginBottom:verticalScale(30)}}>
 <FlatList
             data={data}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
-            Switches(item)
+        <Switches props={item}/>
             )}
           />
           </View>
@@ -98,8 +111,9 @@ return(
         <>
         <BoardSwitches props/>
         <EditSwitch editSwitch={editModalVisible} navigation={navigation}/>
+        <Confirmation confirm={deleteModalVisible} navigation={navigation}/>
        
-    </>
+        </>
     )
     
 };
@@ -112,7 +126,7 @@ const styles = StyleSheet.create({
     height: Scale(50),
     width: Scale(330),
     borderRadius: 8,
-    backgroundColor: 'white',
+    
     justifyContent: 'center', 
    },
    switchIcons: {
@@ -159,6 +173,16 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  switchBox:{
+    width:Scale(330),
+    height:verticalScale(50),
+    marginBottom:Scale(10),
+    flexDirection:"row",
+    borderRadius:Scale(10),
+    justifyContent:'space-between',
+     position:'relative',
+     paddingTop:Scale(10) ,
   }
   });
   

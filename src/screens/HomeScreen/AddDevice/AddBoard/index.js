@@ -8,13 +8,13 @@ const AddBoard = (props) => {
 
     return(
         <>
-        <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450)}}>
+        <View style={{ flex:1,backgroundColor:COLORS.secondary,height:verticalScale(450),}}>
       <View style={{paddingLeft: 20, paddingBottom: 15,}}>
-        <Text style={{color: 'black', fontSize: 30}}>Add Board</Text>
+        <Text style={{color: 'black', fontSize: 30,paddingLeft:Scale(10)}}>Add Board</Text>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TextInput
-          style={[styles.dropdown,{backgroundColor: appTheme('primary'),}]}
+          style={[styles.dropdown,{backgroundColor: appTheme('primary')}]}
           // onChangeText={onChangeNumber}
           // value={number}
           placeholderTextColor= {appTheme('font')}
@@ -23,7 +23,7 @@ const AddBoard = (props) => {
         />
 
         <View style={{paddingTop: 25}}>
-          <TouchableOpacity style={[styles.button,{backgroundColor: appTheme('scanboard')}]}
+          <TouchableOpacity style={[styles.button,{backgroundColor: appTheme('scanBoard')}]}
           onPress={() => props.navigation.navigate("BarCodeScanner")}>
             <Text style={{color: appTheme('primary'), fontSize: 17}}>Scan Board</Text>
           </TouchableOpacity>

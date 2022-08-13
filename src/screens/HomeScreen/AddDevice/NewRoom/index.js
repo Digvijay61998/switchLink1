@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,TouchableOpacity,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale, IMAGE, appTheme } from '../../../../common/constants'
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
@@ -41,15 +41,15 @@ const CreateNewRoom = (props) => {
     //     /> */}
     //     </View>
     // </LinearGradient>
-    <View>
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+    <View style={{flex:1,backgroundColor:appTheme('primary')}}>
+        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('primary'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
         <Image
               style={styles.locationIcon}
               source={IMAGE.profile}
             />
         <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:"black"}}>Hii Ashutosh</Text>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:"black",lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hii Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
     <LinearGradient
@@ -63,14 +63,15 @@ const CreateNewRoom = (props) => {
      <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
      
          <TextInput
-                        style={styles.dropdown}
+                        style={[styles.dropdown,{backgroundColor:appTheme('primary')}]}
                         // onChangeText={onChangeNumber}
                         // value={number}
+                        placeholderTextColor={appTheme('font')}
                         placeholder="Enter Room Name"
                         keyboardType="alphabet"
       />
          <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          style={[styles.dropdown,{backgroundColor:appTheme('primary')}, isFocus && { borderColor: 'blue' }]}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
@@ -91,7 +92,7 @@ const CreateNewRoom = (props) => {
         />
       </View>
       <View style={{paddingTop:25}}>
-      <TouchableOpacity style={styles.button}
+      <TouchableOpacity style={[styles.button,{backgroundColor:appTheme('lightBlack'),}]}
           onPress={() => props.navigation.navigate("AddDeviceStack")}
       >
       <Text style={{color:'white'}}>Save</Text>
@@ -109,7 +110,9 @@ export default CreateNewRoom
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:Scale(20),
+      position:'relative',
+      zIndex:8,
+      maringTop:verticalScale(30),
         width:Scale(375),
         height:Scale(620),
         borderTopRightRadius:Scale(40),
@@ -117,7 +120,8 @@ const styles = StyleSheet.create({
         justifyContent:"space-around",
         flexDirection:"row",
         alignItems:"flex-start",
-        paddingTop:Scale(50)
+        paddingTop:Scale(50),
+        top: -20
         
     },
     Fixbox:{
@@ -164,11 +168,8 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderColor: 'gray',
-        borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
-        backgroundColor:'white',
         fontSize:Scale(16),
         color:"#A7B0C0"
       },
@@ -202,8 +203,7 @@ const styles = StyleSheet.create({
       button:{
         height: Scale(50),
         width: Scale(320),
-        borderColor: 'gray',
-        borderWidth: 0.5,
+       
         borderRadius: 8,
         paddingHorizontal: 8,
         backgroundColor:'black',

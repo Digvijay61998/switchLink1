@@ -1,21 +1,21 @@
 import { StyleSheet, Text, View,Modal ,Image,TouchableOpacity, TextInput} from 'react-native'
 import React from 'react'
-import { COLORS, Scale, verticalScale,ICONS } from '../constants';
+import { COLORS, Scale, verticalScale,ICONS, appTheme } from '../constants';
 
 const EditSwitch = (props) => {
     console.log('props',props);
     return props.editSwitch ? (
         <Modal transparent={true} visible={true}>
             <View style={styles.container}>
-                <View style={styles.subContainer}>
+                <View style={[styles.subContainer,]}>
         <View style={{height:verticalScale(550)}}>
         <View style={{display:'flex',flexDirection:'row',marginBottom:10}}>
         <Image source={ICONS.editRoom} style={styles.icons} />
-        <Text style={{color:'black',fontSize:23,paddingLeft:Scale(8)}}>Edit Switch</Text> 
+        <Text style={{color:appTheme('font'),fontSize:23,paddingLeft:Scale(8)}}>Edit Switch</Text> 
         </View>
 
         <View style={{marginBottom:verticalScale(24)}}>
-            <Text style={{marginBottom:Scale(5),fontSize:14}}>Switch Name</Text>
+            <Text style={{marginBottom:Scale(5),fontSize:14,color:appTheme('font')}}>Switch Name</Text>
             <TextInput
                     style={styles.dropdown}
                     // onChangeText={onChangeNumber}
@@ -26,50 +26,50 @@ const EditSwitch = (props) => {
                     />
         </View>
          <View style={{display:'flex',flexDirection:'column',justifyContent:"space-between",height:verticalScale(240),marginBottom:verticalScale(80)}}>
-         <Text style={{fontSize:14}}>Select Switch Icon</Text>   
+         <Text style={{fontSize:14,color:appTheme('font')}}>Select Switch Icon</Text>   
 
          <View style={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:verticalScale(200)}}>
         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={styles.icons} />
-        <Image source={ICONS.fan} style={styles.icons2} />
-        <Image source={ICONS.alarm} style={styles.icons2} />
-        <Image source={ICONS.tv} style={styles.icons2} />
-        <Image source={ICONS.camera} style={styles.icons2} />
+        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
             
         </View>  
         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={styles.icons} />
-        <Image source={ICONS.fan} style={styles.icons2} />
-        <Image source={ICONS.alarm} style={styles.icons2} />
-        <Image source={ICONS.tv} style={styles.icons2} />
-        <Image source={ICONS.camera} style={styles.icons2} />
-            
-        </View>  
-
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={styles.icons} />
-        <Image source={ICONS.fan} style={styles.icons2} />
-        <Image source={ICONS.alarm} style={styles.icons2} />
-        <Image source={ICONS.tv} style={styles.icons2} />
-        <Image source={ICONS.camera} style={styles.icons2} />
+        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
             
         </View>  
 
         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={styles.icons} />
-        <Image source={ICONS.fan} style={styles.icons2} />
-        <Image source={ICONS.alarm} style={styles.icons2} />
-        <Image source={ICONS.tv} style={styles.icons2} />
-        <Image source={ICONS.camera} style={styles.icons2} />
+        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
+            
+        </View>  
+
+        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
+        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
+        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
             
         </View>  
         </View> 
         </View>       
          <View style={{width:'100%',justifyContent:'flex-end',alignItems:'center',flexDirection:'row'}}>
                       <TouchableOpacity
-                      style={styles.button}
+                      style={[styles.button]}
                       >
-                          <Text style={{color:COLORS.black,fontSize:Scale(18)}}>Cancel</Text>
+                          <Text style={{color:appTheme('font'),fontSize:Scale(18),borderColor:appTheme('font')}}>Cancel</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                       onPress={()=>props.navigation.replace('ConfirmBoardDetails',{callbackConfirm:('callbackConfirm')})}
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     subContainer: {
         width: Scale(350),
         height: verticalScale(600),
-        backgroundColor: COLORS.primary,
+        
         borderRadius: Scale(12),
         // justifyContent: 'space-around',
         // alignItems: 'center',

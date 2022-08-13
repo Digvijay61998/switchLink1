@@ -13,14 +13,17 @@ export const COLORS={
   purple: '#A75FFF',
   navigationLink:'#4D57EA',
   font: 'black',
-  scanboard:'#262626',
+  lightBlack:'black',
+  input:"white",
+  wallcolor:'#FFFFFF',
+  scanBoard:'#262626',
 
 
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   headerFont:'black',
   link: '#5e75ec',
   black: 'black',
-  input: '#F8FAFD',
+  // input: '#F8FAFD',
   time: '#939598'
 }
 
@@ -32,14 +35,18 @@ export const DARKCOLORS = {
   purple: '#A75FFF',
   navigationLink:'#4D57EA',
   font: 'white',
-  scanboard:'#D9D9D9',
+  lightBlack:'#333333',
+  input:'black',
+  wallcolor:'black',
+  scanBoard:'#D9D9D9',
+
 
   
   headerFont:'white',
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   link: '#5e75ec',
   black: 'black',
-  input: '#F8FAFD',
+  // input: '#F8FAFD',
   time:'#939598'
 };
 export const CONTAINER = {

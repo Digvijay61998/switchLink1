@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,Switch,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale, IMAGE } from '../../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale, IMAGE, appTheme } from '../../../../common/constants'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Dropdown } from 'react-native-element-dropdown';
 
@@ -44,15 +44,15 @@ const SetWifiCredentials = (props) => {
     //     /> */}
     //     </View>
     // </LinearGradient>
-    <View>
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+    <View style={{flex:1,backgroundColor:appTheme('primary')}}>
+        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('wallcolor'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
         <Image
               style={styles.locationIcon}
               source={IMAGE.profile}
             />
         <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:"black"}}>Hii Ashutosh</Text>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:"black",lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hii Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
     <LinearGradient
@@ -65,7 +65,7 @@ const SetWifiCredentials = (props) => {
      <Text style={{fontFamily:'Montserrat -Thin',fontStyle: 'normal',fontWeight:'500',fontSize:24,color:"black"}}>Set WiFi Credentials</Text> 
      <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
         <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          style={[styles.dropdown,{backgroundColor:appTheme('input')},isFocus && { borderColor: 'blue',}]}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
@@ -85,15 +85,16 @@ const SetWifiCredentials = (props) => {
           
         />
          <TextInput
-                        style={styles.dropdown}
+                        style={[styles.dropdown,{backgroundColor:appTheme('input'),color:appTheme('font')}]}
                         // onChangeText={onChangeNumber}
                         // value={number}
+                        placeholderTextColor={appTheme('font')}
                         placeholder="Enter Password"
                         keyboardType="numeric"
       />
       </View>
       <View style={{paddingTop:25}}>
-      <TouchableOpacity style={styles.button}
+      <TouchableOpacity style={[styles.button,{backgroundColor:appTheme('lightBlack')}]}
       onPress={()=> props.navigation.navigate('CreateNewRoom')}>
       <Text style={{color:'white'}}>Save</Text>
 
@@ -110,7 +111,9 @@ export default SetWifiCredentials
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:Scale(20),
+      position:'relative',
+      zIndex:8,
+      maringTop:verticalScale(30),
         width:Scale(375),
         height:Scale(620),
         borderTopRightRadius:Scale(40),
@@ -118,7 +121,8 @@ const styles = StyleSheet.create({
         justifyContent:"space-around",
         flexDirection:"row",
         alignItems:"flex-start",
-        paddingTop:Scale(50)
+        paddingTop:Scale(50),
+        top: -20
         
     },
     Fixbox:{
@@ -165,11 +169,9 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderColor: 'gray',
-        borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
-        backgroundColor:'white'
+        
       },
       icon: {
         marginRight: 5,
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
       },
       selectedTextStyle: {
-        fontSize: 16,
+        fontSize: 50,
       },
       iconStyle: {
         width: 20,
@@ -204,7 +206,6 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
-        backgroundColor:'black',
         position:"relative",
         justifyContent:'center',
         alignItems:'center',
