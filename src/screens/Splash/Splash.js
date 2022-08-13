@@ -1,42 +1,69 @@
 import { StyleSheet, Image,StatusBar} from 'react-native'
 import React, { useEffect } from 'react'
-import {Scale,IMAGE} from "../../common/constants"
+import {Scale,IMAGE,appTheme} from "../../common/constants"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Animatable from "react-native-animatable";
+import { useDispatch, useSelector ,connect} from "react-redux";
+import {
+  themeChange
+} from "../../redux/state/Theme/Actions";
 const Splash = (props) => {
-    async function componentDidMount() {
-        let userToken = JSON.parse(await AsyncStorage.getItem("userToken"));
+  const dispatch = useDispatch();
+  async function handleTheme() { 
+    const userTheme = Boolean(await AsyncStorage.getItem("userTheme"));
+    console.log("@@@@ User Token================", userTheme);
+    dispatch(
+      themeChange({
+        data: { theme: userTheme }
+      }),
+    );
+  }
+
+  async function componentDidMount() {
+ 
+        let userToken = (await AsyncStorage.getItem("userToken"));
         console.log("@@@@ User Token================", userToken);
-        setTimeout(() => {
+    setTimeout(() => {
+          console.log("AuthStackScreen is navigated ");
         //   if (!userToken?.accessToken) {
         //     this.props.navigation.replace("OnBoardingStackScreen");
         //   } else {
             // if (userToken?.role == "customer") {
+          
             props.navigation.replace("AuthStackScreen");
             // } else {
             //   this.props.navigation.replace("StackScreenSeller");
             // }
         //   }
-        }, 3000);
+        },3000);
       }
 
-      useEffect(()=>{
-        componentDidMount()
+  useEffect(() => {
+    componentDidMount()
+        handleTheme()
       },[])
   return (<>
     <StatusBar hidden />
     <Animatable.View
     useNativeDriver
     animation="bounceIn"
-    style={styles.container}
+    style={[styles.container,{backgroundColor:appTheme('primary')}]}
   >
     <Image source={IMAGE.spashLogo} style={styles.imageStyle} />
   </Animatable.View>
   </>
   )
 }
+function mapStateToProps(state) {
+  console.log("state~~~~~~~~~~~~~~~~~~~~~~~~~",state);
+  return {
+    // Theme:Theme.theme
+  };
+}
 
-export default Splash
+export default connect(mapStateToProps, null, null, { forwardRef: true })(
+  Splash
+)
 
 const styles = StyleSheet.create({
 

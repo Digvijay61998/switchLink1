@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View ,Image,Switch} from 'react-native'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
 import { COLORS,DARKCOLORS, ICONS, Scale, verticalScale ,appTheme} from '../../common/constants'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector ,connect} from "react-redux";
+import { bindActionCreators } from "redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   themeChange
 } from "../../redux/state/Theme/Actions";
@@ -11,17 +13,28 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 const Setting = (props) => {
   console.log("props", props);
   const { navigation } = props;
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.Theme);
+  const [isEnabled, setIsEnabled] = useState(theme);
+  const toggleSwitch = async() => {
+    setIsEnabled(previousState => !previousState);
+    await AsyncStorage.setItem("userTheme", String(theme))
+  }
+
   console.log("theme", theme);
   dispatch(
     themeChange({
       data: { theme: isEnabled }
     }),
   );
+  const handleTheme = async() => {
+    console.log('userTheme@@@@@@@@@@',await AsyncStorage.getItem("userTheme"))
+  }
+
+  useEffect(() => {
+    handleTheme()
+  },[isEnabled])
+
   const THEMECOLOR = (theme == true ? DARKCOLORS : COLORS)
   return (
     <LinearGradient

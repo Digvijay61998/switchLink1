@@ -7,7 +7,7 @@ const EditSwitch = (props) => {
     return props.editSwitch ? (
         <Modal transparent={true} visible={true}>
             <View style={styles.container}>
-                <View style={[styles.subContainer,]}>
+                <View style={[styles.subContainer, {backgroundColor: appTheme('primary')}]}>
         <View style={{height:verticalScale(550)}}>
         <View style={{display:'flex',flexDirection:'row',marginBottom:10}}>
         <Image source={ICONS.editRoom} style={styles.icons} />
