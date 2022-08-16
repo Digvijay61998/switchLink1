@@ -119,10 +119,8 @@ const LightIcons = {
  
 
 export const appIcons = (appIcons) => {
-  console.log("props#######################", appIcons);
     var THEME = appIcons
   const { theme } = useSelector((state) => state.Theme);
-      console.log("theme", theme);
     const APPCOLORS = (theme == true ? DarkIcons[THEME] : LightIcons[THEME])
  return APPCOLORS
   }

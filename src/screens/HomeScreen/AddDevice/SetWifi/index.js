@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View ,Image,FlatList,Switch,TextInput} from 'react-native'
+import { StyleSheet, Text, View ,Image,TouchableOpacity,Switch,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale, IMAGE, appTheme } from '../../../../common/constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
@@ -51,23 +50,23 @@ const SetWifiCredentials = (props) => {
               source={IMAGE.profile}
             />
         <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hii Ashutosh</Text>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: Scale(32),color:appTheme('font')}}>Hii Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:Scale(16),color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
     <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
+    colors={appTheme('tertiary')}
       start={{ x: 0, y:1 }}
       end={{ x: 1, y: 0 }}
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
      <Text style={{fontFamily:'Montserrat-Black',fontWeight:'500',fontSize:Scale(24),color:"black"}}>Set WiFi Credentials</Text> 
-     <View style={{paddingTop:40,justifyContent:"space-between",height:170}}>
+     <View style={{paddingTop:Scale(40),justifyContent:"space-between",height:verticalScale(170)}}>
         <Dropdown
           style={[styles.dropdown,{backgroundColor:appTheme('input')},isFocus && { borderColor: 'blue',}]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
+          selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
           inputSearchStyle={styles.inputSearchStyle}
           data={data}
           maxHeight={300}
@@ -88,7 +87,7 @@ const SetWifiCredentials = (props) => {
                         style={[styles.dropdown,{backgroundColor:appTheme('input'),color:appTheme('font')}]}
                         // onChangeText={onChangeNumber}
                         // value={number}
-                        placeholderTextColor={appTheme('font')}
+                        placeholderTextColor={appTheme('placeHolder')}
                         placeholder="Enter Password"
                         keyboardType="numeric"
       />
@@ -122,13 +121,12 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"flex-start",
         paddingTop:Scale(50),
-        top: -20
+        top:verticalScale(-20)
         
     },
     Fixbox:{
         width:Scale(157),
         height:verticalScale(185),
-        backgroundColor:'#fff',
         borderRadius:Scale(10),
         alignItems:"center",
         justifyContent:"center",
@@ -169,43 +167,42 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderRadius: 8,
-        paddingHorizontal: 8,
+        borderRadius: Scale(8),
+        paddingHorizontal: verticalScale(8),
         
       },
       icon: {
-        marginRight: 5,
+        marginRight: verticalScale(5),
       },
       label: {
         position: 'absolute',
         backgroundColor: 'white',
-        left: 22,
-        top: 8,
-        zIndex: 999,
-        paddingHorizontal: 8,
-        fontSize: 14,
+        left: Scale(22),
+        top: verticalScale(8),
+        paddingHorizontal: Scale(8),
+        fontSize: Scale(14),
       },
       placeholderStyle: {
-        fontSize: 16,
+        fontSize: Scale(16),
       },
       selectedTextStyle: {
-        fontSize: 50,
+        fontSize: Scale(16),
       },
       iconStyle: {
-        width: 20,
-        height: 20,
+        width: Scale(20),
+        height: verticalScale(20),
       },
       inputSearchStyle: {
-        height: 40,
-        fontSize: 16,
+        height: verticalScale(40),
+        fontSize: Scale(16),
       },  
       button:{
         height: Scale(50),
         width: Scale(320),
         borderColor: 'gray',
         borderWidth: 0.5,
-        borderRadius: 8,
-        paddingHorizontal: 8,
+        borderRadius:Scale(8),
+        paddingHorizontal: verticalScale(8),
         position:"relative",
         justifyContent:'center',
         alignItems:'center',

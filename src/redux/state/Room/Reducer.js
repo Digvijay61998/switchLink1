@@ -1,28 +1,53 @@
 import Immutable from "seamless-immutable";
-import {CREATE_ROOM_SUCCESS,CREATE_ROOM_ERROR} from "../ActionTypes";
+import {
+  GET_ROOM_LIST,
+  GET_ROOM_LIST_ERROR,
+  GET_ROOM_LIST_SUCCESS,
+  CREATE_ROOM,
+  CREATE_ROOM_ERROR,
+  CREATE_ROOM_SUCCESS
+} from "../ActionTypes";
 import { createReducer } from "../CreateReducer";
 
 const INITIAL_STATE = Immutable({
-     switchList:null,
-    isFetching: false,
+  roomList: null, 
+  createRoom:null,
+    isFetching:false,
     error: null,
 });
 
 const reducers = {
-  [CREATE_ROOM_SUCCESS]: (state, { data }) => {
+  [GET_ROOM_LIST]: (state, { data }) => {
     return Immutable.merge(state, {
-        boardName:null,
-        macAdress:null,
-        boardType:null,
-      isFetching: false,
+      roomList:null,
+      isFetching: true,
       error: null,
     });
   },
-  [CREATE_ROOM_SUCCESS]: (state, { data }) => {
+  [GET_ROOM_LIST_SUCCESS]: (state, action) => {
+    return Immutable.merge(state, {
+          roomList:action.payload.roomList,
+          isFetching: false,
+          error: null,
+        });
+      },
+    
+  [GET_ROOM_LIST_ERROR]: (state, error) => {
         return Immutable.merge(state, {
-            boardName:null,
-            macAdress:null,
-            boardType:null,
+          isFetching: false,
+          error: error,
+        });
+  },
+  [CREATE_ROOM]: (state, { data }) => {
+    return Immutable.merge(state, {
+      roomList:null,
+      isFetching: true,
+      error: null,
+    });
+  },
+  [CREATE_ROOM_SUCCESS]: (state, action) => {
+    return Immutable.merge(state, {
+         createRoom:action.payload.createRoom,
           isFetching: false,
           error: null,
         });
@@ -35,5 +60,6 @@ const reducers = {
         });
       },
 };
+
 
 export const reducer = createReducer(INITIAL_STATE, reducers);

@@ -4,8 +4,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale, IMAGE ,appTheme} from '../../../../common/constants'
 import { Dropdown } from 'react-native-element-dropdown';
 import {
-  createBoardProcess,createBoardError
-} from "../../../../redux/state/Board/Action";
+  createRoom,createRoomError
+} from "../../../../redux/state/Room/Action"
 import { useDispatch, useSelector } from "react-redux";
 
 const data = [
@@ -18,30 +18,31 @@ const data = [
   ];
 const CreateNewRoom = (props) => {
   const dispatch = useDispatch();
-  const {  isFetching, error } = useSelector((state) => state.board);
+  const {  isFetching, error } = useSelector((state) => state.room);
 console.log("error",error);
   const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
   const [roomName, setRoomName] = useState('')
-  console.log("value",value?.label);
+  console.log("value", value?.label);
+  
   const handleRoomsubmit = () => {
-    // try{
-    //   dispatch(
-    //     createBoardProcess({
-    //       data: { 
-    //         boardName:roomName,
-    //         boardType:value.label,
-    //        }
-    //     }),
-    //   );
-         props.navigation.navigate("AddDeviceStack")
-    // } catch {
-    //   dispatch(
-    //     createBoardError({
-    //         error:'please select the field first',
-    //     }),
-    //   );
-    // }
+    try{
+      dispatch(
+        createRoom({
+          data: { 
+            name:roomName,
+            roomType:value.label,
+           }
+        }),
+      );
+        //  props.navigation.navigate("AddDeviceStack")
+    } catch {
+      dispatch(
+        createRoomError({
+            error:'please select the field first',
+        }),
+      );
+    }
     
   }
   return (
@@ -81,7 +82,7 @@ console.log("error",error);
         </View>
         </View>
     <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
+    colors={appTheme('tertiary')}
       start={{ x: 0, y:1 }}
       end={{ x: 1, y: 0 }}
       style={styles.container}
@@ -91,17 +92,17 @@ console.log("error",error);
      <View style={{paddingTop:verticalScale(40),justifyContent:"space-between",height:verticalScale(170)}}>
      
          <TextInput
-                        style={[styles.dropdown,{backgroundColor:appTheme('primary')}]}
+                        style={[styles.dropdown,{backgroundColor:appTheme('primary'),color:appTheme('font')}]}
                         onChangeText={(val)=>{setRoomName(val)}}
                         // value={number}
-                        placeholderTextColor={appTheme('font')}
+                        placeholderTextColor={appTheme('placeHolder')}
                         placeholder="Enter Room Name"
                         keyboardType="alphabet"
       />
          <Dropdown
           style={[styles.dropdown,{backgroundColor:appTheme('primary')}, isFocus && { borderColor: 'blue' }]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
+          selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
           inputSearchStyle={styles.inputSearchStyle}
           data={data}
           maxHeight={300}
@@ -125,7 +126,7 @@ console.log("error",error);
                 // props.navigation.navigate("AddDeviceStack")
               }
       >
-      <Text style={{color:'white'}}>Save</Text>
+      <Text style={{color:'white',fontWeight:'600',fontSize:Scale(18)}}>Save</Text>
 
       </TouchableOpacity>
       </View>

@@ -11,25 +11,27 @@ const AddBoard = (props) => {
   const [boardName, setBoardName] = useState('')
   const dispatch = useDispatch();
   const {  isFetching, error } = useSelector((state) => state.board);
-console.log("error",boardName);
+  console.log("error", boardName);
+  
   const handleBoardSubmit = () => {
-    try{
-      dispatch(
-        createBoardProcess({
-          data: { 
-            boardName:boardName,
-           }
-        }),
-      );
-         props.navigation.navigate("BarCodeScanner")
-    } catch {
-      dispatch(
-        createBoardError({
-            error:'please select the field first',
-        }),
-      );
+    if (boardName.length > 0) {
+      try{
+        dispatch(
+          createBoardProcess({
+            data: { 
+              boardName:boardName,
+             }
+          }),
+        );
+           props.navigation.navigate("BarCodeScanner")
+      } catch {
+        dispatch(
+          createBoardError({
+              error:'please select the field first',
+          }),
+        );
+      }
     }
-    
   }
     return(
         <>

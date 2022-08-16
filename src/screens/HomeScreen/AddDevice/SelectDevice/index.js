@@ -1,13 +1,19 @@
 import React from "react";
 import { Image, StyleSheet, Text, View ,TouchableOpacity} from "react-native";
-import { COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
+import { appImage, appTheme, COLORS, ICONS, Scale, verticalScale } from "../../../../common/constants";
+import LinearGradient from 'react-native-linear-gradient'
 
 
 const SelectDevice = (props) => {
 
     return(
-        <>
-        <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450)}}>
+      <>
+          <LinearGradient
+    colors={appTheme('secondary')}
+      start={{ x: 0, y:1 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
+        > 
         <View style={{paddingLeft:20,paddingBottom:15}}>
         <Text style={{color:"black",fontSize:30}}>
             Select Device
@@ -39,7 +45,7 @@ const SelectDevice = (props) => {
 
         </View>
     </View>
-    </View>
+    </LinearGradient>
     </>
     )
 }
@@ -47,6 +53,11 @@ export default SelectDevice;
 
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height:verticalScale(450)
+    
+  },
     dropdown: {
       height: Scale(50),
       width: Scale(320),

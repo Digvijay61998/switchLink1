@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {CustomHome} from '../../common/component';
 import CustomRooms from './AddRoom/CustomRooms';
 import SetWifiCredentials from './AddDevice/SetWifi';
@@ -10,19 +10,31 @@ import AddRoom from './AddDevice';
 import {createStackNavigator} from '@react-navigation/stack';
 // import EditRoom from './AddRoom/EditRoom';
 // import BoardName from './BoardName';
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRoomsList
+  } from "../../redux/state/Room/Action";
+  
 const HomeStackNavigator = createStackNavigator();
 
 const Home = props => {
-  console.log('props', props);
   const {navigation} = props;
-
+  const dispatch = useDispatch();
+  const {roomList,isFetching, error } = useSelector((state) => state.room);
+  console.log("isFetching",roomList, isFetching, error);
+  
+  useEffect(() => {
+    dispatch(
+      getRoomsList(),
+  );
+},[])
+         
   return (
     <View style={{flex: 1}}>
-      {SetWifiCredentials (props)}
+      {/* {SetWifiCredentials (props)} */}
       {/* <CreateNewRoom props /> */}
       {/* <AddRoom prop /> */}
-      {/* {CustomRooms(props)} */}
+        <CustomRooms props={props} />
       {/* {renderHederComponents()} */}
     </View>
   );

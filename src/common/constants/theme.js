@@ -7,7 +7,8 @@ import React from "react";
  
 export const COLORS={
   primary: '#FFFF', // background Color
-  secondary: ['#E5DFED', '#E5DFED'], // Dark purple
+  secondary: ['#e8e6ff', '#e8e6ff'], // Dark purple
+  tertiary: ["#c5c0fe","#edc1fe","#ed86ff"],
   header: ["#c5c0fe", "#edc1fe", "#ed86ff"],
   lightPurple: ['#E5DFED', '#E5DFED'],
   purple: '#A75FFF',
@@ -17,6 +18,7 @@ export const COLORS={
   input:"white",
   wallcolor:'#FFFFFF',
   scanBoard:'#262626',
+  placeHolder:'#A7B0C0',
 
 
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
@@ -30,6 +32,7 @@ export const COLORS={
 export const DARKCOLORS = {
   primary: 'black', // background Color
   secondary: ["#c5c1ff", "#edc1fe", "#ed86ff"], // Dark purple
+  tertiary:  ["#dcc2ff", "#d4c2ff", "#c7c1ff"],
   header: ['#0D0D0D', "#0D0D0D", "#0D0D0D"],
   lightPurple:["#c5c0fe", "#edc1fe", "#ed86ff"],
   purple: '#A75FFF',
@@ -39,7 +42,7 @@ export const DARKCOLORS = {
   input:'black',
   wallcolor:'black',
   scanBoard:'#D9D9D9',
-
+  placeHolder:'#A7B0C0',
 
   
   headerFont:'white',
@@ -85,10 +88,8 @@ export const FONTS = {
   },
 };
 export const appTheme = (appTheme) => {
-  console.log("props#######################", appTheme);
 	var THEME = appTheme
   const { theme } = useSelector((state) => state.Theme);
-      console.log("theme", theme);
     const APPCOLORS = (theme == true ? DARKCOLORS[THEME] : COLORS[THEME])
  return APPCOLORS
   }

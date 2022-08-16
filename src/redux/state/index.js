@@ -8,6 +8,8 @@ export default () => {
     auth: require("./Login/Reducer").reducer,
     Theme: require("./Theme/Reducer").reducer,
     board: require("./Board/Reducer").reducer,
+    room: require("./Room/Reducer").reducer,
+
     // stockManag: require("./StockManagement/Reducer").reducer,
     // termConditions: require("./TermConditions/Reducer").reducer,
     // contactUs: require("./ContactUs/Reducer").reducer,

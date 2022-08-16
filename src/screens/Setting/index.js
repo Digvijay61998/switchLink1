@@ -11,7 +11,6 @@ import {
 } from "../../redux/state/Theme/Actions";
 import { TouchableOpacity } from 'react-native-gesture-handler'
 const Setting = (props) => {
-  console.log("props", props);
   const { navigation } = props;
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.Theme);
@@ -20,8 +19,6 @@ const Setting = (props) => {
     setIsEnabled(previousState => !previousState);
     await AsyncStorage.setItem("userTheme", String(theme))
   }
-
-  console.log("theme", theme);
   dispatch(
     themeChange({
       data: { theme: isEnabled }

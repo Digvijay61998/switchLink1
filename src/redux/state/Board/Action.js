@@ -14,6 +14,20 @@ export const createBoardError = (error) => ({
     error,
 });
 
+export const getDeviceList = payloadData => ({
+  type: ActionTypes.GET_DEVICE_LIST,
+  payload: payloadData,
+});
+export const getDeviceListSuccess = payloadData => ({
+  type: ActionTypes.GET_DEVICE_LIST_SUCCESS,
+  payload: payloadData,
+});
+
+export const getDeviceListError = (error) => ({
+  type: ActionTypes.GET_DEVICE_LIST_ERROR,
+  error,
+});
+
 export const getSwitchList = payloadData => ({
     type: ActionTypes.GET_SWITCH_LIST,
     payload: payloadData,

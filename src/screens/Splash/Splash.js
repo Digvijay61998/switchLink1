@@ -25,12 +25,12 @@ const Splash = (props) => {
         console.log("@@@@ User Token================", userToken);
     setTimeout(() => {
           console.log("AuthStackScreen is navigated ");
-        //   if (!userToken?.accessToken) {
-        //     this.props.navigation.replace("OnBoardingStackScreen");
-        //   } else {
-            // if (userToken?.role == "customer") {
-          
+          if (userToken) {
+            props.navigation.replace("HomeNavigator");
+          } else { 
             props.navigation.replace("AuthStackScreen");
+            }
+          
             // } else {
             //   this.props.navigation.replace("StackScreenSeller");
             // }
