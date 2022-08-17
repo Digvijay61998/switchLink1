@@ -34,8 +34,8 @@ const Switches =({props})=>{
   console.log("props",props);
   return(
     <>
-      <View style={[styles.switchBox,{backgroundColor:appTheme('primary')}]}>
-      <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:Scale(110),paddingLeft:Scale(10)}}>
+      <View style={[styles.switchBox,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:"#9243E3"}]}>
+      <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:Scale(110),paddingLeft:Scale(10),}}>
       <Image source={ICONS.switchBoard} style={[styles.switchIcons,{tintColor:appTheme('font')}]} />
        <Text style={{fontWeight:"600",color:appTheme('font'),fontSize:Scale(18)}}>{props.switch_name}</Text>
       </View>
@@ -60,10 +60,10 @@ const Switches =({props})=>{
 
 const BoardSwitches =()=>{
 return(
-  <View style={{ backgroundColor:COLORS.secondary,height:verticalScale(450),justifyContent:'center',alignItems:'center'}}>
-  <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130),paddingLeft:20}}>
+  <View style={{ backgroundColor:appTheme('primary'),height:verticalScale(450),justifyContent:'center',alignItems:'center',paddingTop:verticalScale(80)}}>
+  <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130)}}>
 <Text style={{fontSize:25,color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
-<View style={[styles.box,{backgroundColor:appTheme('primary')}]}>
+<View style={[styles.box,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:"#9243E3"}]}>
    <Text style={{fontSize:18,color:appTheme('font'),paddingLeft:Scale(10)}}>Board 1</Text>
    </View>
   
@@ -85,7 +85,7 @@ return(
           {props.route.params?.callbackConfirm == 'callbackConfirm' ? 
         <TouchableOpacity
         style={{width:Scale(350),height:verticalScale(46),backgroundColor:"black",borderRadius:Scale(8),justifyContent:'center',alignItems:'center',bottom:verticalScale(19)}}
-        onPress={()=>navigation.navigate('AddStackRoom')}
+        onPress={()=>navigation.navigate('CustomRooms')}
         >
        <Text style={{color:'white',fontSize:Scale(22),fontWeight:'500'}}>Confirm and Add Board</Text>
         </TouchableOpacity>:null

@@ -24,6 +24,7 @@ const Home = props => {
   console.log("isFetching",roomList, isFetching, error);
   
   useEffect(() => {
+    console.log("CustomRooms");
     dispatch(
       getRoomsList(),
   );
