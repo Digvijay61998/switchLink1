@@ -35,13 +35,13 @@ const AddBoard = (props) => {
   }
     return(
         <>
-        <View style={{ flex:1,backgroundColor:appTheme('primary'),height:verticalScale(450),paddingTop:verticalScale(100)}}>
-      <View style={{paddingLeft: 20, paddingBottom: 15,}}>
-        <Text style={{color: 'black', fontSize: 30,paddingLeft:Scale(10)}}>Add Board</Text>
+        <View style={{ flex:1,backgroundColor:appTheme('primary'),height:verticalScale(450),paddingTop:verticalScale(20)}}>
+      <View style={{paddingLeft:Scale(20), paddingBottom: 15,}}>
+        <Text style={{color: 'black', fontSize: Scale(25),paddingLeft:Scale(10)}}>Add Board</Text>
       </View>
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{alignItems: 'center', justifyContent: 'center',top:verticalScale(15)}}>
         <TextInput
-          style={[styles.dropdown,{backgroundColor: appTheme('primary')}]}
+          style={[styles.dropdown,{backgroundColor: appTheme('primary'),borderColor:appTheme('inputBorder'),}]}
           onChangeText={(val)=>{setBoardName(val)}}
           // value={number}
           // placeholderTextColor= {appTheme('font')}
@@ -50,7 +50,7 @@ const AddBoard = (props) => {
               keyboardType="alphabet"
         />
 
-        <View style={{paddingTop: 25}}>
+        <View style={{paddingTop:verticalScale(35)}}>
           <TouchableOpacity 
           style={[styles.button,{backgroundColor: appTheme('scanBoard')}]}
                 onPress={() =>handleBoardSubmit()}
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
       height: Scale(50),
     width: Scale(320),
       borderRadius:Scale(8),
-      borderColor:'#9243E3',
       borderWidth:1,
       paddingHorizontal: 8,
-    fontSize: Scale(17),
+    fontSize: Scale(18),
+    paddingLeft:Scale(20),
     fontWeight:'500',
     },
     button: {

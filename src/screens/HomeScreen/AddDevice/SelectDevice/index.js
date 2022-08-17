@@ -13,36 +13,36 @@ const SelectDevice = (props) => {
       
       style={styles.container}
         >  */}
-        <View style={{backgroundColor:appTheme('primary'),flex: 1,paddingTop:verticalScale(100),
+        <View style={{backgroundColor:appTheme('primary'),flex: 1,paddingTop:verticalScale(20),
     height:verticalScale(450)}}>
         <View style={{paddingLeft:Scale(30),paddingBottom:Scale(15)}}>
-        <Text style={{color:"black",fontSize:30}}>
+        <Text style={{color:"black",fontSize:Scale(25)}}>
             Add Device
         </Text>
         </View>
         <View style={{justifyContent:"center",alignItems:'center'}}>
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate('AddBoard')} style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:20,color:'black'}}>Switch Board</Text>
-        <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
+        onPress={()=>props.navigation.navigate('AddBoard')} style={{height:verticalScale(55),width:'85%',borderBottomColor:appTheme('inputBorder'),borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:Scale(18),color:'black'}}>Switch Board</Text>
+        <Image source={ICONS.arrow} style={{height:verticalScale(18), width:Scale(15)}}  tintColor="grey"/>
 
         </TouchableOpacity>
 
-        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:20,color:'black'}}>Monitor Sensor</Text>
-        <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
+        <View style={{height:verticalScale(55),width:'85%',borderBottomColor:appTheme('inputBorder'),borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:Scale(18),color:'black'}}>Monitor Sensor</Text>
+        <Image source={ICONS.arrow} style={{height:verticalScale(18), width:Scale(15)}}  tintColor="grey"/>
 
         </View>
 
-        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:20, color:'black'}}>IR Blaster</Text>
-        <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
+        <View style={{height:verticalScale(55),width:'85%',borderBottomColor:appTheme('inputBorder'),borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:Scale(18), color:'black'}}>IR Blaster</Text>
+        <Image source={ICONS.arrow} style={{height:verticalScale(18), width:Scale(15)}}  tintColor="grey"/>
 
         </View>
 
-        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:20,color:'black'}}>Camera</Text>
-        <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
+        <View style={{height:verticalScale(55),width:'85%',borderBottomColor:appTheme('inputBorder'),borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:Scale(18),color:'black'}}>Camera</Text>
+        <Image source={ICONS.arrow} style={{height:verticalScale(18), width:Scale(15)}}  tintColor="grey"/>
 
         </View>
     </View>

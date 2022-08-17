@@ -34,13 +34,13 @@ const Switches =({props})=>{
   console.log("props",props);
   return(
     <>
-      <View style={[styles.switchBox,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:"#9243E3"}]}>
-      <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:Scale(110),paddingLeft:Scale(10),}}>
+      <View style={[styles.switchBox,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:appTheme('inputBorder')}]}>
+      <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:"center",marginBottom:verticalScale(10), paddingLeft:Scale(10),}}>
       <Image source={ICONS.switchBoard} style={[styles.switchIcons,{tintColor:appTheme('font')}]} />
-       <Text style={{fontWeight:"600",color:appTheme('font'),fontSize:Scale(18)}}>{props.switch_name}</Text>
+       <Text style={{fontWeight:"600",color:appTheme('font'),fontSize:Scale(18),left:Scale(10)}}>{props.switch_name}</Text>
       </View>
       <View style={{paddingRight:Scale(18)}}>
-      <View style={{display:'flex', flexDirection:"row",width:Scale(60),justifyContent:"space-around"}}>
+      <View style={{display:'flex', flexDirection:"row",width:Scale(60),justifyContent:"space-around",marginBottom:verticalScale(10)}}>
       <TouchableOpacity
       onPress={()=>handleEdit()}
       >
@@ -60,15 +60,15 @@ const Switches =({props})=>{
 
 const BoardSwitches =()=>{
 return(
-  <View style={{ backgroundColor:appTheme('primary'),height:verticalScale(450),justifyContent:'center',alignItems:'center',paddingTop:verticalScale(80)}}>
+  <View style={{ backgroundColor:appTheme('primary'),height:verticalScale(450),justifyContent:'center',alignItems:'center'}}>
   <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130)}}>
 <Text style={{fontSize:25,color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
-<View style={[styles.box,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:"#9243E3"}]}>
+<View style={[styles.box,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:appTheme('inputBorder')}]}>
    <Text style={{fontSize:18,color:appTheme('font'),paddingLeft:Scale(10)}}>Board 1</Text>
    </View>
   
   </View>
-  <View style={{right:Scale(77)}}>
+  <View style={{right:Scale(90)}}>
   <Text style={{fontSize:16,color:"#353535",marginBottom:Scale(10)}}>Switches on the board</Text>
 
   </View>
@@ -116,8 +116,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
    },
    switchIcons: {
-    width: Scale(30),
-    height: verticalScale(30),
     resizeMode: 'contain',
   },
   icons:{
@@ -162,10 +160,11 @@ const styles = StyleSheet.create({
   },
   switchBox:{
     width:Scale(330),
-    height:verticalScale(50),
+    height:verticalScale(60),
     marginBottom:Scale(10),
     flexDirection:"row",
-    borderRadius:Scale(10),
+    borderRadius: Scale(10),
+    alignItems:"center",
     justifyContent:'space-between',
      position:'relative',
      paddingTop:Scale(10) ,

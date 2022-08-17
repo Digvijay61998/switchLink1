@@ -46,45 +46,18 @@ console.log("error",error);
     
   }
   return (
-    // <LinearGradient
-    // colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-    //   start={{ x: 0, y:1 }}
-    //   end={{ x: 1, y: 0 }}
-    //   style={styles.container}
-    //   > 
-    //   <View style={{flex:1,paddingTop:20}}>
-    //   {/* <FlatList
-    //       data={data}
-    //       keyExtractor={(item) => item.id}
-    //       renderItem={({ item, index }) => (
-    //           renderSwitches(item)
-    //       )}
-    //       numColumns={2}
-    //       ListHeaderComponent={addNewRoom()}
-    //     //   ListFooterComponent={renderFooter}
-    //     //   ListEmptyComponent={renderEmpty}
-    //     //   onEndReachedThreshold={0.5}
-    //     //   onEndReached = {({distanceFromEnd})=>{ 
-    //     //       fetchMoreData()
-    //     //   }}
-    //     /> */}
-    //     </View>
-    // </LinearGradient>
     <View style={{flex:1,backgroundColor:appTheme('primary')}}>
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('primary'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
+        <View style={{flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('primary'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
         <Image
               style={styles.locationIcon}
               source={IMAGE.profile}
             />
         <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hii Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hi Ashutosh</Text>
         <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
-    <LinearGradient
-    colors={appTheme('tertiary')}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
+    <View
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
@@ -92,7 +65,7 @@ console.log("error",error);
      <View style={{paddingTop:verticalScale(40),justifyContent:"space-between",height:verticalScale(170)}}>
      
          <TextInput
-                        style={[styles.dropdown,{backgroundColor:appTheme('primary'),color:appTheme('font')}]}
+                        style={[styles.dropdown,{backgroundColor:appTheme('primary'),color:appTheme('font'),borderColor:appTheme('inputBorder')}]}
                         onChangeText={(val)=>{setRoomName(val)}}
                         // value={number}
                         placeholderTextColor={appTheme('placeHolder')}
@@ -100,7 +73,7 @@ console.log("error",error);
                         keyboardType="alphabet"
       />
          <Dropdown
-          style={[styles.dropdown,{backgroundColor:appTheme('primary')}, isFocus && { borderColor: 'blue' }]}
+          style={[styles.dropdown,{backgroundColor:appTheme('primary'),borderColor:appTheme('inputBorder')}]}
           placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
           selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
           inputSearchStyle={styles.inputSearchStyle}
@@ -131,7 +104,7 @@ console.log("error",error);
       </View>
       
     </View>
-    </LinearGradient>
+    </View>
     </View>
   )
 }
@@ -151,7 +124,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"flex-start",
         paddingTop:Scale(50),
-        top: -20
+        top: verticalScale(-20)
         
     },
     Fixbox:{
@@ -199,6 +172,7 @@ const styles = StyleSheet.create({
         height: Scale(50),
         width: Scale(320),
         borderRadius: 8,
+        borderWidth:Scale(1),
         paddingHorizontal: 8,
         fontSize:Scale(16),
       },

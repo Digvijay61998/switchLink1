@@ -15,11 +15,11 @@ export const COLORS={
   navigationLink:'#4D57EA',
   font: 'black',
   lightBlack:'black',
-  input:"white",
+  input:"#F8FAFD",
   wallcolor:'#FFFFFF',
   scanBoard:'#262626',
   placeHolder:'#A7B0C0',
-
+  inputBorder:'#9243E3',
 
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   headerFont:'black',
@@ -43,6 +43,7 @@ export const DARKCOLORS = {
   wallcolor:'black',
   scanBoard:'#D9D9D9',
   placeHolder:'#A7B0C0',
+  inputBorder:'#9243E3',
 
   
   headerFont:'white',

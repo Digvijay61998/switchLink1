@@ -54,6 +54,7 @@
 
 import React, { Component } from 'react';
 import { Text, View, Dimensions, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 import { animatedStyles, scrollInterpolator } from '../../utils/animation';
 import { COLORS, Scale, verticalScale ,appTheme, IMAGE} from '../constants';
@@ -116,14 +117,17 @@ export default class CustomHome extends Component {
   _renderItem({ item }) {
     return (
         <View style={styles.itemContainer}>
-          <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',paddingTop:verticalScale(7)}}>
-        <Text style={styles.itemLabel}>{item.boxText}</Text>
-        <Image source={icons.coolicon} style={{ width: Scale(17),height:Scale(20),
-    resizeMode: "contain",}}/>
+          <View style={{flexDirection:'row',justifyContent:'space-between',paddingTop:verticalScale(3)}}>
+          <Text style={styles.itemLabel}>{item.boxText}</Text>
+          <TouchableOpacity style={{top:verticalScale(5)}}>
+        <Image source={icons.coolicon} style={{ width: Scale(15),height:verticalScale(20),
+              resizeMode: "contain"
+            }} />
+            </TouchableOpacity>
         </View>
         <Text style={styles.roomType}>Room Type</Text>
-        <View style={{display:"flex",flexDirection:'row'}}>
-        <Text style={{fontSize:7,color:"#A75FFF"}}>{item.id} Devices</Text>  
+        <View style={{flexDirection:'row'}}>
+        <Text style={{fontSize:Scale(8),color:"#A75FFF"}}>{item.id} Devices</Text>  
 
         </View>
       </View>
@@ -133,21 +137,17 @@ export default class CustomHome extends Component {
   
   render() {
     return (
-      <>
-      <View style={{height:verticalScale(195),width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'red'}}>
+      <View style={{width:Scale(375),height:verticalScale(220),backgroundColor:"white"}}>
+      <View style={{height:verticalScale(140),width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
   <Image
               style={{
-                width: Scale(400),
-                marginTop: verticalScale(15),
-                resizeMode: "contain",}}
+              width: "100%",
+                height:verticalScale(140),
+                resizeMode: "cover",}}
               source={IMAGE.scenery}
             /> 
-     
-   
-      </View>
-      <View style={{ position: "absolute",
-    zIndex: 1,top:verticalScale(210)
-    }}>
+        </View>
+        <View style={{zIndex:1,top:verticalScale(10)}}>
         <Carousel
           ref={(c) => this.carousel = c}
           data={DATA}
@@ -160,9 +160,9 @@ export default class CustomHome extends Component {
           // scrollInterpolator={scrollInterpolator}
           // slideInterpolatedStyle={animatedStyles}
           useScrollView={true}          
-        />
+          />
+        </View>
       </View>
-      </>
     );
   }
 }
@@ -175,9 +175,9 @@ const styles = StyleSheet.create({
     width: Scale(240),
     height: Scale(60),
     backgroundColor: 'white',
-    borderRadius:15,
+    borderRadius:Scale(10),
     borderColor:"#9243E3",
-    borderWidth:2,
+    borderWidth:1,
     flexDirection:'column',
     padding:17,
     justifyContent:'center'
@@ -185,13 +185,13 @@ const styles = StyleSheet.create({
 
   },
   itemLabel: {
-    color: ' #000000',
-    fontSize: 18,
+    color:'black',
+    fontSize: Scale(16),
     fontWeight:'700',
   },
   roomType:{
     color:'#939598',
-    fontSize: 11,
+    fontSize: Scale(12),
     // lineHeight:24
   }
   

@@ -4,8 +4,10 @@ import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale } from '../../../../common/constants'
 import {useDispatch,useSelector } from "react-redux";
 import {getDeviceList} from "../../../../redux/state/Board/Action"
+import { EditSwitch } from '../../../../common/component';
 const CustomRooms = ({props}) => {
-  console.log("props",props);
+  console.log("props", props);
+  const {navigation} = props
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const { roomList, isFetching, error } = useSelector((state) => state.room);
@@ -24,7 +26,7 @@ const CustomRooms = ({props}) => {
 const addNewRoom = () => {
     return(
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate('CreateNewRoom')}
+        onPress={()=>navigation.navigate('CreateNewRoom')}
         style={styles.Fixbox}>
         <Image source={ICONS.edit} resizeMode="contain" style={{height:verticalScale(40), width:Scale(40)}}/>
         <Text style={styles.label}>Add New Room</Text>
@@ -32,7 +34,6 @@ const addNewRoom = () => {
     )
 }
   const RenderSwitches = ({item}) => {
-  console.log("item",item);
   return (
     <TouchableOpacity
       onPress={() => handleSubmitRoomKey(item.room_key)}
@@ -66,7 +67,8 @@ const addNewRoom = () => {
       start={{ x: 0, y:1 }}
       end={{ x: 1, y: 0 }}
       style={styles.container}
-      > 
+    > 
+<EditSwitch editSwitch={false} navigation={navigation}/>
       <View style={{flex:1}}>
       <FlatList
           data={roomList}
@@ -75,7 +77,7 @@ const addNewRoom = () => {
             <RenderSwitches item={item} props={props} />
           )}
           numColumns={2}
-          ListHeaderComponent={addNewRoom()}
+          ListHeaderComponent={addNewRoom(props)}
         //   ListFooterComponent={renderFooter}
         //   ListEmptyComponent={renderEmpty}
         //   onEndReachedThreshold={0.5}
