@@ -66,7 +66,8 @@ const drawerData = [
 ];
 
  
-export default function CustomDrawer (props) {
+export default function CustomDrawer({props}) {
+  console.log("props",props);
 
 
   const RenderTopConatiner = () => {
@@ -103,8 +104,8 @@ export default function CustomDrawer (props) {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.closeDrawer();
-          this.props.navigation.navigate(item.navigation);
+          props.navigation.closeDrawer();
+          props.navigation.navigate(item.navigation);
         }}
         style={styles.renderDrawerBox}
       >

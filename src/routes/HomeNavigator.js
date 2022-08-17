@@ -403,7 +403,7 @@ const HomeNavigator = () => (
       borderRadius: Scale(25),
     }}
     
-    drawerContent={props => <CustomDrawer {...props} />}>
+    drawerContent={props => <CustomDrawer props={props} />}>
     <RootStackNavigator.Screen
       options={{gestureEnabled: false}}
       name="BottomTabsStackScreen"
