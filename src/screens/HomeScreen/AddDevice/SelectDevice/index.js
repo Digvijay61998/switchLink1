@@ -8,44 +8,46 @@ const SelectDevice = (props) => {
 
     return(
       <>
-          <LinearGradient
+          {/* <LinearGradient
     colors={appTheme('secondary')}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
+      
       style={styles.container}
-        > 
-        <View style={{paddingLeft:20,paddingBottom:15}}>
+        >  */}
+        <View style={{backgroundColor:appTheme('primary'),flex: 1,paddingTop:verticalScale(100),
+    height:verticalScale(450)}}>
+        <View style={{paddingLeft:Scale(30),paddingBottom:Scale(15)}}>
         <Text style={{color:"black",fontSize:30}}>
-            Select Device
+            Add Device
         </Text>
         </View>
         <View style={{justifyContent:"center",alignItems:'center'}}>
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate('AddBoard')} style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Switch Board</Text>
+        onPress={()=>props.navigation.navigate('AddBoard')} style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:20,color:'black'}}>Switch Board</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </TouchableOpacity>
 
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Monitor Sensor</Text>
+        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:20,color:'black'}}>Monitor Sensor</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
 
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15, color:'black'}}>IR Blaster</Text>
+        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:20, color:'black'}}>IR Blaster</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
 
-        <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Camera</Text>
+        <View style={{height:55,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
+        <Text style={{fontSize:20,color:'black'}}>Camera</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
     </View>
-    </LinearGradient>
+    </View>
+    {/* </LinearGradient> */}
     </>
     )
 }

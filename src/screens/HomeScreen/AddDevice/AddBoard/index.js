@@ -35,7 +35,7 @@ const AddBoard = (props) => {
   }
     return(
         <>
-        <View style={{ flex:1,backgroundColor:COLORS.secondary,height:verticalScale(450),}}>
+        <View style={{ flex:1,backgroundColor:appTheme('primary'),height:verticalScale(450),paddingTop:verticalScale(100)}}>
       <View style={{paddingLeft: 20, paddingBottom: 15,}}>
         <Text style={{color: 'black', fontSize: 30,paddingLeft:Scale(10)}}>Add Board</Text>
       </View>
@@ -44,7 +44,8 @@ const AddBoard = (props) => {
           style={[styles.dropdown,{backgroundColor: appTheme('primary')}]}
           onChangeText={(val)=>{setBoardName(val)}}
           // value={number}
-          placeholderTextColor= {appTheme('font')}
+          // placeholderTextColor= {appTheme('font')}
+          placeholderTextColor= '#A7B0C0'
               placeholder="Enter Board Name"
               keyboardType="alphabet"
         />
@@ -52,7 +53,9 @@ const AddBoard = (props) => {
         <View style={{paddingTop: 25}}>
           <TouchableOpacity 
           style={[styles.button,{backgroundColor: appTheme('scanBoard')}]}
-                onPress={() =>handleBoardSubmit()}>
+                onPress={() =>handleBoardSubmit()}
+                //  onPress={()  => props.navigation.navigate("BarCodeScanner")}
+                >
                        <Text style={{color: appTheme('primary'), fontSize:Scale(18)}}>Scan Board</Text>
           </TouchableOpacity>
         </View>
@@ -69,6 +72,8 @@ const styles = StyleSheet.create({
       height: Scale(50),
     width: Scale(320),
       borderRadius:Scale(8),
+      borderColor:'#9243E3',
+      borderWidth:1,
       paddingHorizontal: 8,
     fontSize: Scale(17),
     fontWeight:'500',

@@ -26,6 +26,7 @@ const fan = require('../../assets/icons/fan.png');
 const camera = require('../../assets/icons/camera.png');
 const alarm = require('../../assets/icons/alarm.png');
 const headerBack = require('../../assets/icons/headerBack.png');
+const coolicon = require('../../assets/icons/coolicon.png');
 
 
 
@@ -55,7 +56,8 @@ export default {
   fan,
   camera,
   alarm,
-  headerBack
+  headerBack,
+  coolicon
 };
 
 

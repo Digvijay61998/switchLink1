@@ -5,6 +5,7 @@ const profile = require("../../assets/image/profile.png");
 const SwitchlinkLogo = require("../../assets/image/SwitchlinkLogo.png");
 const ss = require("../../assets/image/ss.png");
 const SwitchlinkDarkLogo = require("../../assets/image/SwitchlinkDarkLogo.png");
+const scenery = require("../../assets/image/scenery.jpg");
 
 
 const DarkImage = {
@@ -12,6 +13,8 @@ const DarkImage = {
     spashLogo : require("../../assets/image/splashLogo.png"),
     profile : require("../../assets/image/profile.png"),
      ss : require("../../assets/image/ss.png"),
+scenery : require("../../assets/image/scenery.jpg")
+
 }
 
 const LightImage = {
@@ -19,14 +22,16 @@ const LightImage = {
     spashLogo : require("../../assets/image/splashLogo.png"),
     profile : require("../../assets/image/profile.png"),
      ss : require("../../assets/image/ss.png"),
-}
+     scenery : require("../../assets/image/scenery.jpg")
+    }
    
 export default {
     spashLogo,
     profile,
     SwitchlinkLogo,
     ss,
-    SwitchlinkDarkLogo
+    SwitchlinkDarkLogo,
+    scenery
 }
 
 export const appImage = (ThemeImage) => {
