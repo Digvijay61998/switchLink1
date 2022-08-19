@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,Image,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale } from '../../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale ,appTheme} from '../../../../common/constants'
 import {useDispatch,useSelector } from "react-redux";
 import {getDeviceList} from "../../../../redux/state/Board/Action"
 import { EditSwitch } from '../../../../common/component';
@@ -27,7 +27,7 @@ const addNewRoom = () => {
     return(
         <TouchableOpacity 
         onPress={()=>navigation.navigate('CreateNewRoom')}
-        style={styles.Fixbox}>
+        style={[styles.Fixbox,{borderColor:appTheme('inputBorder')}]}>
         <Image source={ICONS.edit} resizeMode="contain" style={{height:verticalScale(40), width:Scale(40)}}/>
         <Text style={styles.label}>Add New Room</Text>
         </TouchableOpacity>
@@ -37,11 +37,11 @@ const addNewRoom = () => {
   return (
     <TouchableOpacity
       onPress={() => handleSubmitRoomKey(item.room_key)}
-      style={styles.box}
+      style={[styles.box,{borderColor:appTheme('inputBorder')}]}
     >
         <Text style={{fontWeight:"700",fontSize:Scale(18),color:"black",letterSpacing:1}}>{item.room_type}</Text>
-        <Text>room type</Text>
-        <Text style={{color:COLORS.purple,fontWeight:"600",fontSize:Scale(18)}}>{item.no_of_board}  Devices</Text>
+        <Text>Room Type</Text>
+        <Text style={{color:appTheme('inputBorder'),fontWeight:"600",fontSize:Scale(18)}}>{item.no_of_board}  Devices</Text>
         <Switch
         trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
         thumbColor={isEnabled ? "#A75FFF" : "#A75FFF"}
@@ -62,11 +62,8 @@ const addNewRoom = () => {
     )
 }
   return (
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.container}
+    <View
+      style={[styles.container,{backgroundColor:appTheme('primary')}]}
     > 
 <EditSwitch editSwitch={false} navigation={navigation}/>
       <View style={{flex:1}}>
@@ -86,7 +83,7 @@ const addNewRoom = () => {
         //   }}
         />
         </View>
-    </LinearGradient>
+    </View>
   )
 }
 
@@ -94,11 +91,7 @@ export default CustomRooms
 
 const styles = StyleSheet.create({
     container:{
-        marginTop: Scale(10),
-        width:Scale(375),
-        height:Scale(620),
-        borderTopRightRadius:Scale(40),
-        borderTopLeftRadius:Scale(40),
+        flex:1,
         justifyContent:"space-around",
         flexDirection:"row",
         alignItems:"flex-start",
@@ -106,10 +99,11 @@ const styles = StyleSheet.create({
         
     },
     Fixbox:{
-        width:Scale(157),
-        height:verticalScale(185),
+      width: Scale(157),
+       borderRadius:Scale(20),
+      height: verticalScale(185),
+      borderWidth:Scale(1.5),
         backgroundColor:'#fff',
-        borderRadius:Scale(10),
         alignItems:"center",
         justifyContent:"center",
         marginLeft: Scale(20),
@@ -118,8 +112,9 @@ const styles = StyleSheet.create({
     box:{
         width:Scale(157),
         height:verticalScale(185),
-        backgroundColor:'#fff',
-        borderRadius:Scale(10),
+      backgroundColor: '#fff',
+        borderWidth:Scale(1.5),
+        borderRadius:Scale(20),
         alignItems:"flex-start",
         paddingLeft:Scale(20),
         flexDirection:"column",

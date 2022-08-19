@@ -1,7 +1,7 @@
-import { StyleSheet, Text,View, Image, FlatList,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text,View, Image, FlatList,TouchableOpacity,ImageBackground} from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { COLORS, ICONS, Scale, verticalScale } from '../../../common/constants'
+import { COLORS, ICONS, Scale, verticalScale,appImage,appTheme} from '../../../common/constants'
 
 const EditScene = () => {
     const Weekdata = [
@@ -45,14 +45,14 @@ const EditScene = () => {
         return (
             <View style={[styles.container]}>
             <View style={[styles.SwitchContainer,{marginBottom:verticalScale(-20)}]}>
-                       <Text style={{ fontWeight: '600', fontSize: Scale(16) }}>Room Name 1</Text>
+                       <Text style={{ fontWeight: '700', fontSize: Scale(16) }}>Room Name 1</Text>
              <Text style={{fontWeight: '600', fontSize: Scale(14),color:COLORS.link}}>Remove All</Text>
              </View>
            <View style={styles.SwitchContainer}>
                     <TouchableOpacity style={styles.switch}>
                         <View style={styles.switchDiv}>
                             <View style={styles.switchSubDiv}>
-                        <Text style={styles.Switchfont}>Board Name</Text>
+                        <Text style={[styles.Switchfont,{color:appTheme('inputBorder')}]}>Board Name</Text>
                             <Image source={ICONS.unTick} style={styles.switchIcons} />
                             </View>
                             <View style={{width:'100%',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
@@ -64,7 +64,7 @@ const EditScene = () => {
              <TouchableOpacity style={styles.switch}>
              <View style={styles.switchDiv}>
                             <View style={styles.switchSubDiv}>
-                        <Text style={styles.Switchfont}>Board Name</Text>
+                        <Text style={[styles.Switchfont,{color:appTheme('inputBorder')}]}>Board Name</Text>
                             <Image source={ICONS.tick} style={styles.switchIcons} />
                             </View>
                             <View style={{width:'100%',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
@@ -78,7 +78,7 @@ const EditScene = () => {
              <TouchableOpacity style={styles.switch}>
              <View style={styles.switchDiv}>
                             <View style={styles.switchSubDiv}>
-                        <Text style={styles.Switchfont}>Board Name</Text>
+                        <Text style={[styles.Switchfont,{color:appTheme('inputBorder')}]}>Board Name</Text>
                             <Image source={ICONS.tick} style={styles.switchIcons} />
                             </View>
                             <View style={{width:'100%',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
@@ -90,7 +90,7 @@ const EditScene = () => {
              <TouchableOpacity style={styles.switch}>
              <View style={styles.switchDiv}>
                             <View style={styles.switchSubDiv}>
-                        <Text style={styles.Switchfont}>Board Name</Text>
+                        <Text style={[styles.Switchfont,{color:appTheme('inputBorder')}]}>Board Name</Text>
                             <Image source={ICONS.unTick} style={styles.switchIcons} />
                             </View>
                             <View style={{width:'100%',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
@@ -105,14 +105,16 @@ const EditScene = () => {
     }
   return (
     <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
+       <View
       style={styles.header}
       >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Scene</Text>
-          </LinearGradient>
+        <ImageBackground
+          source={appImage('scenery')}
+          resizeMode="cover"
+          style={{ width: '100%', height: '100%',alignItems:"flex-start",justifyContent:"flex-end"}}>
+    <Text style={{fontSize:Scale(24),color:'white',left:Scale(10),bottom:verticalScale(10)}}>Scene</Text>
+        </ImageBackground>
+      </View>
      <FlatList
                data={Weekdata}
                keyExtractor={(item) => item.id}
@@ -140,21 +142,18 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
         flexDirection:'column',
         alignItems:'center',
-        paddingTop: Scale(10),
+        paddingTop: Scale(0),
         padding: Scale(20),
             marginBottom:Scale(25)
         
         // backgroundColor:COLORS.secondary
       },
       header: {
-        borderBottomLeftRadius: Scale(40),
-        borderBottomRightRadius:Scale(40),
         width: '100%',
         alignItems:'flex-start',
         justifyContent: 'center',
-        paddingLeft:Scale(20),
-        height: verticalScale(90),
-    },
+        height: verticalScale(150),
+      },
       headerContainer: {
         width: '100%',
         alignItems:'center',

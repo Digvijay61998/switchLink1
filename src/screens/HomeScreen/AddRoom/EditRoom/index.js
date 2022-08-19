@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View ,FlatList,Switch,TouchableOpacity} from 'react-native'
 import React,{useState} from 'react'
 import { CustomHeader } from "../../../../common/component";
-import { COLORS, Scale, verticalScale } from '../../../../common/constants';
+import { appTheme, COLORS, Scale, verticalScale } from '../../../../common/constants';
 import { useDispatch, useSelector } from "react-redux";
 
 const EditRoom = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const { deviceList, isFetching, error } = useSelector((state) => state.board);
-  console.log("deviceList",deviceList);
     const dispatch = useDispatch();
   
   //   function handleSubmitRoomKey(key) {
@@ -21,12 +20,20 @@ const EditRoom = (props) => {
   // }
     const {navigation} = props;
 
+  const renderEmpty = () => {
+    return (
+      <View style={styles.empty}>
+      <Text>No Device Found </Text>
+      </View>
+    )
+  }
 // add new custom room
-  const addnewDevice = (item) => {
-      console.log("item",item);
+  const AddnewDevice = ({item}) => {
         return(
-            <View style={{width:Scale(330),height:verticalScale(70),backgroundColor:"white",marginBottom:Scale(20),alignItems:"center",justifyContent:"space-around",flexDirection:"row",borderRadius:Scale(10)}}>
-                <Text style={{width:Scale(200),fontWeight:"600",color:"black",fontSize:Scale(18)}}>{item.board_name}</Text>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate( 'BoardName')}
+            style={{ width: Scale(340), height: verticalScale(70), marginBottom: Scale(20), alignItems: "center", justifyContent: "space-around", flexDirection: "row", borderRadius: Scale(10), borderWidth: Scale(1.5), borderColor: appTheme('inputBorder') }}>
+                <Text style={{width:Scale(200),fontWeight:"700",color:"black",fontSize:Scale(18)}}>{item.board_name}</Text>
                 <Switch
                     trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
                     thumbColor={isEnabled ? "#A75FFF" : "#939598"}
@@ -35,30 +42,30 @@ const EditRoom = (props) => {
                     value={isEnabled}
                     style={{width:Scale(40)}}
                 />
-            </View>
+            </TouchableOpacity>
         )
     }
 // custom room switch
     const Devices =()=>{
-        return(
-            <View style={{width:Scale(375),height:verticalScale(430),backgroundColor:COLORS.secondary,flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
-            <View style={{width:Scale(375),height:verticalScale(70),flexDirection:"row",justifyContent:"space-around",alignItems:"center"}}> 
-                <Text style={{fontWeight:"500",fontSize:Scale(20),color:"black"}}>Devices</Text>
+      return (
+            <View style={{width:Scale(375),height:verticalScale(430),backgroundColor:appTheme('primary'),flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
+            <View style={{width:Scale(340),height:verticalScale(70),flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}> 
+                <Text style={{fontWeight:"500",fontSize:Scale(22),color:appTheme('font'),fontFamily: 'Montserrat'}}>Devices</Text>
                 <TouchableOpacity 
                  onPress={() => navigation.navigate( 'AddDeviceStack', { screen: 'AddBoard'})}
                 >
-                <Text style={{color:COLORS.link,fontSize:Scale(17),fontWeight:'600'}}>Add New Device</Text>
+                <Text style={{color:COLORS.link,fontSize:Scale(18),fontWeight:'700',letterSpacing:Scale(0.5)}}>Add New Device</Text>
                 </TouchableOpacity>
             </View>
           <FlatList
               data={deviceList[0].Boards}
               keyExtractor={(item) => item.board_key}
               renderItem={({ item, index }) => (
-                addnewDevice(item)
+                <AddnewDevice item={item} />
               )}
             //   ListHeaderComponent={addNewRoom()}
             //   ListFooterComponent={renderFooter}
-            //   ListEmptyComponent={renderEmpty}
+              ListEmptyComponent={renderEmpty}
             //   onEndReachedThreshold={0.5}
             //   onEndReached = {({distanceFromEnd})=>{ 
             //       fetchMoreData()
@@ -77,5 +84,10 @@ export default EditRoom
 const styles = StyleSheet.create({
     container:{
         flex:1,
-    }
+  },
+  empty:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+}
 })

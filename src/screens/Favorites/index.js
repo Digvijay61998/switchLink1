@@ -68,9 +68,8 @@ const Favorites = (props) => {
 
 // add new custom room
   const AddnewDevice = (props) => {
-    console.log("item",props);
       return(
-          <View style={{width:Scale(330),height:verticalScale(100),backgroundColor:appTheme('primary'),marginBottom:Scale(20),alignItems:"center",justifyContent:"space-around",flexDirection:"row",borderRadius:Scale(10)}}>
+          <View style={[styles.deviceContainer,{borderColor:appTheme('inputBorder')}]}>
           <View style={{flexDirection:'column',justifyContent:'space-around',height:verticalScale(80)}}>
           <Text style={{ width: Scale(200), fontWeight: "400", color:appTheme('purple'), fontSize: Scale(16) }}>{props.item.Board}</Text>
             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
@@ -79,7 +78,7 @@ const Favorites = (props) => {
           </View>
           </View>
           <TouchableOpacity>
-              <Image source={appIcons('deleteRoom')} style={{bottom:Scale(20)}} />
+              <Image source={appIcons('deleteRoom')} style={{top:Scale(20)}} />
           </TouchableOpacity>
           </View>
       )
@@ -88,11 +87,8 @@ const Favorites = (props) => {
   const Devices = (props) => {
  
       return(
-        <LinearGradient
-        colors={appTheme('lightPurple')}
-        start={{ x: 0, y:1 }}
-        end={{ x: 1, y: 0 }}
-          style={{ width: Scale(375), height: verticalScale(430), flexDirection: "column", justifyContent: "flex-start", alignItems: "center" }}>
+        <View
+          style={{ width: Scale(375), height: verticalScale(430), flexDirection: "column", justifyContent: "flex-start", alignItems: "center",backgroundColor:appTheme('primary') }}>
           <View style={{width:Scale(375),height:verticalScale(70),flexDirection:"row",justifyContent:"space-around",alignItems:"center"}}> 
               <Text style={{fontWeight:"600",fontSize:Scale(24),color:"black",letterSpacing:1}}>Favorites</Text>
               <TouchableOpacity 
@@ -116,7 +112,7 @@ const Favorites = (props) => {
           //       fetchMoreData()
           //   }}
           />
-          </LinearGradient>
+          </View>
       )
   }
   return (
@@ -133,6 +129,16 @@ export default Favorites
 const styles = StyleSheet.create({
   container:{
     flex:1,
-}
+  },
+  deviceContainer: {
+    borderWidth:Scale(1.5),
+    width: Scale(330),
+    height: verticalScale(100),
+    marginBottom: Scale(20),
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexDirection: "row",
+    borderRadius: Scale(10)
+  }
 
 })

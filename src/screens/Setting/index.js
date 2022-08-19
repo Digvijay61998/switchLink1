@@ -17,15 +17,16 @@ const Setting = (props) => {
   const [isEnabled, setIsEnabled] = useState(theme);
   const toggleSwitch = async() => {
     setIsEnabled(previousState => !previousState);
-    await AsyncStorage.setItem("userTheme", String(theme))
   }
-  dispatch(
-    themeChange({
-      data: { theme: isEnabled }
-    }),
-  );
-  const handleTheme = async() => {
-    console.log('userTheme@@@@@@@@@@',await AsyncStorage.getItem("userTheme"))
+
+  const handleTheme = async () => {
+    dispatch(
+      themeChange({
+        data: { theme: isEnabled }
+      }),
+    );
+    await AsyncStorage.setItem("userTheme", String(isEnabled))
+    console.log('userTheme@@@@@@@@@@', await AsyncStorage.getItem("userTheme"))
   }
 
   useEffect(() => {

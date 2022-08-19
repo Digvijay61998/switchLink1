@@ -10,7 +10,7 @@ import {
 const Splash = (props) => {
   const dispatch = useDispatch();
   async function handleTheme() { 
-    const userTheme = Boolean(await AsyncStorage.getItem("userTheme"));
+    const userTheme = await AsyncStorage.getItem("userTheme");
     console.log("@@@@ User Token================", userTheme);
     dispatch(
       themeChange({
