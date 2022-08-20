@@ -5,8 +5,8 @@ import { COLORS, ICONS, Scale, verticalScale ,appTheme} from '../../../../common
 import {useDispatch,useSelector } from "react-redux";
 import {getDeviceList} from "../../../../redux/state/Board/Action"
 import { EditSwitch } from '../../../../common/component';
-const CustomRooms = (props) => {
-  console.log("props", props);
+const CustomRooms = ({props}) => {
+  console.log("props@@@@@@", props);
   const {navigation} = props
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -26,7 +26,7 @@ const CustomRooms = (props) => {
 const addNewRoom = () => {
     return(
         <TouchableOpacity 
-        onPress={()=>navigation.navigate('CreateNewRoom')}
+        onPress={()=>props.navigation.navigate('CreateNewRoom')}
         style={[styles.Fixbox,{borderColor:appTheme('inputBorder')}]}>
         <Image source={ICONS.edit} resizeMode="contain" style={{height:verticalScale(40), width:Scale(40)}}/>
         <Text style={styles.label}>Add New Room</Text>
@@ -65,7 +65,6 @@ const addNewRoom = () => {
     <View
       style={[styles.container,{backgroundColor:appTheme('primary')}]}
     > 
-<EditSwitch editSwitch={false} navigation={navigation}/>
       <View style={{flex:1}}>
       <FlatList
           data={roomList}
