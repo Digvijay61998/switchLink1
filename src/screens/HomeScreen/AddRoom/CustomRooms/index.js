@@ -7,7 +7,6 @@ import {getDeviceList} from "../../../../redux/state/Board/Action"
 import { EditSwitch } from '../../../../common/component';
 const CustomRooms = ({props}) => {
   console.log("props@@@@@@", props);
-  const {navigation} = props
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const { roomList, isFetching, error } = useSelector((state) => state.room);
