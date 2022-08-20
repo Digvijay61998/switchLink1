@@ -65,26 +65,22 @@ function* signUserAccount(action) {
     console.log("SignUp response@@@@@@@@@==", response);
     const result = API.handleLoginResponse(response);
     console.log("SignUp Response@@@@@@@@@==", result);
-    // if (result) {
-    //   if (result) {
-    //     yield put(LoginActions.signUpBuyerSuccess(result.data));
-    //     if (result.status === 200) {
-    //       Snackbar.show({
-    //         text:
-    //           "Your Account has been registered In SwitchLink Data base",
-    //         duration: 3000,
-    //         // fontFamily: 'Metropolis',
-    //       });
-    //       alert(
-    //         `Welcome ${action.payload.data.name} You have been successfully registered to the Switch Link Application,`
-    //       );
-    //       // yield call(navigate, "HomeNavigator");
-    //     }
-    //     console.log("@@@ Buyer Account Api=======", result);
-    //   } else yield put(LoginActions.signUpBuyerError(result));
+    // UserLogin
+    if (result) {
+          Snackbar.show({
+            text:
+              "Your Account has been registered In SwitchLink Data base please login",
+            duration: 3000,
+            // fontFamily: 'Metropolis',
+          });
+          // alert(
+          //   `Welcome ${action.payload.data.name} You have been successfully registered to the Switch Link Application,`
+          // );
+          yield call(navigate, "UserLogin");
+        console.log("@@@ Buyer Account Api=======", result);
     // } else {
     //   yield put(LoginActions.signUpBuyerError("Some Error"));
-    // }
+    }
   } catch (error) {
     // let errorMsg = JSON.parse(error.request._response).message;
     // let errorStatus = JSON.parse(error.request._response).success;
