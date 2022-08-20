@@ -5,7 +5,7 @@ import { COLORS, ICONS, Scale, verticalScale ,appTheme} from '../../../../common
 import {useDispatch,useSelector } from "react-redux";
 import {getDeviceList} from "../../../../redux/state/Board/Action"
 import { EditSwitch } from '../../../../common/component';
-const CustomRooms = ({props}) => {
+const CustomRooms = (props) => {
   console.log("props@@@@@@", props);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);

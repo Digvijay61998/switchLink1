@@ -84,7 +84,7 @@ return(
           {props.route.params?.callbackConfirm == 'callbackConfirm' ? 
         <TouchableOpacity
         style={{width:Scale(350),height:verticalScale(46),backgroundColor:"black",borderRadius:Scale(8),justifyContent:'center',alignItems:'center',bottom:verticalScale(19)}}
-        onPress={()=>props.navigation.navigate('CustomRooms')}
+        onPress={() => props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
         >
        <Text style={{color:'white',fontSize:Scale(22),fontWeight:'500'}}>Confirm and Add Board</Text>
         </TouchableOpacity>:null
