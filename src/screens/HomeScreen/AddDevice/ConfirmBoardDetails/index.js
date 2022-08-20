@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ConfirmBoardDetails = (props) => {
   console.log("props",props.route.params?.callbackConfirm);
-  const {navigation} = props
   const [editModalVisible, setEditModalVisible] = useState(false);
   const dispatch = useDispatch();
   const { boardDetails, isFetching, error,switchList } = useSelector((state) => state.board);
@@ -85,7 +84,7 @@ return(
           {props.route.params?.callbackConfirm == 'callbackConfirm' ? 
         <TouchableOpacity
         style={{width:Scale(350),height:verticalScale(46),backgroundColor:"black",borderRadius:Scale(8),justifyContent:'center',alignItems:'center',bottom:verticalScale(19)}}
-        onPress={()=>navigation.navigate('CustomRooms')}
+        onPress={()=>props.navigation.navigate('CustomRooms')}
         >
        <Text style={{color:'white',fontSize:Scale(22),fontWeight:'500'}}>Confirm and Add Board</Text>
         </TouchableOpacity>:null
@@ -96,7 +95,7 @@ return(
     return(
         <>
         <BoardSwitches props/>
-        <EditSwitch editSwitch={editModalVisible} navigation={navigation}/>
+        <EditSwitch editSwitch={editModalVisible} navigation={props.navigation}/>
         {/* <Confirmation confirm={deleteModalVisible} navigation={navigation}/> */}
        
         </>

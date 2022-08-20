@@ -19,52 +19,25 @@ const SetWifiCredentials = (props) => {
     
     
   return (
-    // <LinearGradient
-    // colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-    //   start={{ x: 0, y:1 }}
-    //   end={{ x: 1, y: 0 }}
-    //   style={styles.container}
-    //   > 
-    //   <View style={{flex:1,paddingTop:20}}>
-    //   {/* <FlatList
-    //       data={data}
-    //       keyExtractor={(item) => item.id}
-    //       renderItem={({ item, index }) => (
-    //           renderSwitches(item)
-    //       )}
-    //       numColumns={2}
-    //       ListHeaderComponent={addNewRoom()}
-    //     //   ListFooterComponent={renderFooter}
-    //     //   ListEmptyComponent={renderEmpty}
-    //     //   onEndReachedThreshold={0.5}
-    //     //   onEndReached = {({distanceFromEnd})=>{ 
-    //     //       fetchMoreData()
-    //     //   }}
-    //     /> */}
-    //     </View>
-    // </LinearGradient>
     <View style={{flex:1,backgroundColor:appTheme('primary')}}>
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('wallcolor'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
+        <View style={{flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('primary'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
         <Image
               style={styles.locationIcon}
               source={IMAGE.profile}
             />
         <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: Scale(32),color:appTheme('font')}}>Hii Ashutosh</Text>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:Scale(16),color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hi Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
-    <LinearGradient
-    colors={appTheme('tertiary')}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
+    <View
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-     <Text style={{fontFamily:'Montserrat-Black',fontWeight:'500',fontSize:Scale(24),color:"black"}}>Set WiFi Credentials</Text> 
+     <Text style={{fontFamily:'Montserrat-Black',fontWeight:'500',fontSize:Scale(24),color:appTheme('font')}}>Set WiFi Credentials</Text> 
      <View style={{paddingTop:Scale(40),justifyContent:"space-between",height:verticalScale(170)}}>
         <Dropdown
-          style={[styles.dropdown,{backgroundColor:appTheme('input')},isFocus && { borderColor: 'blue',}]}
+          style={[styles.dropdown,{backgroundColor:appTheme('input'), borderColor:appTheme('inputBorder'),}]}
           placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
           selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
           inputSearchStyle={styles.inputSearchStyle}
@@ -84,7 +57,7 @@ const SetWifiCredentials = (props) => {
           
         />
          <TextInput
-                        style={[styles.dropdown,{backgroundColor:appTheme('input'),color:appTheme('font')}]}
+                        style={[styles.dropdown,{backgroundColor:appTheme('input'), borderColor:appTheme('inputBorder'),color:appTheme('font')}]}
                         // onChangeText={onChangeNumber}
                         // value={number}
                         placeholderTextColor={appTheme('placeHolder')}
@@ -101,7 +74,7 @@ const SetWifiCredentials = (props) => {
       </View>
       
     </View>
-    </LinearGradient>
+      </View>
     </View>
   )
 }
@@ -167,8 +140,10 @@ const styles = StyleSheet.create({
       dropdown: {
         height: Scale(50),
         width: Scale(320),
-        borderRadius: Scale(8),
-        paddingHorizontal: verticalScale(8),
+        borderRadius: 8,
+        borderWidth:Scale(1),
+        paddingHorizontal: 8,
+        fontSize:Scale(16),
         
       },
       icon: {

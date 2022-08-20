@@ -49,8 +49,8 @@ const Scheduler = props => {
     // shows the number of boards with there details
     const ScheduleBoard = (props) => {
       return (
-        <View style={[styles.weeklyContainer,{backgroundColor:appTheme('primary')}]}>
-          <View style={styles.weeklyColumn}>
+        <View style={[styles.weeklyContainer,{backgroundColor:appTheme('primary'),borderColor:appTheme('inputBorder')}]}>
+          <View style={[styles.weeklyColumn]}>
             <Text
               style={{
                 color: appTheme('purple'),
@@ -127,11 +127,8 @@ const Scheduler = props => {
       );
     };
     return (
-      <LinearGradient
-      colors={appTheme('secondary')}
-        start={{ x: 0, y:1 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.container}>
+      <View
+        style={[styles.container,{backgroundColor:appTheme('primary')}]}>
         <View style={styles.headerContainer}>
           <Text
             style={{
@@ -157,7 +154,7 @@ const Scheduler = props => {
           keyExtractor={item => item.id}
           renderItem={({item, index}) => <ScheduleBoard item />}
         />
-      </LinearGradient>
+      </View>
     );
   };
 
@@ -198,6 +195,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: Scale(15),
     marginBottom: verticalScale(10),
+    borderWidth:Scale(1.5)
   },
   weeklyColumn: {
     justifyContent: 'space-between',
