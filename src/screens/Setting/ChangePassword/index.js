@@ -2,36 +2,31 @@ import { StyleSheet, Text, View ,Image,Switch, TextInput, TouchableOpacity} from
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
+import { appTheme, COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
 const ChangePassword = (props) => {
 const {navigation} = props;
 const [isEnabled, setIsEnabled] = useState(false);
 const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Change Password</Text>
-      </LinearGradient>
+    <View style={{backgroundColor:appTheme('primary'),flex:1}}>
+    
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:23}}>Change Password</Text>
+     
       <View style={{padding:Scale(20),}}>
         <View style={{paddingLeft:Scale(15),marginBottom:verticalScale(30)}}>
       <View style={{display:"flex",flexDirection:"column",height:verticalScale(110),width:Scale(200),justifyContent:"space-between",marginBottom:verticalScale(10),}}>
-        <Text style={{color:COLORS.black,fontSize:Scale(18)}}> Password must contain:</Text>
-        <Text style={{color:COLORS.black,fontSize:Scale(15)}}>At least 8 characters</Text>
-        <Text style={{color:COLORS.black,fontSize:Scale(15)}}>At least 1 Uppercase (A-Z)</Text>
-        <Text style={{color:COLORS.black,fontSize:Scale(15)}}>At least 1 Lowercase (a-z)</Text>
-        <Text style={{color:COLORS.black,fontSize:Scale(15)}}>At least Numerical (1,2,...9)</Text>
+        <Text style={{color:appTheme('headerFont'),fontSize:Scale(18)}}> Password must contain:</Text>
+        <Text style={{color:appTheme('headerFont'),fontSize:Scale(15)}}>At least 8 characters</Text>
+        <Text style={{color:appTheme('headerFont'),fontSize:Scale(15)}}>At least 1 Uppercase (A-Z)</Text>
+        <Text style={{color:appTheme('headerFont'),fontSize:Scale(15)}}>At least 1 Lowercase (a-z)</Text>
+        <Text style={{color:appTheme('headerFont'),fontSize:Scale(15)}}>At least Numerical (1,2,...9)</Text>
     </View>
     </View>
   
     <View style={{height:verticalScale(320),width:"98%",display:'flex',flexDirection:'column',justifyContent:"space-around"}}>
     <TextInput
-                    style={styles.dropdown}
+                    style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Current Password"
@@ -39,7 +34,7 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
     
     <TextInput
-                    style={styles.dropdown}
+                    style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="New Password"
@@ -47,7 +42,7 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
 
 <TextInput
-                    style={styles.dropdown}
+                    style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Confirm Password"
@@ -55,9 +50,9 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
 
 <TouchableOpacity
-                      style={[styles.button,{backgroundColor:COLORS.black}]}
+                      style={[styles.button,{backgroundColor:appTheme('scanBoard')}]}
                       >
-                          <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Change Password</Text>
+                          <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Change Password</Text>
                         </TouchableOpacity>
 </View>
       </View>

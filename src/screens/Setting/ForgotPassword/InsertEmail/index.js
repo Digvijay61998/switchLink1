@@ -2,7 +2,7 @@ import { StyleSheet, Text, View ,Image,Switch, TextInput, TouchableOpacity} from
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
+import { appTheme, COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
 // import { COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
 
 const InsertEmail = (props) => {
@@ -11,25 +11,20 @@ const [isEnabled, setIsEnabled] = useState(false);
 const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Forgot Password</Text>
-      </LinearGradient>
-      <View style={{padding:Scale(20),}}>
+    <View style={{backgroundColor:appTheme('primary'),flex:1}}>
+    
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:Scale(25)}}>Forgot Password</Text>
+      
      
-      <Text style={{color:COLORS.black,fontSize:Scale(18)}}>Let's get you into your account</Text>
+      <Text style={{color:appTheme('headerFont'),fontSize:Scale(18),paddingTop:Scale(30),paddingLeft:Scale(24)}}>Let's get you into your account</Text>
+      <View style={{paddingTop:Scale(50),width:'100%',justidyContent:'center',alignItems:'center'}}>
 
   
-    <View style={{height:verticalScale(160),width:"98%",display:'flex',flexDirection:'column',justifyContent:"space-around",marginTop:verticalScale(20)}}>
+    <View style={{height:verticalScale(160),width:"90%",display:'flex',flexDirection:'column',justifyContent:"space-around",}}>
   
     
 <TextInput
-                    style={styles.dropdown}
+                   style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Email Address"
@@ -39,9 +34,9 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 <TouchableOpacity
 onPress={()=> props.navigation.navigate('Verification')}
 
-                      style={[styles.button,{backgroundColor:COLORS.black}]}
+                    style={[styles.button,{backgroundColor:appTheme('scanBoard')}]}
                       >
-                          <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Continue</Text>
+                          <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Continue</Text>
                         </TouchableOpacity>
 </View>
       </View>
@@ -82,13 +77,13 @@ const styles = StyleSheet.create({
   },
     dropdown: {
         height: Scale(50),
-        width: '100%',
+        width:'100%',
         borderRadius: 8,
         paddingHorizontal: 8,
         // backgroundColor:COLORS.input,
         backgroundColor: '#F8FAFD',
         fontSize: Scale(17),
-        color:COLORS.black
+        borderWidth:1
         // fontFamily: 'Montserrat-Thin',
       },
       button: {

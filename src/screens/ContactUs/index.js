@@ -2,36 +2,30 @@ import { StyleSheet, Text, View ,Image,Switch, TextInput, TouchableOpacity} from
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS, ICONS, Scale, verticalScale } from '../../common/constants'
+import { appTheme, COLORS, ICONS, Scale, verticalScale } from '../../common/constants'
 const ContactUs = (props) => {
 const {navigation} = props;
 const [isEnabled, setIsEnabled] = useState(false);
 const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Contact Us</Text>
-      </LinearGradient>
+    <View style={{backgroundColor:appTheme('primary'),flex:1}}>
+   
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:20}}>Contact Us</Text>
       <View style={{padding:Scale(20),}}>
       <View style={{display:"flex",flexDirection:"column",height:verticalScale(90),width:Scale(160),justifyContent:"space-between",marginBottom:verticalScale(10)}}>
-        <Text style={{color:COLORS.black}}> Contact us at</Text>
-        <Text style={{color:COLORS.black}}> 98xxx xxxxx</Text>
+        <Text style={{color:appTheme('headerFont')}}> Contact us at</Text>
+        <Text style={{color:appTheme('headerFont')}}> 98xxx xxxxx</Text>
         <Text style={{color:COLORS.link}}> support@switchlink.com</Text>
-        <Text style={{color:COLORS.black}}> OR</Text>
+        <Text style={{color:appTheme('headerFont')}}> OR</Text>
     </View>
 
     <View style={{marginBottom:verticalScale(12)}}>
-<Text style={{color:COLORS.black}}> Fill Up the form and out team will get back to you!</Text>
+<Text style={{color:appTheme('headerFont')}}> Fill Up the form and out team will get back to you!</Text>
     </View>
     <View style={{height:verticalScale(400),width:"98%",display:'flex',flexDirection:'column',justifyContent:"space-around"}}>
     <TextInput
-                    style={styles.dropdown}
+                    style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Name"
@@ -39,7 +33,7 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
     
     <TextInput
-                    style={styles.dropdown}
+                    style={[styles.dropdown,,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Email"
@@ -47,7 +41,7 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
 
 <TextInput
-                    style={styles.message}
+                    style={[styles.message,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Message"
@@ -55,9 +49,9 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
 
 <TouchableOpacity
-                      style={[styles.button,{backgroundColor:COLORS.black}]}
+                      style={[styles.button,{backgroundColor:appTheme('scanBoard')}]}
                       >
-                          <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Send Message</Text>
+                          <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Send Message</Text>
                         </TouchableOpacity>
 </View>
       </View>
@@ -100,11 +94,10 @@ const styles = StyleSheet.create({
         width: '100%',
         borderRadius: 8,
         paddingHorizontal: 8,
-        // backgroundColor:COLORS.input,
         backgroundColor: '#F8FAFD',
         fontSize: Scale(17),
-        color:COLORS.black
-        // fontFamily: 'Montserrat-Thin',
+        borderWidth:1,
+        borderColor:'#9243E3'
       },
       button: {
         width: '100%',
@@ -121,10 +114,10 @@ const styles = StyleSheet.create({
             width: '100%',
             borderRadius: 8,
             // backgroundColor:COLORS.input,
-            backgroundColor: '#F8FAFD',
-            fontSize: Scale(17),
-            color:COLORS.black,
             
+            fontSize: Scale(17),
+            borderWidth:1,
+            borderColor:'#9243E3'
             // fontFamily: 'Montserrat-Thin',
     }
 })

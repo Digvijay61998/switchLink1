@@ -35,28 +35,17 @@ const Setting = (props) => {
 
   const THEMECOLOR = (theme == true ? DARKCOLORS : COLORS)
   return (
-    <LinearGradient
-      style={{flex: 1}}
-    colors={appTheme('secondary')}
-    start={{ x:0, y:1 }}
-    end={{ x:1, y: 0 }}
-    >
-    <LinearGradient
-    colors={appTheme('header')}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Settings</Text>
-      </LinearGradient>
+   
+     <View style={{width:'100%',height:'100%',backgroundColor:appTheme('primary')}}>
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:28}}>Settings</Text>
     <View style={[styles.container, { flex: 1 }]}>
         <View style={[styles.userName,{backgroundColor: appTheme('purple'),}]}>
           <Text style={{fontSize:Scale(18),fontWeight:'700'}}>AD</Text>
         </View>
-        <Text style={{marginTop:verticalScale(10),fontSize:Scale(18)}}>Ashutosh Deshmukh</Text>
+        <Text style={{marginTop:verticalScale(10),fontSize:Scale(18),color:appTheme('headerFont')}}>Ashutosh Deshmukh</Text>
         <View style={{justifyContent:"center",alignItems:'center',width:Scale(375),marginTop:verticalScale(50)}}>
         <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Upadate Profile</Text>
+        <Text style={{fontSize:15,color:appTheme('headerFont'),color:appTheme('headerFont')}}>Upadate Profile</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </View>
@@ -64,7 +53,7 @@ const Setting = (props) => {
       <TouchableOpacity
       onPress={() => props.navigation.navigate('ChangePassword')}
       style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Change Password</Text>
+        <Text style={{fontSize:15,color:appTheme('headerFont')}}>Change Password</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </TouchableOpacity>
@@ -74,7 +63,7 @@ const Setting = (props) => {
       <TouchableOpacity 
       onPress={()=> props.navigation.navigate('ForgotPassword')}
       style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Forgot Password</Text>
+        <Text style={{fontSize:15,color:appTheme('headerFont')}}>Forgot Password</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </TouchableOpacity>
@@ -84,13 +73,13 @@ const Setting = (props) => {
       <TouchableOpacity
       onPress={()=> props.navigation.navigate('ResetPin')}
       style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Reset Pin</Text>
+        <Text style={{fontSize:15,color:appTheme('headerFont')}}>Reset Pin</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>
 
         </TouchableOpacity>
         </View>
           <View style={{height:50,width:'85%',borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
-        <Text style={{fontSize:15,color:'black'}}>Switch To Dark Mode</Text>
+        <Text style={{fontSize:15,color:appTheme('headerFont')}}>Switch To Dark Mode</Text>
         <Switch
                     trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
                     thumbColor={theme ? "#A75FFF" : "#939598"}
@@ -102,8 +91,8 @@ const Setting = (props) => {
         </View>
     </View>
       </View>
+      </View>
     
-      </LinearGradient>
   )
 }
 

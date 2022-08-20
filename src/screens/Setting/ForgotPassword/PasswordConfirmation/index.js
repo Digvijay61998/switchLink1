@@ -2,29 +2,25 @@ import { StyleSheet, Text, View ,Image,Switch, TextInput, TouchableOpacity} from
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS,ICONS,Scale, verticalScale  } from '../../../../common/constants'
+import { appTheme, COLORS,ICONS,Scale, verticalScale  } from '../../../../common/constants'
 const PasswordConfirmation = (props) => {
 const {navigation} = props;
 const [isEnabled, setIsEnabled] = useState(false);
 const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Forgot Password</Text>
-      </LinearGradient>
+    <View style={{backgroundColor:appTheme('primary'),flex:1}}>
+    
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:Scale(25)}}>Forgot Password</Text>
+     
       <View style={{padding:Scale(20),}}>
      
 
   
     <View style={{height:verticalScale(230),width:"98%",display:'flex',flexDirection:'column',justifyContent:"space-around",marginTop:verticalScale(50)}}>
     <TextInput
-                    style={styles.dropdown}
+                     style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
+
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="New Password"
@@ -32,8 +28,8 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
                     />
     
     <TextInput
-                    style={styles.dropdown}
-                    // onChangeText={onChangeNumber}
+                     style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
+                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Confirm Password"
                     keyboardType="alphabet"
@@ -42,9 +38,9 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
 
 <TouchableOpacity
-                      style={[styles.button,{backgroundColor:COLORS.black}]}
+                      style={[styles.button,{backgroundColor:appTheme('scanBoard')}]}
                       >
-                          <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Done</Text>
+                          <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Done</Text>
                         </TouchableOpacity>
 </View>
       </View>
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
         // backgroundColor:COLORS.input,
         backgroundColor: '#F8FAFD',
         fontSize: Scale(17),
-        color:COLORS.black
+        borderWidth:1
         // fontFamily: 'Montserrat-Thin',
       },
       button: {

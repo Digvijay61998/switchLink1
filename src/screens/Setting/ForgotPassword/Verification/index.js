@@ -2,7 +2,7 @@ import { StyleSheet, Text, View ,Image,Switch, TextInput, TouchableOpacity} from
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
-import { COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
+import { appTheme, COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
 // import { COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
 
 const Verification = (props) => {
@@ -11,25 +11,21 @@ const [isEnabled, setIsEnabled] = useState(false);
 const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{backgroundColor:COLORS.secondary,flex:1,}}>
-    <LinearGradient
-    colors={["#c5c0fe","#edc1fe","#ed86ff"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.header}
-      >
-        <Text style={{fontSize:Scale(24),color:COLORS.black}}>Forgot Password</Text>
-      </LinearGradient>
+    <View style={{backgroundColor:appTheme('primary'),flex:1,}}>
+   
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Forgot Password</Text>
+      
       <View style={{display:"flex",justifyContent:'center',alignItems:'center',width:'100%',marginTop:verticalScale(25)}}>
       <View style={{padding:Scale(20),width:Scale(340),height:verticalScale(300),alignItems:"center",display:'flex',flexDirection:'column',justifyContent:'space-between',}}>
      
-      <Text style={{color:COLORS.black,fontSize:Scale(21)}}>Enter Verification Code</Text>
-<Text style={{color:COLORS.black,fontSize:Scale(16)}}>sent to your email address</Text>
+      <Text style={{color:appTheme('headerFont'),fontSize:Scale(21)}}>Enter Verification Code</Text>
+<Text style={{color:appTheme('headerFont'),fontSize:Scale(16)}}>sent to your email address</Text>
   
   
     
 <TextInput
-                    style={styles.dropdown}
+                     style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
+
                     // onChangeText={onChangeNumber}
                     // value={number}
                         placeholder="Enter the 6 digit code"
@@ -38,10 +34,10 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
 <TouchableOpacity
 onPress={()=> props.navigation.navigate('PasswordConfirmation')}
-                      style={[styles.dropdown,{backgroundColor:COLORS.black,justifyContent: 'center',
+                      style={[styles.dropdown,{backgroundColor:appTheme('scanBoard'),justifyContent: 'center',
                       alignItems: "center",}]}
                       >
-                          <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Verify</Text>
+                          <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Verify</Text>
                         </TouchableOpacity>
 <View>
   <Text style={{color:"#30BDF2",fontSize:Scale(18)}}>Resend Code</Text>
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
         // backgroundColor:COLORS.input,
         backgroundColor: '#F8FAFD',
         fontSize: Scale(17),
-        color:COLORS.black
+       borderWidth:1
         // fontFamily: 'Montserrat-Thin',
       },
       button: {

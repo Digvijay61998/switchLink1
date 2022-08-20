@@ -20,6 +20,8 @@ export const COLORS={
   scanBoard:'#262626',
   placeHolder:'#A7B0C0',
   inputBorder:'#9243E3',
+  contactUsInput:"#F8FAFD",
+
 
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
   headerFont:'black',
@@ -44,7 +46,8 @@ export const DARKCOLORS = {
   scanBoard:'#D9D9D9',
   placeHolder:'#A7B0C0',
   inputBorder:'#9243E3',
-
+  contactUsInput:'#FFFF',
+  
   
   headerFont:'white',
   button: ['#A75FFF', '#A75FFF', '#635BFF', '#635BFF'],
