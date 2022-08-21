@@ -4,8 +4,10 @@ import API from "../../../services/Api";
 import {
     CREATE_BOARD_SUCCESS,
   GET_SWITCH_LIST_SUCCESS,
-  GET_DEVICE_LIST
+  GET_DEVICE_LIST,
+  CREATE_BOARD_TO_ROOM
 } from "../ActionTypes";
+import * as RoomAction from "../Room/Action";
 import * as BoardAction from "./Action";
 import Snackbar from "react-native-snackbar";
 import { navigate, replace, reset } from "../../../theme/rnnavigation";
@@ -47,6 +49,34 @@ function* createBoard(action) {
     }
 }
 
+function* createBoardToRoom(action) {
+  try {
+    const response = yield call(API.post, "/board/addToRoom", action.payload.data);
+    // const result = API.handleResponseForSearchMessage(response);
+      if (response) {
+            yield put(BoardAction.createBoardToRoomSuccess({ data:response.data.message }));
+        try {
+            yield put(RoomAction.getRoomsList());
+                yield call(navigate, 'RootBottomTabStack', { screen: 'CustomRooms' });
+              } catch (error) {
+                  console.log("error: ", error);
+              }
+      }
+  } catch (error) {
+  //   console.log("saga login account error===", error);
+  //   let errorMsg = JSON.parse(error.request._response).message;
+  //   let errorStatus = JSON.parse(error.request._response).success;
+  //   if (errorStatus === false) {
+  //     yield put(LoginActions.loginAccountError(error));
+    Snackbar.show({
+      backgroundColor:'red',
+    text: "Network error",
+    duration: 3000,
+  });
+  //   }
+    console.log("Saga Responce Error",error);
+  }
+}
 function* getSwitchList(action) {
     console.log("saga login account==", action);
     try {
@@ -97,11 +127,10 @@ function* getDeviceList(action) {
 }
   export default function* root() {
     yield [
-        yield takeLatest(CREATE_BOARD_SUCCESS, createBoard),
+      yield takeLatest(CREATE_BOARD_SUCCESS, createBoard),
+      yield takeLatest(CREATE_BOARD_TO_ROOM, createBoardToRoom),
         yield takeLatest(GET_SWITCH_LIST_SUCCESS, getSwitchList),
         yield takeLatest(GET_DEVICE_LIST, getDeviceList),
-
-        
     ];
   }
   

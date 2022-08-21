@@ -3,7 +3,8 @@ import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,Touchabl
 import { EditSwitch } from "../../../../common/component";
 import { COLORS, ICONS, Scale, verticalScale ,appTheme} from "../../../../common/constants";
 import {
-  getSwitchListSuccess
+  getSwitchListSuccess,
+  createBoardToRoom
 } from "../../../../redux/state/Board/Action";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,14 +12,26 @@ const ConfirmBoardDetails = (props) => {
   console.log("props",props.route.params?.callbackConfirm);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const { boardDetails, isFetching, error,switchList } = useSelector((state) => state.board);
-console.log("boardDetails@@@@@@@@@@@@@",switchList);
-
+  const { boardDetails,BasketKey, isFetching, error,switchList } = useSelector((state) => state.board);
+const { createRoom } = useSelector((state) => state.room);
+  
+  console.log("boardDetails@@@@@@@@", BasketKey);
+  
   const handleEdit = () => {
   setEditModalVisible(true)
 }
 
-  
+  const handleCreateDevice = () => {
+    dispatch(
+      createBoardToRoom({
+        data: {
+          boardKey: BasketKey,
+          roomKey:createRoom.room_key
+          // BasketKey: boardDetails.board_key,
+        }
+      }));
+  }
+
   useEffect(() => {
     dispatch(
       getSwitchListSuccess({
@@ -46,7 +59,8 @@ const Switches =({props})=>{
       <Image source={ICONS.editRoom} style={styles.icons} />
    </TouchableOpacity>
    <TouchableOpacity
-   onPress={()=>handleDelete()}>
+              // onPress={() => handleDelete()}
+            >
    <Image source={ICONS.deleteRoom} style={styles.icons} />
 
    </TouchableOpacity>
@@ -83,8 +97,9 @@ return(
           </View>
           {props.route.params?.callbackConfirm == 'callbackConfirm' ? 
         <TouchableOpacity
-        style={{width:Scale(350),height:verticalScale(46),backgroundColor:"black",borderRadius:Scale(8),justifyContent:'center',alignItems:'center',bottom:verticalScale(19)}}
-        onPress={() => props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
+        style={{ width: Scale(350), height: verticalScale(46), backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center', bottom: verticalScale(19) }}
+        onPress={() => handleCreateDevice()}
+          // props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
         >
        <Text style={{color:'white',fontSize:Scale(22),fontWeight:'500'}}>Confirm and Add Board</Text>
         </TouchableOpacity>:null

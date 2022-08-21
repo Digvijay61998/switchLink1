@@ -94,9 +94,9 @@ console.log("error",error);
         />
       </View>
       <View style={{paddingTop:25}}>
-            <TouchableOpacity style={[styles.button,{backgroundColor:appTheme('lightBlack'),}]}
-              // onPress={() =>handleRoomsubmit()
-              onPress={()=> props.navigation.navigate("AddDeviceStack")} 
+            <TouchableOpacity style={[styles.button, { backgroundColor: appTheme('lightBlack'), }]}
+              onPress={() => handleRoomsubmit()}
+              // onPress={()=> props.navigation.navigate("AddDeviceStack")} 
       >
       <Text style={{color:'white',fontWeight:'600',fontSize:Scale(18)}}>Save</Text>
 

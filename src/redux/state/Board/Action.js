@@ -44,4 +44,22 @@ export const getSwitchList = payloadData => ({
   export const getSwitchListError = (error) => ({
       type: ActionTypes.GET_SWITCH_LIST_ERROR,
       error,
-    });
+  });
+    
+
+  // Create board to room 
+
+  export const createBoardToRoom = payloadData => ({
+    type: ActionTypes.CREATE_BOARD_TO_ROOM,
+    payload: payloadData,
+  });
+export const createBoardToRoomSuccess = payloadData => ({
+    type: ActionTypes.CREATE_BOARD_TO_ROOM_SUCCESS,
+    payload: payloadData,
+});
+
+export const createBoardToRoomError = (error) => ({
+    type: ActionTypes.CREATE_BOARD_TO_ROOM_ERROR,
+    error,
+});
+  

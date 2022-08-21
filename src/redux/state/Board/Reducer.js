@@ -3,6 +3,9 @@ import {
   CREATE_BOARD_PROCESS,
   CREATE_BOARD_SUCCESS,
   CREATE_BOARD_ERROR,
+  CREATE_BOARD_TO_ROOM,
+  CREATE_BOARD_TO_ROOM_SUCCESS,
+  CREATE_BOARD_TO_ROOM_ERROR,
   GET_SWITCH_LIST,
   GET_SWITCH_LIST_SUCCESS,
   GET_SWITCH_LIST_ERROR,
@@ -20,6 +23,8 @@ const INITIAL_STATE = Immutable({
   boardName: null,
   macAddress: null,
   boardDetails: null,
+  BasketKey:null,
+  message:'',
   isFetching: false,
   error: null,
 });
@@ -69,6 +74,7 @@ const reducers = {
   [GET_SWITCH_LIST_SUCCESS]: (state, action) => {
     console.log('data@@@@@@@@@@@@', action);
     return Immutable.merge(state, {
+      BasketKey:action.payload.data.BasketKey,
       isFetching: false,
       error: null,
     });
@@ -99,6 +105,32 @@ const reducers = {
   },
 
   [GET_DEVICE_LIST_ERROR]: (state, error) => {
+    return Immutable.merge(state, {
+      isFetching: false,
+      error: error,
+    });
+  },
+
+// CREATE BOARD FOR ROOMS
+
+  [CREATE_BOARD_TO_ROOM]: (state, action) => {
+    console.log('data', action);
+    return Immutable.merge(state, {
+      isFetching: true,
+      error: null,
+    });
+  },
+
+  [CREATE_BOARD_TO_ROOM_SUCCESS]: (state, action) => {
+    console.log('data@@@@@@@@@@@@@@@@@@@@@@@', action);
+    return Immutable.merge(state, {
+      message: action.payload.data.message,
+      isFetching: false,
+      error: null,
+    });
+  },
+
+  [CREATE_BOARD_TO_ROOM_ERROR]: (state, error) => {
     return Immutable.merge(state, {
       isFetching: false,
       error: error,

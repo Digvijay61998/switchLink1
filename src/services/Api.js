@@ -184,31 +184,28 @@ export default {
     if (response) {
       // console.log('handleResponseForMessage==', response.message);
       if (response && response.code == 200) {
-        const message = response.message;
-        Snackbar.show({
-          text: message,
-          duration: Snackbar.LENGTH_SHORT,
-        });
-        return {success: true, data: response.data};
-      } else {
-        let message =
-          typeof response.message === 'string'
-            ? response.message
-            : typeof response.message === 'object'
-            ? response.message.denied
-              ? this.handleError(response.message.denied)
-              : response.message.incorrect_password
-              ? this.handleError(response.message.incorrect_password)
-              : response.message.invalid_email
-              ? this.handleError(response.message.invalid_email)
-              : 'Some Error'
-            : 'Some Error!';
-        Snackbar.show({
-          text: message,
-          duration: Snackbar.LENGTH_SHORT,
-        });
-        return {success: false, data: response.message};
+        const data = response.data;
+        return {success: true, data: data};
       }
+      // else {
+      //   let message =
+      //     typeof response.message === 'string'
+      //       ? response.message
+      //       : typeof response.message === 'object'
+      //       ? response.message.denied
+      //         ? this.handleError(response.message.denied)
+      //         : response.message.incorrect_password
+      //         ? this.handleError(response.message.incorrect_password)
+      //         : response.message.invalid_email
+      //         ? this.handleError(response.message.invalid_email)
+      //         : 'Some Error'
+      //       : 'Some Error!';
+      //   Snackbar.show({
+      //     text: message,
+      //     duration: Snackbar.LENGTH_SHORT,
+      //   });
+      //   return {success: false, data: response.message};
+      // }
     }
   },
 

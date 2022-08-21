@@ -17,7 +17,7 @@ import {
   
 const HomeStackNavigator = createStackNavigator();
 
-const Home = props => {
+const Home = (props) => {
   const {navigation} = props;
   const dispatch = useDispatch();
   const {roomList,isFetching, error } = useSelector((state) => state.room);
@@ -35,7 +35,7 @@ const Home = props => {
       {/* {SetWifiCredentials (props)} */}
       {/* <CreateNewRoom props /> */}
       {/* <AddRoom prop /> */}
-        <CustomRooms props={props} />
+        <CustomRooms navigation={navigation} />
       {/* {renderHederComponents()} */}
     </View>
   );
