@@ -4,17 +4,17 @@ import { EditSwitch } from "../../../../common/component";
 import { COLORS, ICONS, Scale, verticalScale ,appTheme} from "../../../../common/constants";
 import {
   getSwitchListSuccess,
-  createBoardToRoom
+  createBoardToRoom,
+  updateBoardName
 } from "../../../../redux/state/Board/Action";
 import { useDispatch, useSelector } from "react-redux";
 
 const ConfirmBoardDetails = (props) => {
-  console.log("props",props.route.params?.callbackConfirm);
-  const [editModalVisible, setEditModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const { boardDetails,BasketKey, isFetching, error,switchList } = useSelector((state) => state.board);
+  const { boardName,boardDetails,BasketKey, isFetching, error,switchList } = useSelector((state) => state.board);
 const { createRoom } = useSelector((state) => state.room);
-  
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editboardName, setEditBoardName] = useState(boardName);
   console.log("boardDetails@@@@@@@@", BasketKey);
   
   const handleEdit = () => {
@@ -22,7 +22,8 @@ const { createRoom } = useSelector((state) => state.room);
 }
 
   const handleCreateDevice = () => {
-    dispatch(
+    try {
+        dispatch(
       createBoardToRoom({
         data: {
           boardKey: BasketKey,
@@ -30,6 +31,19 @@ const { createRoom } = useSelector((state) => state.room);
           // BasketKey: boardDetails.board_key,
         }
       }));
+      dispatch(
+        updateBoardName({
+          data: {
+            board_key: BasketKey,
+            board_name:editboardName
+            // BasketKey: boardDetails.board_key,
+          }
+        }));
+      } catch (error) {
+        console.log("error: ", error);
+    }
+  
+     
   }
 
   useEffect(() => {
@@ -75,11 +89,17 @@ const BoardSwitches =()=>{
 return(
   <View style={{ backgroundColor:appTheme('primary'),height:verticalScale(450),justifyContent:'center',alignItems:'center'}}>
   <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130)}}>
-<Text style={{fontSize:25,color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
-<View style={[styles.box,{backgroundColor:appTheme('primary'),borderWidth:1,borderColor:appTheme('inputBorder')}]}>
-   <Text style={{fontSize:18,color:appTheme('font'),paddingLeft:Scale(10)}}>Board 1</Text>
-   </View>
-  
+<Text style={{fontSize:Scale(25),color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
+      <TextInput
+        onChangeText={(val) => { setEditBoardName(val) }}
+        defaultValue={editboardName}
+           placeholderTextColor={appTheme('placeHolder')}
+           placeholder="Enter Room Name"
+           keyboardType="alphabet"
+        style={[styles.box, {
+          backgroundColor: appTheme('primary'), borderWidth: 1, borderColor: appTheme('inputBorder'), color: appTheme('font')}]}>
+   {/* <Text style={{fontSize:Scale(18),color:appTheme('font'),paddingLeft:Scale(10)}}>Board 1</Text> */}
+   </TextInput>
   </View>
   <View style={{right:Scale(90)}}>
   <Text style={{fontSize:16,color:"#353535",marginBottom:Scale(10)}}>Switches on the board</Text>
@@ -126,7 +146,8 @@ const styles = StyleSheet.create({
     height: Scale(50),
     width: Scale(330),
     borderRadius: 8,
-    
+    fontSize: Scale(18),
+    paddingLeft: Scale(10),
     justifyContent: 'center', 
    },
    switchIcons: {

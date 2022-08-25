@@ -1,18 +1,64 @@
-import {StyleSheet, Text, View, Image, Switch} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, Text, View, Image, Switch,TouchableOpacity} from 'react-native';
+import React, {useState,useEffect} from 'react';
 import {appTheme,appIcons, COLORS, ICONS, Scale, verticalScale} from '../../../../common/constants';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import icons from '../../../../common/constants/icons';
 import LinearGradient from 'react-native-linear-gradient'
+import { useDispatch, useSelector } from "react-redux";
+import { Dropdown } from 'react-native-element-dropdown';
+import {
+  getSwitchListSuccess,
+} from "../../../../redux/state/Board/Action";
 
-const BoardName = () => {
+const BoardName = (props) => {
+  console.log("props:",props.route?.params?.board_key);
+  const dispatch = useDispatch();
+  const [ boardKey ,setBoardKey]=useState(props.route?.params?.board_key)
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const { switchList,deviceList, isFetching, error } = useSelector((state) => state.board);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  console.log("switchList###",switchList);
+  const data = [
+    // { label: 'wireless LAN', value: '1' },
+    // { label: 'wireless MAN', value: '2' },
+    // { label: 'wireless PAN', value: '3' },
+    // { label: 'wireless WAN', value: '4' },
+  ];
+  useEffect(() => {
+    dispatch(
+      getSwitchListSuccess({
+        data: {
+          BasketKey: boardKey,
+        }
+      }));
+},[])
+
 
   return (
     <View style={[styles.container,{backgroundColor:appTheme('primary')}]}>
       <View style={styles.headerContainer}>
-        <Text style={{fontWeight: '600', fontSize: Scale(24)}}>Board Name</Text>
+      <Dropdown
+          style={[styles.dropdown,{backgroundColor:appTheme('input'), borderColor:appTheme('inputBorder'),}]}
+          placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
+          selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
+          inputSearchStyle={styles.inputSearchStyle}
+          data={deviceList[0]?.Boards}
+          maxHeight={200}
+          labelField="board_name"
+          valueField="board_key"
+          placeholder={ 'Select Network Type'}
+          searchPlaceholder="Search..."
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+          
+        />
+        {/* <Text style={{fontWeight: '600', fontSize: Scale(24)}}>Board Name</Text> */}
       </View>
       <View style={styles.switchLock}>
         <View style={[styles.switchLockBox,{ borderColor:appTheme('inputBorder')}]}>
@@ -158,6 +204,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     padding: Scale(20),
   },
+  dropdown: {
+    height: Scale(40),
+    width: Scale(150),
+    borderRadius: 8,
+    borderWidth:Scale(1),
+    paddingHorizontal: 8,
+    fontSize:Scale(16),
+    
+  },
+  placeholderStyle: {
+    fontSize: Scale(12),
+  },
+  selectedTextStyle: {
+    fontSize: Scale(16),
+  },
+  inputSearchStyle: {
+    height: verticalScale(40),
+    fontSize: Scale(16),
+  },  
   headerContainer: {
     width: '96%',
     alignItems: 'flex-start',

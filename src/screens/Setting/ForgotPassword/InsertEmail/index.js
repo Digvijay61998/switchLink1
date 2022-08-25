@@ -4,19 +4,30 @@ import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
 import { appTheme, COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
 // import { COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
-
+import { useDispatch, useSelector } from "react-redux";
+import {updateForgotPassword} from "../../../../redux/state/Login/Actions" 
 const InsertEmail = (props) => {
-const {navigation} = props;
-const [isEnabled, setIsEnabled] = useState(false);
-const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const { navigation } = props;
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+
+  
+  const handleSubmit = () => {
+    dispatch(
+      updateForgotPassword({
+        data: {
+          email: email,
+        }
+      }));
+}
 
   return (
     <View style={{backgroundColor:appTheme('primary'),flex:1}}>
     
-        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:Scale(25)}}>Forgot Password</Text>
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),padding:Scale(25),fontFamily:'Montserrat'}}>Forgot Password</Text>
       
      
-      <Text style={{color:appTheme('headerFont'),fontSize:Scale(18),paddingTop:Scale(30),paddingLeft:Scale(24)}}>Let's get you into your account</Text>
+      <Text style={{color:appTheme('headerFont'),fontSize:Scale(18),paddingTop:Scale(50),paddingLeft:Scale(24),top:verticalScale(20)}}>Let's get you into your account</Text>
       <View style={{paddingTop:Scale(50),width:'100%',justidyContent:'center',alignItems:'center'}}>
 
   
@@ -25,15 +36,16 @@ const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     
 <TextInput
                    style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
-                    // onChangeText={onChangeNumber}
+                    onChangeText={(val)=>{setEmail(val)}}
                     // value={number}
                         placeholder="Email Address"
                     keyboardType="alphabet"
                     />
 
 <TouchableOpacity
-onPress={()=> props.navigation.navigate('Verification')}
-
+            onPress={() => handleSubmit()
+              // props.navigation.navigate('Verification')
+            }
                     style={[styles.button,{backgroundColor:appTheme('scanBoard')}]}
                       >
                           <Text style={{color:appTheme('primary'),fontSize:Scale(18)}}>Continue</Text>

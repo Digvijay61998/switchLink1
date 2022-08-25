@@ -5,7 +5,8 @@ import {
     CREATE_BOARD_SUCCESS,
   GET_SWITCH_LIST_SUCCESS,
   GET_DEVICE_LIST,
-  CREATE_BOARD_TO_ROOM
+  CREATE_BOARD_TO_ROOM,
+  UPDATE_BOARD_NAME
 } from "../ActionTypes";
 import * as RoomAction from "../Room/Action";
 import * as BoardAction from "./Action";
@@ -19,7 +20,8 @@ function* createBoard(action) {
       const response = yield call(API.post, "/board", action.payload.data);
       const result = API.handleResponseForMessage(response);
         if (result) {
-            if (result) {
+          if (result) {
+              console.log("result@@@@@@@@@@@@@@@",result);
                 yield put(BoardAction.getSwitchList({data:result.data}));
                 try {
                     Snackbar.show({
@@ -77,6 +79,7 @@ function* createBoardToRoom(action) {
     console.log("Saga Responce Error",error);
   }
 }
+
 function* getSwitchList(action) {
     console.log("saga login account==", action);
     try {
@@ -107,7 +110,7 @@ function* getDeviceList(action) {
     const response = yield call(API.get, "/board/room/"+action.payload.roomKey);
     const result = API.handleResponseForMessage(response);
       if (result) {
-              yield put(BoardAction.getDeviceListSuccess({deviceList:result.data}));
+        yield put(BoardAction.getDeviceListSuccess({ deviceList: result.data}));
               yield call(navigate, 'AddStackRoom', { screen: 'EditRoom'});
       }
   } catch (error) {
@@ -125,12 +128,51 @@ function* getDeviceList(action) {
     console.log("Saga Responce Error",error);
   }
 }
+
+function* updateBoardName(action) {
+  try {
+    const response = yield call(API.put, "/board/updateBoard", action.payload.data);
+    const result = API.handleResponseForMessage(response);
+    console.log("saga redux @@@response",response);
+      // if (result) {
+      //   if (result) {
+      //       console.log("result@@@@@@@@@@@@@@@",result);
+      //         yield put(BoardAction.getSwitchList({data:result.data}));
+      //         try {
+      //             Snackbar.show({
+      //                 backgroundColor:'green',
+      //                 text: "Board Created Succesfully",
+      //                 duration: 3000,
+      //             });
+      //             yield call(navigate, "ConfirmBoardDetails");
+      //         } catch (error) {
+      //             console.log("error: ", error);
+      //         }
+      //     }
+      // }
+  } catch (error) {
+  //   console.log("saga login account error===", error);
+  //   let errorMsg = JSON.parse(error.request._response).message;
+  //   let errorStatus = JSON.parse(error.request._response).success;
+  //   if (errorStatus === false) {
+  //     yield put(LoginActions.loginAccountError(error));
+    Snackbar.show({
+      backgroundColor:'red',
+    text: "Network error",
+    duration: 3000,
+  });
+  //   }
+    console.log("Saga Responce Error",error);
+  }
+}
+
   export default function* root() {
     yield [
       yield takeLatest(CREATE_BOARD_SUCCESS, createBoard),
       yield takeLatest(CREATE_BOARD_TO_ROOM, createBoardToRoom),
-        yield takeLatest(GET_SWITCH_LIST_SUCCESS, getSwitchList),
-        yield takeLatest(GET_DEVICE_LIST, getDeviceList),
+      yield takeLatest(GET_SWITCH_LIST_SUCCESS, getSwitchList),
+      yield takeLatest(GET_DEVICE_LIST, getDeviceList),
+      yield takeLatest(UPDATE_BOARD_NAME, updateBoardName),
     ];
   }
   

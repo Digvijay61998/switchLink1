@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'http://3.6.152.102:8080/api/switchlink',
+    baseURL: 'http://192.168.1.19:8080/api/switchlink',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });
@@ -118,7 +118,7 @@ export default {
   handleLoginResponse(response) {
     if (response) {
       // console.log('@@@ Handle Res=======', response);
-      if (response.data && response.status == 200) {
+      if (response.data && response.status == 200 || 202) {
         return {success: true, data: response.data};
       } else {
         let message =

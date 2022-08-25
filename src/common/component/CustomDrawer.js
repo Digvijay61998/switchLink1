@@ -11,6 +11,7 @@ import {
 import {Scale,verticalScale,IMAGE ,appTheme} from "../constants"
 // import * as IMAGECONST from "../theme/ImageConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {navigate, replace, reset} from '../../theme/rnnavigation';
 
 
 
@@ -67,8 +68,13 @@ const drawerData = [
 
  
 export default function CustomDrawer({props}) {
-  console.log("props",props);
-
+  console.log("props", props);
+  
+  const handleClear = async () => {
+    console.log("CLEAR STORAGE####");
+      AsyncStorage.clear();
+      reset('UserLogin')
+}
 
   const RenderTopConatiner = () => {
     return (
@@ -126,6 +132,11 @@ export default function CustomDrawer({props}) {
           numColumns={1}
           showsHorizontalScrollIndicator={false}
         />
+        <TouchableOpacity
+        onPress={()=>handleClear()}
+        >
+        <Text>Logout</Text>
+        </TouchableOpacity>
       </View>
     );
   };

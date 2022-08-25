@@ -3,37 +3,44 @@ import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {CustomHeader} from "../../common/component"
 import { appTheme, COLORS, ICONS,Scale, verticalScale } from '../../../../common/constants'
+import { useDispatch, useSelector } from "react-redux";
 // import { COLORS,ICONS,Scale, verticalScale } from '../../../common/constants'
-
+import {userVerifyOTP} from "../../../../redux/state/Login/Actions"
 const Verification = (props) => {
-const {navigation} = props;
-const [isEnabled, setIsEnabled] = useState(false);
-const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+  const { UserEmail, isFetching, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [otp, setOTP] = useState();
+console.log("UserEmail@@",UserEmail);
+  const handleSubmit = () => {
+    dispatch(
+      userVerifyOTP({
+        data: {
+          email:UserEmail,
+          otp: Number(otp),
+        }
+      }));
+}
   return (
     <View style={{backgroundColor:appTheme('primary'),flex:1,}}>
-   
-        <Text style={{fontSize:Scale(24),color:appTheme('headerFont')}}>Forgot Password</Text>
-      
+        <Text style={{fontSize:Scale(24),color:appTheme('headerFont'),fontFamily:"Montserrat.regular",left:Scale(35)}}>Forgot Password</Text>
       <View style={{display:"flex",justifyContent:'center',alignItems:'center',width:'100%',marginTop:verticalScale(25)}}>
       <View style={{padding:Scale(20),width:Scale(340),height:verticalScale(300),alignItems:"center",display:'flex',flexDirection:'column',justifyContent:'space-between',}}>
      
-      <Text style={{color:appTheme('headerFont'),fontSize:Scale(21)}}>Enter Verification Code</Text>
-<Text style={{color:appTheme('headerFont'),fontSize:Scale(16)}}>sent to your email address</Text>
-  
-  
-    
+      <Text style={{color:appTheme('headerFont'),fontSize:Scale(21),fontFamily:"Montserrat.regular"}}>Enter Verification Code</Text>
+<Text style={{color:appTheme('headerFont'),fontSize:Scale(16),fontFamily:"Montserrat.regular"}}>sent to your email address</Text>
 <TextInput
                      style={[styles.dropdown,{backgroundColor: appTheme('contactUsInput'),borderColor:appTheme('inputBorder')}]}
 
-                    // onChangeText={onChangeNumber}
+            onChangeText={(e) => {setOTP(e)}}
                     // value={number}
                         placeholder="Enter the 6 digit code"
                     keyboardType="alphabet"
                     />
 
 <TouchableOpacity
-onPress={()=> props.navigation.navigate('PasswordConfirmation')}
+            onPress={() =>handleSubmit()
+              // props.navigation.navigate('PasswordConfirmation')
+            }
                       style={[styles.dropdown,{backgroundColor:appTheme('scanBoard'),justifyContent: 'center',
                       alignItems: "center",}]}
                       >

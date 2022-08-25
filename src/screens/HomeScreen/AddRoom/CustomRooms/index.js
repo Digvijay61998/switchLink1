@@ -38,8 +38,8 @@ const addNewRoom = () => {
       onPress={() => handleSubmitRoomKey(item.room_key)}
       style={[styles.box,{borderColor:appTheme('inputBorder')}]}
     >
-        <Text style={{fontWeight:"700",fontSize:Scale(18),color:"black",letterSpacing:1}}>{item.room_type}</Text>
-        <Text>Room Type</Text>
+        <Text style={{fontWeight:"700",fontSize:Scale(18),color:"black",letterSpacing:1,fontFamily:"metropolis"}}>{item.name}</Text>
+        <Text style={{fontFamily:"metropolis"}}>{item.room_type}</Text>
         <Text style={{color:appTheme('inputBorder'),fontWeight:"600",fontSize:Scale(18)}}>{item.no_of_board}  Devices</Text>
         <Switch
         trackColor={{ false: "#EEEEEE", true: "#A75FFF6B" }}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing:1,
         color: "#000",
-        fontSize:Scale(20),
+      fontSize: Scale(20),
+        fontFamily:"metropolis"
     }
-
 })

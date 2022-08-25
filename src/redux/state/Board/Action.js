@@ -45,7 +45,17 @@ export const getSwitchList = payloadData => ({
       type: ActionTypes.GET_SWITCH_LIST_ERROR,
       error,
   });
-    
+
+  export const updateBoardName = payloadData => ({
+    type: ActionTypes.UPDATE_BOARD_NAME,
+    payload: payloadData,
+  });
+  
+  export const updateBoardNameError = (error) => ({
+      type: ActionTypes.UPDATE_BOARD_NAME_ERROR,
+      error,
+  });
+  
 
   // Create board to room 
 

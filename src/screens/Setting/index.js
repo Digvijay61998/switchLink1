@@ -61,7 +61,7 @@ const Setting = (props) => {
 
         <View style={{justifyContent:'center',width:'85%'}}>
       <TouchableOpacity 
-      onPress={()=> props.navigation.navigate('ForgotPassword')}
+      onPress={()=> props.navigation.replace('ForgotPassword')}
       style={{height:50,borderBottomColor:"#A75FFF",borderBottomWidth:1,justifyContent:"space-between",display:"flex",flexDirection:"row",paddingTop:14}}>
         <Text style={{fontSize:15,color:appTheme('headerFont')}}>Forgot Password</Text>
         <Image source={ICONS.arrow} style={{height:18, width:15}}  tintColor="grey"/>

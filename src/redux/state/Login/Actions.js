@@ -37,128 +37,49 @@ export const createBoardError = (error) => ({
   });
 
 
-
-
-
-
-
-
-
-
-export const SocialLoginGoogleAccount = payloadData => ({
-  type: ActionTypes.SOCIAL_LOGIN_ACCOUNT,
-  payload: payloadData,
+  export const updateForgotPassword = payloadData => ({
+    type: ActionTypes.UPDATE_FORGOT_PASSWORD,
+    payload: payloadData,
+});
+  
+  export const updateForgotPasswordSuccess = payloadData => ({
+    type: ActionTypes.UPDATE_FORGOT_PASSWORD_SUCCESS,
+    payload: payloadData,
 });
 
-export const SocialLoginGoogleSuccess = data => ({
-  type: ActionTypes.SOCIAL_LOGIN_SUCCESS,
-  data,
+export const updateForgotPasswordError = (error) => ({
+    type: ActionTypes.UPDATE_FORGOT_PASSWORD_ERROR,
+    error,
+  });
+
+  export const userVerifyOTP = payloadData => ({
+    type: ActionTypes.POST_VERIFY_OTP,
+    payload: payloadData,
 });
+  
+export const userVerifyOTPError = (error) => ({
+    type: ActionTypes.POST_VERIFY_OTP_ERROR,
+    error,
+  });
 
-export const SocialLoginGoogleError = (error, id) => ({
-  type: ActionTypes.SOCIAL_LOGIN_ERROR,
-  error,
+  export const userNewPassword = payloadData => ({
+    type: ActionTypes.USER_NEW_PASSWORD,
+    payload: payloadData,
 });
-
-
-
-
-export const signUpBuyerSuccess = data => ({
-  type: ActionTypes.SIGNUP_BUYER_SUCCESS,
-  data,
+  
+export const userNewPasswordError = (error) => ({
+    type: ActionTypes.USER_NEW_PASSWORD_ERROR,
+    error,
+  });
+  
+  export const userChangePassword = payloadData => ({
+    type: ActionTypes.USER_CHANGE_PASSWORD,
+    payload: payloadData,
 });
-
-export const signUpBuyerError = (error, id) => ({
-  type: ActionTypes.SIGNUP_BUYER_ERROR,
-  error,
-});
-
-export const signUpSellerAccount = payloadData => ({
-  type: ActionTypes.SIGNUP_SELLER_ACCOUNT,
-  payload: payloadData,
-});
-
-export const signUpSellerSuccess = data => ({
-  type: ActionTypes.SIGNUP_SELLER_SUCCESS,
-  data,
-});
-
-export const signUpSellerError = (error, id) => ({
-  type: ActionTypes.SIGNUP_SELLER_ERROR,
-  error,
-});
-
-export const recoverEmailAccount = payloadData => ({
-  type: ActionTypes.RECOVER_EMAIL_ACCOUNT,
-  payload: payloadData,
-});
-
-export const recoverEmailSuccess = data => ({
-  type: ActionTypes.RECOVER_EMAIL_SUCCESS,
-  data,
-});
-
-export const recoverEmailError = (error, id) => ({
-  type: ActionTypes.RECOVER_EMAIL_ERROR,
-  error,
-});
-
-export const enterOtpAccount = payloadData => ({
-  type: ActionTypes.ENTER_OTP_ACCOUNT,
-  payload: payloadData,
-});
-
-export const enterOtpSuccess = data => ({
-  type: ActionTypes.ENTER_OTP_SUCCESS,
-  data,
-});
-
-export const enterOtpError = (error, id) => ({
-  type: ActionTypes.ENTER_OTP_ERROR,
-  error,
-});
-
-export const recoverPasswordAccount = payloadData => ({
-  type: ActionTypes.RECOVER_PASSWORD_ACCOUNT,
-  payload: payloadData,
-});
-
-export const recoverPasswordSuccess = data => ({
-  type: ActionTypes.RECOVER_PASSWORD_SUCCESS,
-  data,
-});
-
-export const recoverPasswordError = (error, id) => ({
-  type: ActionTypes.RECOVER_PASSWORD_ERROR,
-  error,
-});
-
-export const createProfileAccount = payloadData => ({
-  type: ActionTypes.CREATE_PROFILE_ACCOUNT,
-  payload: payloadData,
-});
-
-export const createProfileSuccess = data => ({
-  type: ActionTypes.CREATE_PROFILE_SUCCESS,
-  data,
-});
-
-export const createProfileError = (error, id) => ({
-  type: ActionTypes.CREATE_PROFILE_ERROR,
-  error,
-});
-
-export const loginWithFacebook = payloadData => ({
-  type: ActionTypes.LOGIN_FACEBOOK_ACCOUNT,
-  payload: payloadData,
-});
-
-export const loginWithFacebookSuccess = data => ({
-  type: ActionTypes.LOGIN_FACEBOOK_SUCCESS,
-  data,
-});
-
-export const loginWithFacebookError = (error, id) => ({
-  type: ActionTypes.LOGIN_FACEBOOK_ERROR,
-  error,
-});
+  
+export const userChangePasswordError = (error) => ({
+    type: ActionTypes.USER_CHANGE_PASSWORD_ERROR,
+    error,
+  });
+  
+  

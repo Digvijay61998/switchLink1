@@ -13,6 +13,8 @@ import {
   GET_DEVICE_LIST,
   GET_DEVICE_LIST_SUCCESS,
   GET_DEVICE_LIST_ERROR,
+  USER_CHANGE_PASSWORD,
+  USER_CHANGE_PASSWORD_ERROR
 } from '../ActionTypes';
 import {createReducer} from '../CreateReducer';
 
@@ -131,6 +133,20 @@ const reducers = {
   },
 
   [CREATE_BOARD_TO_ROOM_ERROR]: (state, error) => {
+    return Immutable.merge(state, {
+      isFetching: false,
+      error: error,
+    });
+  },
+  [USER_CHANGE_PASSWORD]: (state, action) => {
+    console.log('data@@@@@@@@@@@@@@@@@@@@@@@', action);
+    return Immutable.merge(state, {
+      isFetching: false,
+      error: null,
+    });
+  },
+
+  [USER_CHANGE_PASSWORD_ERROR]: (state, error) => {
     return Immutable.merge(state, {
       isFetching: false,
       error: error,
