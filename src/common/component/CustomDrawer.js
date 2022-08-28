@@ -73,7 +73,7 @@ export default function CustomDrawer({props}) {
   const handleClear = async () => {
     console.log("CLEAR STORAGE####");
       AsyncStorage.clear();
-      reset('AuthStackScreen')
+      props.navigation.reset('AuthStackScreen')
 }
 
   const RenderTopConatiner = () => {

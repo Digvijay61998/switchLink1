@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'http://3.6.152.102:8080/api/switchlink',
+    baseURL: 'http://192.168.0.115:8080/api/switchlink',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });

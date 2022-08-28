@@ -16,6 +16,7 @@ import {
   COLORS,
   FONTS,
   ICONS,
+  appTheme,
 } from '../../common/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {Formik, useFormik} from 'formik';
@@ -74,7 +75,7 @@ const UserSignUp = props => {
   });
   return (
     <SafeAreaView style={CONTAINER}>
-      <View style={{width: Scale(200), right: Scale(50), marginTop: Scale(20)}}>
+      <View style={{width: Scale(250), right: Scale(35), marginTop: Scale(20)}}>
         <Text style={FONTS.textTittle}>Welcome to</Text>
         <View style={{flexDirection: 'row'}}>
           <Image
@@ -101,7 +102,7 @@ const UserSignUp = props => {
           alignItems: 'baseline',
           marginTop: Scale(20),
         }}>
-        <Text style={{color: '#7F7F7F', letterSpacing: 1}}>
+        <Text style={{color: appTheme('font'), letterSpacing: 1}}>
           First, let's get to know each other better.
         </Text>
       </View>
@@ -139,6 +140,7 @@ const UserSignUp = props => {
                     letterSpacing: -1,
                     color: COLORS.black,
                     top: verticalScale(-10),
+                    fontFamily:"Montserrat-Regular"
                   },
                 ]}>
                 Sign up
@@ -147,7 +149,7 @@ const UserSignUp = props => {
                 <TextInput
                   style={[
                     FONTS.textstyle,
-                    {color: 'black', paddingLeft: Scale(10), width: '100%'},
+                    {color: appTheme('font'), paddingLeft: Scale(10), width: '100%',fontFamily:"Montserrat-Regular"},
                   ]}
                   name="Name"
                   keyboardType="email-address"
@@ -165,7 +167,7 @@ const UserSignUp = props => {
                 <TextInput
                   style={[
                     FONTS.textstyle,
-                    {color: 'black', paddingLeft: Scale(10), width: '100%'},
+                    {color:appTheme('font'),fontFamily:"Montserrat-Regular", paddingLeft: Scale(10), width: '100%'},
                   ]}
                   name="email"
                   keyboardType="email-address"
@@ -183,7 +185,7 @@ const UserSignUp = props => {
                 <TextInput
                   style={[
                     FONTS.textstyle,
-                    {color: 'black', paddingLeft: Scale(10), width: '100%'},
+                    {color:appTheme('font'),fontFamily:"Montserrat-Regular", paddingLeft: Scale(10), width: '100%'},
                   ]}
                   name="Set_Password"
                   keyboardType="email-address"
@@ -201,7 +203,7 @@ const UserSignUp = props => {
                 <TextInput
                   style={[
                     FONTS.textstyle,
-                    {color: 'black', paddingLeft: Scale(10), width: '100%'},
+                    {color:appTheme('font'),fontFamily:"Montserrat-Regular", paddingLeft: Scale(10), width: '100%'},
                   ]}
                   name="confirm_password"
                   keyboardType="email-address"
@@ -220,7 +222,7 @@ const UserSignUp = props => {
                   style={[
                     FONTS.textstyle,
                     {
-                      color: 'black',
+                      color:appTheme('font'),fontFamily:"Montserrat-Regular",
                       width: '100%',
                       fontSize: 18,
                       paddingLeft: Scale(10),
@@ -243,7 +245,7 @@ const UserSignUp = props => {
                   style={[
                     FONTS.textstyle,
                     {
-                      color: 'black',
+                      color:appTheme('font'),fontFamily:"Montserrat-Regular",
                       width: '100%',
                       fontSize: 18,
                       paddingLeft: Scale(10),
@@ -288,9 +290,10 @@ const UserSignUp = props => {
                       FONTS.textstyle,
                       {
                         fontSize: Scale(20),
-                        color: 'white',
+                        color: appTheme('primary'),
                         letterSpacing: 0,
                         fontWeight: '600',
+                        fontFamily:"Montserrat-Regular"
                       },
                     ]}>
                     Sign Up
@@ -306,10 +309,10 @@ const UserSignUp = props => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Text>Already have an account? </Text>
+                <Text style={{color:appTheme('font')}}>Already have an account? </Text>
                 <TouchableOpacity
                   onPress={() => props.navigation.replace('UserLogin')}>
-                  <Text style={[FONTS.Link, {fontWeight: '600'}]}>Log In</Text>
+                  <Text style={[FONTS.Link, {fontWeight: '600',fontFamily:"Montserrat-Regular"}]}>Log In</Text>
                 </TouchableOpacity>
               </View>
             </View>
