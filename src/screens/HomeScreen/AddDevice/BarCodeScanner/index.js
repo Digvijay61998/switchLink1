@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import { Text, View ,TouchableOpacity,Image,StyleSheet,Linking} from "react-native";
-import { appTheme, IMAGE, Scale, verticalScale } from "../../../../common/constants";
+import { Text, View ,TouchableOpacity,Image,StyleSheet,Linking,ImageBackground} from "react-native";
+import { appImage, appTheme, IMAGE, Scale, verticalScale } from "../../../../common/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
     createBoardSuccess,createBoardError
@@ -38,10 +38,15 @@ const BarCodeScanner = (props) => {
             // onPress={()=>props.navigation.navigate('ConfirmBoardDetails')}
             style={{flex:1,justifyContent:"center",alignItems:"center"}}
             > */}
-               <Text style={{fontSize:Scale(23),height:verticalScale(100),paddingRight:Scale(20),width:Scale(300),Color:appTheme('font')}}>
-              Scan the Barcode on the device
+               <Text style={{fontSize:Scale(23),height:verticalScale(100),paddingRight:Scale(20),width:Scale(300),color:appTheme('font'),fontFamily:'Montserrat-SemiBold'}}>
+              Scan the barcode on the device
         </Text>
-        <View style={{width:Scale(350),height:verticalScale(250),alignItems:"center",justifyContent:"center",overflow:"hidden",borderColor:"#13FF0E",borderWidth:Scale(4)}}>
+        <ImageBackground source={appImage('camera')} resizeMode="contain"
+          style={{height:verticalScale(250),width:Scale(350),alignItems: "center", justifyContent: "center" }}
+        >
+          <View
+          style={{width:Scale(300),height:verticalScale(230),alignItems:"center",justifyContent:"center",overflow:"hidden"}}
+          >
           <QRCodeScanner
       onRead={(e)=>handleBoardSubmit(e)}
       flashMode={RNCamera.Constants.FlashMode.torch}
@@ -57,8 +62,9 @@ const BarCodeScanner = (props) => {
           <Text style={styles.buttonText}>OK. Got it!</Text>
         </TouchableOpacity>
       }
-          />
+            />
           </View>
+          </ImageBackground>
                  {/* <Image source={IMAGE.ss}/> */}
             {/* </TouchableOpacity> */}
         </View>

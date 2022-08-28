@@ -12,7 +12,8 @@ export const COLORS={
   header: ["#c5c0fe", "#edc1fe", "#ed86ff"],
   lightPurple: ['#E5DFED', '#E5DFED'],
   purple: '#A75FFF',
-  navigationLink:'#4D57EA',
+  navigationLink: '#4D57EA',
+  profileName:'#1D232E',
   font: 'black',
   lightBlack:'black',
   input:"#F8FAFD",
@@ -36,7 +37,8 @@ export const DARKCOLORS = {
   secondary: ["#c5c1ff", "#edc1fe", "#ed86ff"], // Dark purple
   tertiary:  ["#dcc2ff", "#d4c2ff", "#c7c1ff"],
   header: ['#0D0D0D', "#0D0D0D", "#0D0D0D"],
-  lightPurple:["#c5c0fe", "#edc1fe", "#ed86ff"],
+  lightPurple: ["#c5c0fe", "#edc1fe", "#ed86ff"],
+  profileName:'#ffff',
   purple: '#A75FFF',
   navigationLink:'#4D57EA',
   font: 'white',
@@ -66,7 +68,7 @@ export const CONTAINER = {
 
 export const FONTS = {
   textTittle: {
-    fontFamily: 'Inter',
+    fontFamily: 'Montserrat-SemiBold',
     fontStyle: 'Medium',
     fontWeight: '600',
     fontSize: Scale(32),
@@ -87,7 +89,7 @@ export const FONTS = {
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: '700',
-    fontSize: Scale(16),
+    fontSize: Scale(14),
     lineHeight: Scale(17),
   },
 };

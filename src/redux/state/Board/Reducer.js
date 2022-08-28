@@ -14,7 +14,10 @@ import {
   GET_DEVICE_LIST_SUCCESS,
   GET_DEVICE_LIST_ERROR,
   USER_CHANGE_PASSWORD,
-  USER_CHANGE_PASSWORD_ERROR
+  USER_CHANGE_PASSWORD_ERROR,
+  UPDATE_EDIT_SWITCH_LIST,
+  UPDATE_EDIT_SWITCH_LIST_SUCCESS,
+  UPDATE_EDIT_SWITCH_LIST_ERROR
 } from '../ActionTypes';
 import {createReducer} from '../CreateReducer';
 
@@ -25,8 +28,11 @@ const INITIAL_STATE = Immutable({
   boardName: null,
   macAddress: null,
   boardDetails: null,
-  BasketKey:null,
-  message:'',
+  BasketKey: null,
+  switchKey: null,
+  switchName:null,
+  message: '',
+  modelVisible:false,
   isFetching: false,
   error: null,
 });
@@ -147,6 +153,31 @@ const reducers = {
   },
 
   [USER_CHANGE_PASSWORD_ERROR]: (state, error) => {
+    return Immutable.merge(state, {
+      isFetching: false,
+      error: error,
+    });
+  },
+  [UPDATE_EDIT_SWITCH_LIST]: (state, action) => {
+    console.log('data@@@@@@@', action);
+    return Immutable.merge(state, {
+      switchKey: action.payload.data.switchKey,
+      switchName:action.payload.data.switchName,
+      modelVisible:action.payload.data.modelVisible,
+      isFetching: false,
+      error: null,
+    });
+  },
+  [UPDATE_EDIT_SWITCH_LIST_SUCCESS]: (state, action) => {
+    console.log('data@@@@@@@@@@@@', action);
+    return Immutable.merge(state, {
+      // BasketKey:action.payload.data.BasketKey,
+      isFetching: false,
+      error: null,
+    });
+  },
+
+  [UPDATE_EDIT_SWITCH_LIST_ERROR]: (state, error) => {
     return Immutable.merge(state, {
       isFetching: false,
       error: error,

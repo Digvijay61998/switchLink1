@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View,Modal ,Image,TouchableOpacity, TextInput,FlatList} from 'react-native'
 import React from 'react'
 import { COLORS, Scale, verticalScale,ICONS, appTheme } from '../constants';
+import { useDispatch, useSelector } from "react-redux";
 
 const EditSwitch = (props) => {
-    console.log('props', props);
-    
+    console.log('props@@@', props);
+//  const [switchName ,setSwitchName] = useState()
     const data = [
         {
             key: 1,
@@ -88,6 +89,9 @@ const EditSwitch = (props) => {
         },
         
     ]
+    const handleSubmit = () => {
+        props.resFunc(props?.switchKey)
+}
 
     return props.editSwitch ? (
         <Modal transparent={true} visible={true}>
@@ -103,9 +107,9 @@ const EditSwitch = (props) => {
             <Text style={{marginBottom:Scale(5),fontSize:14,color:appTheme('font')}}>Switch Name</Text>
             <TextInput
                     style={[styles.dropdown,{backgroundColor:appTheme('input'),color:appTheme('font'),borderColor:appTheme('inputBorder')}]}
-                    // onChangeText={onChangeNumber}
+                    onChangeText={(val)=>props.handleResEdit(val)}
                     // value={number}
-                        placeholder="Main Tubelight"
+                        placeholder={''}
                         placeholderTextColor={appTheme('font')}
                     keyboardType="alphabet"
                     />
@@ -113,8 +117,8 @@ const EditSwitch = (props) => {
                         <Text style={{fontSize:14,color:appTheme('font')}}>Select Switch Icon</Text>   
                         <View style={styles.iconsList}>
                         <FlatList
-          data={data}
-          keyExtractor={(item) => item.key}
+                        data={data}
+                        keyExtractor={(item) => item.key}
                                 renderItem={({ item, index }) => (
                                     <View style={{width:Scale(64),height:verticalScale(65)}}>
                                         <Image source={item.icons} width="40%" height="40%"/>
@@ -123,46 +127,6 @@ const EditSwitch = (props) => {
                             numColumns={5}
                             />
                         </View>
-                              {/* <View style={{display:'flex',flexDirection:'column',justifyContent:"space-between",height:verticalScale(240),marginBottom:verticalScale(80)}}>
-         <Text style={{fontSize:14,color:appTheme('font')}}>Select Switch Icon</Text>   
-
-         <View style={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:verticalScale(200)}}>
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
-            
-        </View>  
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
-            
-        </View>  
-
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
-            
-        </View>  
-
-        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-        <Image source={ICONS.bulb} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.fan} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.alarm} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.tv} style={[styles.icons,{tintColor:appTheme('font')}]} />
-        <Image source={ICONS.camera} style={[styles.icons,{tintColor:appTheme('font')}]} />
-            
-        </View>  
-        </View>  */}
-
          <View style={{width:'100%',justifyContent:'flex-end',alignItems:'center',flexDirection:'row'}}>
                       <TouchableOpacity
                       style={[styles.button]}
@@ -170,7 +134,10 @@ const EditSwitch = (props) => {
                           <Text style={{color:appTheme('font'),fontSize:Scale(18),borderColor:appTheme('font')}}>Cancel</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
-                      onPress={()=>props.navigation.replace('ConfirmBoardDetails',{callbackConfirm:('callbackConfirm')})}
+                                onPress={() =>
+                                    handleSubmit()
+                                    // props.navigation.replace('ConfirmBoardDetails', { callbackConfirm: ('callbackConfirm') })
+                                }
                       style={[styles.button,{backgroundColor:COLORS.black}]}
                       >
                           <Text style={{color:COLORS.primary,fontSize:Scale(18)}}>Done</Text>

@@ -280,7 +280,10 @@ const BottomTabsStackScreen = props => {
     <>
     <CustomHeader navigation={props.navigation}/>
     <Tab.Navigator
-      initialRouteName="RootBottomTabStack"
+        initialRouteName="RootBottomTabStack"
+        tabBarOptions={{
+          keyboardHidesTabBar: true,
+        }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor:appTheme('primary') ,

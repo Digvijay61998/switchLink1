@@ -73,3 +73,17 @@ export const createBoardToRoomError = (error) => ({
     error,
 });
   
+
+export const updateEditSwitchList = payloadData => ({
+  type: ActionTypes.UPDATE_EDIT_SWITCH_LIST,
+  payload: payloadData,
+});
+export const updateEditSwitchListSuccess = payloadData => ({
+  type: ActionTypes.UPDATE_EDIT_SWITCH_LIST_SUCCESS,
+  payload: payloadData,
+});
+
+export const updateEditSwitchListError = (error) => ({
+    type: ActionTypes.UPDATE_EDIT_SWITCH_LIST_ERROR,
+    error,
+});

@@ -6,7 +6,8 @@ import {
   GET_SWITCH_LIST_SUCCESS,
   GET_DEVICE_LIST,
   CREATE_BOARD_TO_ROOM,
-  UPDATE_BOARD_NAME
+  UPDATE_BOARD_NAME,
+  UPDATE_EDIT_SWITCH_LIST_SUCCESS
 } from "../ActionTypes";
 import * as RoomAction from "../Room/Action";
 import * as BoardAction from "./Action";
@@ -166,6 +167,42 @@ function* updateBoardName(action) {
   }
 }
 
+function* updateEditSwitchListSuccess(action) {
+  try {
+    const response = yield call(API.put, "/switch/", action.payload.data);
+    const result = API.handleResponseForMessage(response);
+    console.log("saga redux @@@updateEditSwitchListSuccess",response);
+      // if (result) {
+      //   if (result) {
+      //       console.log("result@@@@@@@@@@@@@@@",result);
+      //         yield put(BoardAction.getSwitchList({data:result.data}));
+      //         try {
+      //             Snackbar.show({
+      //                 backgroundColor:'green',
+      //                 text: "Board Created Succesfully",
+      //                 duration: 3000,
+      //             });
+      //             yield call(navigate, "ConfirmBoardDetails");
+      //         } catch (error) {
+      //             console.log("error: ", error);
+      //         }
+      //     }
+      // }
+  } catch (error) {
+  //   console.log("saga login account error===", error);
+  //   let errorMsg = JSON.parse(error.request._response).message;
+  //   let errorStatus = JSON.parse(error.request._response).success;
+  //   if (errorStatus === false) {
+  //     yield put(LoginActions.loginAccountError(error));
+    Snackbar.show({
+      backgroundColor:'red',
+    text: "Network error",
+    duration: 3000,
+  });
+  //   }
+    console.log("Saga Responce Error",error);
+  }
+}
   export default function* root() {
     yield [
       yield takeLatest(CREATE_BOARD_SUCCESS, createBoard),
@@ -173,6 +210,7 @@ function* updateBoardName(action) {
       yield takeLatest(GET_SWITCH_LIST_SUCCESS, getSwitchList),
       yield takeLatest(GET_DEVICE_LIST, getDeviceList),
       yield takeLatest(UPDATE_BOARD_NAME, updateBoardName),
+      yield takeLatest(UPDATE_EDIT_SWITCH_LIST_SUCCESS, updateEditSwitchListSuccess),
     ];
   }
   

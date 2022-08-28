@@ -38,7 +38,6 @@ function* loginAccount(action) {
       }
     } else yield put(LoginActions.loginAccountError(result));
   } catch (error) {
-    console.log("saga login account error===", error);
     if (error.response.status == 403) {
       yield put(LoginActions.loginAccountError(error.response.data));
       Snackbar.show({
@@ -57,14 +56,14 @@ function* signUserAccount(action) {
     const response = yield call(() => API.post('/user', action.payload.data));
     console.log('SignUp response@@@@@@@@@==', response);
     const result = API.handleLoginResponse(response);
-    console.log('SignUp Response@@@@@@@@@==', result);
+    console.log('SignUp result@@@@@@@@@==', result);
     // UserLogin
     if (result) {
       Snackbar.show({
         backgroundColor:'green',
         text: 'Your Account has been registered In SwitchLink Data base please login',
         duration: 3000,
-        fontFamily: 'metropolis.regular',
+        // fontFamily: 'metropolis.regular',
       });
       // alert(
       //   `Welcome ${action.payload.data.name} You have been successfully registered to the Switch Link Application,`
@@ -75,15 +74,15 @@ function* signUserAccount(action) {
       //   yield put(LoginActions.signUpBuyerError("Some Error"));
     }
   } catch (error) {
-    // let errorMsg = JSON.parse(error.request._response).message;
-    // let errorStatus = JSON.parse(error.request._response).success;
-    // if (errorStatus === false) {
-    // 	yield put(LoginActions.signUpBuyerError(error));
-    // 	Snackbar.show({
-    // 		text: errorMsg,
-    // 		duration: 3000,
-    // 		// fontFamily: 'metropolis.regular',
-    // 	});
+    if (error.response.status == 400 && error.response.data) {
+      Alert.alert(
+        "success",
+        `${error.response.data}`,
+        [
+          { text: "OK", }
+        ]
+      );
+    }
     // }
     console.log('Saga Responce Error', error);
   }
@@ -104,7 +103,7 @@ function* updateForgotPassword(action) {
           backgroundColor:'green',
           text: result.data.message,
           duration: 3000,
-          fontFamily: 'metropolis.regular',
+          // fontFamily: 'metropolis.regular',
         });
         yield call(navigate, "Verification");
       } else yield put(LoginActions.updateForgotPasswordError(result));
@@ -117,7 +116,7 @@ function* updateForgotPassword(action) {
       Snackbar.show({
         text: 'network error',
         duration: 3000,
-        fontFamily: 'metropolis.regular',
+        // fontFamily: 'metropolis.regular',
       });
     // }
     console.log('Saga Responce Error');
@@ -135,7 +134,7 @@ function* userVerifyOTP(action) {
           backgroundColor:'green',
           text: result.data.message,
           duration: 3000,
-          fontFamily: 'metropolis.regular',
+          // fontFamily: 'metropolis.regular',
         });
         console.log("navigation@@@@@@@@@");
         yield call(navigate, "PasswordConfirmation");
@@ -170,7 +169,7 @@ function* userNewPassword(action) {
           backgroundColor:'green',
           text: result.data.message,
           duration: 3000,
-          fontFamily: 'metropolis.regular',
+          // fontFamily: 'metropolis.regular',
         });
      
         Alert.alert(

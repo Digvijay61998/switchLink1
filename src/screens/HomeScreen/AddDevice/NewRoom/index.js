@@ -52,16 +52,16 @@ console.log("error",error);
               style={styles.locationIcon}
               source={IMAGE.profile}
             />
-        <View style={{display:"flex",flexDirection:"column"}}>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize: 32,color:appTheme('font')}}>Hi Ashutosh</Text>
-        <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'500',fontSize:16,color:appTheme('font'),lineHeight: 20}}>Lets Make Your Home Comfortable</Text>
+        <View style={{display:"flex",flexDirection:"column",right:Scale(10)}}>
+        <Text style={{fontFamily:'Montserrat-Medium',fontStyle: 'normal',fontWeight:'500',fontSize: Scale(32),color:appTheme('profileName')}}>Hi Ashutosh</Text>
+        <Text style={{fontFamily:'Montserrat-Medium',fontStyle: 'normal',fontWeight:'500',fontSize:Scale(14),color:appTheme('font'),lineHeight: 30}}>Lets Make Your Home Comfortable</Text>
         </View>
         </View>
     <View
       style={styles.container}
       > 
     <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-     <Text style={{fontFamily:'Montserrat',fontStyle: 'normal',fontWeight:'600',fontSize:Scale(24),color:appTheme('font')}}> Create a New Room </Text> 
+     <Text style={{fontFamily:'Montserrat-Medium',fontStyle: 'normal',fontWeight:'500',fontSize:Scale(24),color:appTheme('font')}}> Create a New Room </Text> 
      <View style={{paddingTop:verticalScale(40),justifyContent:"space-between",height:verticalScale(170)}}>
      
          <TextInput
@@ -174,7 +174,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth:Scale(1),
         paddingHorizontal: 8,
-        fontSize:Scale(16),
+        fontSize: Scale(16),
+        fontFamily:"Montserrat-Medium"
       },
       icon: {
         marginRight: 5,
@@ -190,9 +191,11 @@ const styles = StyleSheet.create({
       },
       placeholderStyle: {
         fontSize: 16,
+        fontFamily:"Montserrat-Medium"
       },
       selectedTextStyle: {
         fontSize: 16,
+        fontFamily:"Montserrat-Medium"
       },
       iconStyle: {
         width: 20,
@@ -201,7 +204,7 @@ const styles = StyleSheet.create({
       inputSearchStyle: {
         height: 40,
         fontSize: 16,
-
+        fontFamily:"Montserrat-Regular"
       },  
       button:{
         height: Scale(50),

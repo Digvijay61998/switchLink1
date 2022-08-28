@@ -67,7 +67,7 @@ const EditRoom = (props) => {
                 </TouchableOpacity>
             </View>
           <FlatList
-              data={deviceList[0].Boards}
+              data={deviceList[0]?.Boards}
               keyExtractor={(item) => item.board_key}
               renderItem={({ item, index }) => (
                 <AddnewDevice item={item} />

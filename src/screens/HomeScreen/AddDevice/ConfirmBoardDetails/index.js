@@ -1,24 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity } from "react-native";
+import React, { useEffect, useState,useCallback } from "react";
+import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity ,RefreshControl} from "react-native";
 import { EditSwitch } from "../../../../common/component";
 import { COLORS, ICONS, Scale, verticalScale ,appTheme} from "../../../../common/constants";
 import {
+  getSwitchList,
   getSwitchListSuccess,
   createBoardToRoom,
-  updateBoardName
+  updateBoardName,
+  updateEditSwitchList,
+  updateEditSwitchListSuccess
 } from "../../../../redux/state/Board/Action";
 import { useDispatch, useSelector } from "react-redux";
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 const ConfirmBoardDetails = (props) => {
   const dispatch = useDispatch();
-  const { boardName,boardDetails,BasketKey, isFetching, error,switchList } = useSelector((state) => state.board);
-const { createRoom } = useSelector((state) => state.room);
-  const [editModalVisible, setEditModalVisible] = useState(false);
+  const { switchKey,boardName,boardDetails,BasketKey, isFetching, error,switchList ,modelVisible} = useSelector((state) => state.board);
+  const { createRoom } = useSelector((state) => state.room);
+  const [editSwitchName, setEditSwitchName] = useState(false);
+  const [confirmSave, setConfirmSave] = useState(false);
   const [editboardName, setEditBoardName] = useState(boardName);
-  console.log("boardDetails@@@@@@@@", BasketKey);
+  const [refreshing, setRefreshing] = useState(false);
+
+  console.log("boardDetails@@@@@@@@", switchKey);
   
-  const handleEdit = () => {
-  setEditModalVisible(true)
+  const handleEdit = (item) => {
+    console.log("item",item);
+    dispatch(
+      updateEditSwitchList({
+        data: {
+          switchKey: item.switch_key,
+          switchName: item.switch_name,
+          modelVisible:true
+        }
+      }));
+  // setEditModalVisible(true)
 }
 
   const handleCreateDevice = () => {
@@ -42,9 +60,37 @@ const { createRoom } = useSelector((state) => state.room);
       } catch (error) {
         console.log("error: ", error);
     }
-  
-     
   }
+
+  const handleEditResponse = (item) => {
+    console.log("handleEditResponse@@@@@@@@@@@@@",item);
+    dispatch(
+      updateEditSwitchList({
+        data: {
+          switchKey:item,
+          switchName: editSwitchName,
+          modelVisible:false
+        }
+      }));
+      dispatch(
+        updateEditSwitchListSuccess({
+          data: {
+            switch_key:item,
+            switch_name: editSwitchName,
+          }
+        }));
+        onRefresh()
+        setConfirmSave(true)
+  }
+  
+  const handleResEdit = (val) => {
+    setEditSwitchName(val)
+  }
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   useEffect(() => {
     dispatch(
@@ -53,9 +99,10 @@ const { createRoom } = useSelector((state) => state.room);
           BasketKey: boardDetails.board_key,
         }
       }));
-},[isFetching == true])
+},[isFetching == true || refreshing == true])
 
 
+  
 const Switches =({props})=>{
   console.log("props",props);
   return(
@@ -68,7 +115,7 @@ const Switches =({props})=>{
       <View style={{paddingRight:Scale(18)}}>
       <View style={{display:'flex', flexDirection:"row",width:Scale(60),justifyContent:"space-around",marginBottom:verticalScale(10)}}>
       <TouchableOpacity
-      onPress={()=>handleEdit()}
+      onPress={()=>handleEdit(props)}
       >
       <Image source={ICONS.editRoom} style={styles.icons} />
    </TouchableOpacity>
@@ -76,7 +123,6 @@ const Switches =({props})=>{
               // onPress={() => handleDelete()}
             >
    <Image source={ICONS.deleteRoom} style={styles.icons} />
-
    </TouchableOpacity>
       </View>
       </View>
@@ -89,7 +135,7 @@ const BoardSwitches =()=>{
 return(
   <View style={{ backgroundColor:appTheme('primary'),height:verticalScale(450),justifyContent:'center',alignItems:'center'}}>
   <View style={{display:'flex',flexDirection:'column',justifyContent:'center',height:Scale(130)}}>
-<Text style={{fontSize:Scale(25),color:"black",marginBottom:Scale(10)}}>Confirm Board Details</Text>
+<Text style={{fontSize:Scale(24),color:appTheme('font'),marginBottom:Scale(10),fontFamily: 'Montserrat-Medium'}}>Confirm Board Details</Text>
       <TextInput
         onChangeText={(val) => { setEditBoardName(val) }}
         defaultValue={editboardName}
@@ -102,35 +148,48 @@ return(
    </TextInput>
   </View>
   <View style={{right:Scale(90)}}>
-  <Text style={{fontSize:16,color:"#353535",marginBottom:Scale(10)}}>Switches on the board</Text>
+  <Text style={{fontSize:16,color:appTheme('font'),marginBottom:Scale(7)}}>Switches on the board</Text>
 
   </View>
 
-<View style={{alignItems:"center",flex:1,marginBottom:verticalScale(30)}}>
+<View style={{alignItems:"center",flex:1,marginBottom:verticalScale(35),paddingBottom:verticalScale(10)}}>
 <FlatList
             data={switchList}
-            keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
         <Switches props={item}/>
             )}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
           />
           </View>
-          {props.route.params?.callbackConfirm == 'callbackConfirm' ? 
+          {confirmSave == true ? 
         <TouchableOpacity
-        style={{ width: Scale(350), height: verticalScale(46), backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center', bottom: verticalScale(19) }}
+        style={{ width: Scale(335), height: verticalScale(30),bottom: verticalScale(45) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
         onPress={() => handleCreateDevice()}
           // props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
         >
-       <Text style={{color:'white',fontSize:Scale(22),fontWeight:'500'}}>Confirm and Add Board</Text>
-        </TouchableOpacity>:null
+       <Text style={{color:appTheme('primary'),fontSize:Scale(15),fontWeight:'500',fontFamily: 'Montserrat-Medium'}}>Confirm and Add Board</Text>
+        </TouchableOpacity>:<TouchableOpacity
+        style={{ width: Scale(70), height: verticalScale(30),bottom: verticalScale(45) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
+        onPress={() => handleCreateDevice()}
+          // props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
+        >
+       <Text style={{color:appTheme('primary'),fontSize:Scale(15),fontWeight:'500',fontFamily: 'Montserrat-Medium'}}>SAVE</Text>
+        </TouchableOpacity>
        } 
 </View>
 )
 }
     return(
-        <>
+      <>
         <BoardSwitches props/>
-        <EditSwitch editSwitch={editModalVisible} navigation={props.navigation}/>
+        <EditSwitch
+          editSwitch={modelVisible}
+          switchKey={switchKey}
+          handleResEdit={handleResEdit}
+          resFunc={handleEditResponse}
+          navigation={props.navigation} />
         {/* <Confirmation confirm={deleteModalVisible} navigation={navigation}/> */}
        
         </>

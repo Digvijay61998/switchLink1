@@ -13,8 +13,8 @@ const DarkImage = {
     spashLogo : require("../../assets/image/splashLogo.png"),
     profile : require("../../assets/image/profile.png"),
      ss : require("../../assets/image/ss.png"),
-scenery : require("../../assets/image/scenery.jpg")
-
+    scenery: require("../../assets/image/scenery.jpg"),
+    camera: require("../../assets/image/camera.png")
 }
 
 const LightImage = {
@@ -22,7 +22,8 @@ const LightImage = {
     spashLogo : require("../../assets/image/splashLogo.png"),
     profile : require("../../assets/image/profile.png"),
      ss : require("../../assets/image/ss.png"),
-     scenery : require("../../assets/image/scenery.jpg")
+    scenery: require("../../assets/image/scenery.jpg"),
+    camera: require("../../assets/image/camera.png")
     }
    
 export default {
@@ -31,7 +32,7 @@ export default {
     SwitchlinkLogo,
     ss,
     SwitchlinkDarkLogo,
-    scenery
+    scenery,
 }
 
 export const appImage = (ThemeImage) => {

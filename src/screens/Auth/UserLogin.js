@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import {CONTAINER,Scale,verticalScale,COLORS,FONTS,ICONS} from "../../common/constants"
+import {CONTAINER,Scale,verticalScale,COLORS,FONTS,ICONS,appTheme} from "../../common/constants"
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, useFormik } from 'formik';
 import LinearGradient from 'react-native-linear-gradient'
@@ -59,7 +59,7 @@ export default function UserLogin (props){
     })
     return (
       <View style={CONTAINER}>
-        <View style={{width:Scale(200),right:Scale(50),marginTop:Scale(30)}}>
+        <View style={{width:Scale(250),right:Scale(35),marginTop:Scale(30)}}>
         <Text style={FONTS.textTittle}>Welcome to</Text>
         <View style={{flexDirection:"row"}}><Image
        source={ICONS.SwitchLogo}
@@ -79,7 +79,7 @@ export default function UserLogin (props){
      
          <Text style={{color:"#7F7F7F",lineHeight:Scale(17)}}>Don't have an account?</Text>
       
-        <Text style={[FONTS.Link,{fontWeight:"600"}]}> Create an account</Text>
+        <Text style={[FONTS.Link,{fontWeight:"600",fontFamily:"Montserrat-Regular"}]}> Create an account</Text>
       </TouchableOpacity>
       <Formik
         initialValues={{
@@ -93,18 +93,18 @@ export default function UserLogin (props){
           return (
             <View style={styles.LoginBox}>
               <Text style={{bottom:verticalScale(30), color: "red"  }}>{error?.errorMessage}</Text>
-              <Text style={[FONTS.textstyle, { fontSize: Scale(20), letterSpacing: -1, color: COLORS.black, top: verticalScale(-10) }]}>Log In</Text>
+              <Text style={[FONTS.textstyle, { fontSize: Scale(20), letterSpacing: -1, color: appTheme('font'), top: verticalScale(-10) ,fontFamily:"Montserrat-Regular"}]}>Log In</Text>
               <View
-                style={styles.input} center
+                style={styles.input}
               >
                 <TextInput
-                   style={[FONTS.textstyle, { color: "#295597",paddingLeft:Scale(10), width: "100%"}]}
+                   style={[FONTS.textstyle, { color:appTheme('font'),borderWidth:Scale(1),borderColor:appTheme('inputBorder'),borderRadius:Scale(8), paddingLeft:Scale(10), width: "100%",fontFamily:"Montserrat-Regular"}]}
                    name="email"
                    keyboardType='email-address'
                    value={values.email}
                    onChangeText={handleChange('email')}
                    placeholder="Email"
-                   placeholderTextColor="#4771a5"
+                   placeholderTextColor="#A7B0C0"
                    autoComplete="cc-number"
                 />
               </View>
@@ -115,13 +115,13 @@ export default function UserLogin (props){
                 style={styles.input}
               >
                 <TextInput
-                    style={[FONTS.textstyle, { color: "#295597", width: "100%",fontSize: 18,paddingLeft:Scale(10) }]}
+                    style={[FONTS.textstyle, { color: appTheme('font'),borderWidth:Scale(1),borderColor:appTheme('inputBorder'), width: "100%",fontSize: 18,paddingLeft:Scale(10) ,fontFamily:"Montserrat-Regular",borderRadius:Scale(8)}]}
                     name="password"
                     value={values.password}
                     onChangeText={handleChange('password')}
                     secureTextEntry={true}
                     placeholder="Password"
-                    placeholderTextColor="#4771a5"
+                    placeholderTextColor="#A7B0C0"
                     autoComplete="cc-number"
                 />
               </View>
@@ -129,9 +129,9 @@ export default function UserLogin (props){
                         {errors.password}
                       </Text>
               <TouchableOpacity
-              style={{width:Scale(200),height:Scale(20),marginTop:Scale(20),left:Scale(160)}}
+              style={{width:Scale(200),height:Scale(20),left:Scale(150)}}
               >
-                <Text style={[FONTS.Link,{fontWeight:"600"}]}>Forgot your password?</Text>
+                <Text style={[FONTS.Link,{fontWeight:"600",fontFamily:"Montserrat-Regular"}]}>Forgot your password?</Text>
               </TouchableOpacity>
               <LinearGradient
               colors={COLORS.button}
@@ -142,7 +142,6 @@ export default function UserLogin (props){
                   top: Scale(30),
                   borderRadius: 10,
                   height: Scale(56),
-                  elevation:10
                 }}>
               <TouchableOpacity
               style={{width:"100%",height:verticalScale(56),justifyContent:'center',
@@ -152,7 +151,7 @@ export default function UserLogin (props){
                 elevation="2"
                 // disabled={isFetching}
                 onPress={handleSubmit}
-              ><Text style={[FONTS.textstyle,{fontSize:Scale(20),color:"white",letterSpacing:0,fontWeight:"600" }]}>Log In</Text>
+              ><Text style={[FONTS.textstyle,{fontSize:Scale(20),color:"white",letterSpacing:0,fontWeight:"600" ,fontFamily:"Montserrat-Regular"}]}>Log In</Text>
               </TouchableOpacity>
                 </LinearGradient>
             </View>
@@ -173,9 +172,8 @@ const styles = StyleSheet.create({
     height:verticalScale(50),
     width: "100%",
     borderRadius: 10,
-    marginTop: Scale(25),
+    marginTop: Scale(8),
     backgroundColor: "#F8FAFD",
-    elevation: 1,
     alignItems: 'center',
     justifyContent: "center",
   },

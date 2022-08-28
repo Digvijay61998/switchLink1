@@ -37,7 +37,7 @@ const baseAxios = async (options) => {
   console.log("@@@Api Request headersObj=====", headersObj);
 
   return axios.create({
-    baseURL: 'http://192.168.1.19:8080/api/switchlink',
+    baseURL: 'http://3.6.152.102:8080/api/switchlink',
     timeout: options?.timeout || 30000,
     headers: headersObj,
   });
@@ -120,32 +120,16 @@ export default {
       // console.log('@@@ Handle Res=======', response);
       if (response.data && response.status == 200 || 202) {
         return {success: true, data: response.data};
-      } else {
-        let message =
-          typeof response.errors === 'string'
-            ? response.errors
-            : typeof response.errors === 'object'
-            ? response.errors.denied
-              ? this.handleError(response.errors.denied)
-              : response.errors.incorrect_password
-              ? this.handleError(response.message.incorrect_password)
-              : response.message.invalid_email
-              ? this.handleError(response.message.invalid_email)
-              : 'Some Error'
-            : 'Some Error!';
+      } else if (response.status == 400 && response.data){
+             this.handleError(response.data)
         // console.log('@@@ Handle Error Res=======', response);
         Snackbar.show({
-          text: message,
+          text: response.data,
           duration: Snackbar.LENGTH_SHORT,
         });
         return {
           success: false,
-          data: response.message,
-          id:
-            response.data &&
-            response.data.length > 0 &&
-            response.data[0] &&
-            response.data[0].id,
+          data: response.data,
         };
       }
     }

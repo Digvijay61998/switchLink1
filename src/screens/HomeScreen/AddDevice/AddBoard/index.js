@@ -37,7 +37,7 @@ const AddBoard = (props) => {
         <>
         <View style={{ flex:1,backgroundColor:appTheme('primary'),height:verticalScale(450),paddingTop:verticalScale(20)}}>
       <View style={{paddingLeft:Scale(20), paddingBottom: 15,}}>
-        <Text style={{color: 'black', fontSize: Scale(25),paddingLeft:Scale(10)}}>Add Board</Text>
+        <Text style={{color:appTheme('font'), fontSize: Scale(25),paddingLeft:Scale(10),fontFamily:"Montserrat-Medium"}}>Add Board</Text>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center',top:verticalScale(15)}}>
         <TextInput
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
       paddingHorizontal: 8,
     fontSize: Scale(18),
     paddingLeft:Scale(20),
-    fontWeight:'500',
+    fontWeight: '500',
+    fontFamily:"Inter"
     },
     button: {
       height: Scale(50),
