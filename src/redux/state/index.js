@@ -9,16 +9,7 @@ export default () => {
     Theme: require("./Theme/Reducer").reducer,
     board: require("./Board/Reducer").reducer,
     room: require("./Room/Reducer").reducer,
-
-    // stockManag: require("./StockManagement/Reducer").reducer,
-    // termConditions: require("./TermConditions/Reducer").reducer,
-    // contactUs: require("./ContactUs/Reducer").reducer,
-    // profile: require("./Profile/Reducer").reducer,
-    // buyerHomeReducer: require("./BuyerHome/Reducer").reducer,
-    // addressReducer: require("./Address/Reducer").reducer,
-    // order: require("./Order/Reducer").reducer,
-    // cartReducer: require("./Cart/Reducer").reducer,
-    // session: require("./Session/Reducer").reducer,
+    mqtt: require("./Mqtt/Reducer").reducer,
   });
   return configureStore(rootReducer, rootSaga);
 };

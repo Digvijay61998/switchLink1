@@ -45,6 +45,12 @@ function* loginAccount(action) {
         text: error.response.data,
         duration: 3000,
       });
+    }else{
+      Snackbar.show({
+        backgroundColor:"red",
+        text: error.message,
+        duration:3000,
+      });
     }
     console.log('Saga Responce Error', error);
   }

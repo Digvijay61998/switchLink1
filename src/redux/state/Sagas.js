@@ -1,6 +1,7 @@
 import LoginSaga from "./Login/Sagas";
 import BoardSaga from "./Board/Sagas";
 import RoomSaga from "./Room/Sagas"
+import MqttSaga from "./Mqtt/Sagas"
 import { all } from "redux-saga/effects";
 
 export default function* root() {
@@ -8,6 +9,7 @@ export default function* root() {
     LoginSaga(),
     BoardSaga(),
     RoomSaga(),
+    MqttSaga(),
     // StockMangSaga(),
     // questionAnswer(),
     // termConditions(),
