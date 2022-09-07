@@ -22,6 +22,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getDeviceList} from '../../../../redux/state/Board/Action';
 import {EditSwitch} from '../../../../common/component';
 import {getRoomsList} from '../../../../redux/state/Room/Action';
+import * as Animatable from "react-native-animatable";
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -70,6 +71,9 @@ const CustomRooms = props => {
   };
   const RenderSwitches = ({item}) => {
     return (
+      <Animatable.View
+      useNativeDriver
+      animation="zoomInUp">
       <TouchableOpacity
         onPress={() => handleSubmitRoomKey(item.room_key)}
         style={[styles.box, {borderColor: appTheme('inputBorder')}]}>
@@ -115,7 +119,8 @@ const CustomRooms = props => {
           </TouchableOpacity>
           <Image source={ICONS.deleteRoom} resizeMode="contain" />
         </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        </Animatable.View>
     );
   };
   return (

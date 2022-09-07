@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, Image, Switch,TouchableOpacity,FlatList} from 'react-native';
-import React, {useState,useEffect} from 'react';
+import {StyleSheet, Text, View,Alert, Image, Switch,TouchableOpacity,FlatList,BackHandler} from 'react-native';
+import React, {useState,useEffect,useCallback} from 'react';
 import {appTheme,appIcons, COLORS, ICONS, Scale, verticalScale} from '../../../../common/constants';
 import icons from '../../../../common/constants/icons';
 import LinearGradient from 'react-native-linear-gradient'
@@ -8,23 +8,64 @@ import { Dropdown } from 'react-native-element-dropdown';
 import {
   getSwitchListSuccess,
 } from "../../../../redux/state/Board/Action";
+import {
+  getMQTTswitch,
+  controlMQTTswitch,
+  controlMQTTFanSpeed
+} from "../../../../redux/state/Mqtt/Action";
+import Paho from 'paho-mqtt';
+import { goBack } from '../../../../theme/rnnavigation';
 
+  const client = new Paho.Client(
+      "3.7.137.31",
+      Number(8080),
+      `mqtt-async-test-${parseInt(Math.random() * 100)}`
+  );
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
 const BoardName = (props) => {
   console.log("props:",props.route?.params?.board_key);
   const dispatch = useDispatch();
   const [ boardKey ,setBoardKey]=useState(props.route?.params?.board_key)
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const { switchList,deviceList, isFetching, error } = useSelector((state) => state.board);
+  const { switchList, deviceList, isFetching, error } = useSelector((state) => state.board);
+  const { SwitchStatus, mqttData} = useSelector((state) => state.mqtt);
+  const [refreshing, setRefreshing] = useState();
+  const [callBack, setcallBack] = useState(false);
+
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  console.log("switchList###",switchList);
-  const data = [
-    // { label: 'wireless LAN', value: '1' },
-    // { label: 'wireless MAN', value: '2' },
-    // { label: 'wireless PAN', value: '3' },
-    // { label: 'wireless WAN', value: '4' },
-  ];
+  const [MqttRes, setMqttRes] = useState([])
+
+  const onRefresh = useCallback(() => {
+    setcallBack(true);
+    wait(3000).then(() => setcallBack(false));
+  }, []);
+
+  function onMessage(message) {
+    if (message.destinationName === "9812b7b3-9490-4342-9dff-0ea28b9e604e")
+        console.log("JSON.parse(message.payloadString)",JSON.parse(message.payloadString));
+      setMqttRes(JSON.parse(message.payloadString))
+  }
+  
+  useEffect(() => {
+      client.connect({
+        onSuccess: () => { 
+          console.log("Connected!");
+          setRefreshing('Connected')
+        client.subscribe("9812b7b3-9490-4342-9dff-0ea28b9e604e");
+        client.onMessageArrived = onMessage;
+      },
+      onFailure: () => {
+        console.log("Failed to connect!"); 
+        setRefreshing('disconnect')
+      }
+      });
+  }, [])
+
+
   useEffect(() => {
     dispatch(
       getSwitchListSuccess({
@@ -32,288 +73,196 @@ const BoardName = (props) => {
           BasketKey: boardKey,
         }
       }));
-},[])
+      dispatch(
+        getMQTTswitch({
+          data: {
+            BasketKey: boardKey,
+          }
+        }));
+        handleSetData()
+  }, [])
 
-const res = [
-  {
-      "switch_key": 49,
-      "switch_name": "Switch1",
-      "switch_type": "L",
-      "switch_position": 1,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 50,
-      "switch_name": "Switch2",
-      "switch_type": "L",
-      "switch_position": 2,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 51,
-      "switch_name": "Switch3",
-      "switch_type": "L",
-      "switch_position": 3,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 52,
-      "switch_name": "Switch4",
-      "switch_type": "L",
-      "switch_position": 4,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 53,
-      "switch_name": "Switch5",
-      "switch_type": "L",
-      "switch_position": 5,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 54,
-      "switch_name": "Switch6",
-      "switch_type": "L",
-      "switch_position": 6,
-      "is_fan": false,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF"
-  },
-  {
-      "switch_key": 55,
-      "switch_name": "Fan1",
-      "switch_type": "FN",
-      "switch_position": 1,
-      "is_fan": true,
-      "board_key": 11,
-      "switch_state": "OFF",
-      "child_lock": "OFF",
-      "fan_speed": 1
+  useEffect(() => {
+      dispatch(
+        getMQTTswitch({
+          data: {
+            BasketKey: boardKey,
+          }
+        }));
+        handleSetData()
+  }, [callBack])
+
+
+  const handleSetData = () => {
+    if (mqttData) {
+      setMqttRes({switchs:mqttData})
+    } else {
+      onRefresh()
+    }
   }
-]
+  
+  const handleControllSwitch = (item) => {
+    console.log("item@@@@@@@@@@@",item);
+    if (item.switch_state == "OFF") {
+      let state = "ON"
+      dispatch(
+        controlMQTTswitch({
+          data: {
+            switchKey: item.switch_key,
+            state:state
+          }
+        }));
+    } else if (item.switch_state == "ON") {
+      let state = "OFF"
+      dispatch(
+        controlMQTTswitch({
+          data: {
+            switchKey: item.switch_key,
+            state:state
+          }
+        }));
+    }
+ 
+  }
+  const handleFanSpeed = (val) => {
+    dispatch(
+      controlMQTTFanSpeed({
+        data: {
+          switchKey: String(val.switchKey),
+          speed:val.speed
+        }
+      }));
+}
 
-  const SwitchList = () => {
-    return (
-      <>
-      <View style={styles.SwitchContainer}>
-        <TouchableOpacity style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
-          <View style={{width:'100%'}}>
-          <Image source={ICONS.bulb} style={styles.switchIcons} />
-          <Text style={styles.Switchfont}> Main TubeLight</Text>
+  
+  const BackHandle = () => {
+      client.disconnect()
+      goBack()
+  }
+
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandle()}
+      ]);
+      return true;
+    };
+
+
+    useEffect(() => {
+      BackHandler.addEventListener("hardwareBackPress", backAction);
+  
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", backAction);
+    }, []);
+
+  const SwitchButton = ({ item }) => {
+    return item?.switch_type == 'L' && (
+      <TouchableOpacity
+        onPress={() => handleControllSwitch(item)}
+        style={{ width: Scale(160) }}>
+        {/* <Text style={{ visibility:"none" }}>{count}</Text> */}
+        <LinearGradient
+          colors={item?.switch_state == "ON" ? ["#A75EFF", "#A75EFF", "#645CFF", "#645CFF"] : ["#FFFF", "#FFFF", "#FFFF", "#FFFF"]}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 0 }}
+          style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
+          <View style={{ width: '100%' }}>
+            <Image source={ICONS.bulb} style={styles.switchIcons} />
+            <Text style={styles.Switchfont}> {item.switch_name}</Text>
           </View>
-          <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
-        <View style={{width:'100%'}}>
-          <Image source={ICONS.bulb} style={styles.switchIcons} />
-            <Text style={styles.Switchfont}> Fancy Lamp</Text>
-          </View>
-          <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.SwitchContainer}>
-        <TouchableOpacity style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
-        <View style={{width:'100%'}}>
-          <Image source={ICONS.bulb} style={styles.switchIcons} />
-            <Text style={styles.Switchfont}> Socket</Text>
-          </View>
-          <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
-        <View style={{width:'100%'}}>
-          <Image source={ICONS.bulb} style={styles.switchIcons} />
-            <Text style={styles.Switchfont}> Balcony Light</Text>
-          </View>
-          <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-        </TouchableOpacity>
-      </View>
-      <LinearGradient
-    colors={["#A75EFF","#A75EFF","#645CFF","#645CFF"]}
-      start={{ x: 0, y:1 }}
-      end={{ x: 1, y: 0 }}
-        style={[styles.FanContainer, { borderColor: appTheme('inputBorder') }]}>
-        <View >
-        <Image source={appIcons('fan')} style={styles.switchIcons} />
-        <Text>BoardName</Text>
-        </View>
-        <TouchableOpacity
-          style={{top:verticalScale(11)}}
-        >
-          <View
-            style={[
-              styles.activeFan,
-              {
-                width: Scale(11),
-                height: verticalScale(11),
-                borderRadius: Scale(50),
-              },
-            ]}></View>
-        </TouchableOpacity>
-        <TouchableOpacity
-         style={{top:verticalScale(11)}}
-        >
-          <View
-            style={[
-              styles.activeFan,
-              {
-                width: Scale(14),
-                height: verticalScale(14),
-                borderRadius: Scale(50),
-              },
-            ]}></View>
-        </TouchableOpacity>
-        <TouchableOpacity
-         style={{top:verticalScale(11)}}
-        >
-          <View
-            style={[
-              styles.activeFan,
-              {
-                width: Scale(17),
-                height: verticalScale(17),
-                borderRadius: Scale(50),
-              },
-            ]}></View>
-        </TouchableOpacity>
-        <TouchableOpacity
-         style={{top:verticalScale(11)}}
-        >
-          <View
-            style={[
-              styles.inactiveFan,
-              {
-                width: Scale(19),
-                height: verticalScale(19),
-                borderRadius: Scale(50),
-              },
-            ]}></View>
-        </TouchableOpacity>
-        <TouchableOpacity
-         style={{top:verticalScale(11)}}
-        >
-          <View
-            style={[
-              styles.inactiveFan,
-              {
-                width: Scale(22),
-                height: verticalScale(22),
-                borderRadius: Scale(50),
-              },
-            ]}></View>
-        </TouchableOpacity>
-        <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-      </LinearGradient>
-      </>
+          <Image source={icons.coolicon} style={{ transform: [{ rotate: '90deg' }], bottom: verticalScale(22), right: Scale(10) }} />
+        </LinearGradient>
+      </TouchableOpacity >
     )
   }
 
-  const SwitchButton = (item) => {
-    console.log("item",item);
-    return(
-      <TouchableOpacity style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
-      <View style={{width:'100%'}}>
-      <Image source={ICONS.bulb} style={styles.switchIcons} />
-      <Text style={styles.Switchfont}> Main TubeLight</Text>
-      </View>
-      <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
-    </TouchableOpacity>
-    )
-  }
-
-  const Fan_switch = () => {
-    return (
+  const Fan_switch = ({ item }) => {
+    console.log("item", item);
+    return item?.is_fan == true && (
+      <TouchableOpacity
+      onPress={() => handleControllSwitch(item)}>
       <LinearGradient
-      colors={["#A75EFF","#A75EFF","#645CFF","#645CFF"]}
+        colors={item?.switch_state == "ON" ? ["#A75EFF", "#A75EFF", "#645CFF", "#645CFF"] : ["#FFFF", "#FFFF", "#FFFF", "#FFFF"]}
         start={{ x: 0, y:1 }}
         end={{ x: 1, y: 0 }}
           style={[styles.FanContainer, { borderColor: appTheme('inputBorder') }]}>
           <View >
           <Image source={appIcons('fan')} style={styles.switchIcons} />
-          <Text>BoardName</Text>
+          <Text style={{color: appTheme('primary')}}>{item.switch_name}</Text>
           </View>
           <TouchableOpacity
-            style={{top:verticalScale(11)}}
+          style={{ top: verticalScale(11) }}
+          onPress={()=>handleFanSpeed({speed:'1',switchKey:item.switch_key})}
           >
             <View
-              style={[
-                styles.activeFan,
-                {
+              style={{
+                backgroundColor: item.fan_speed >= 1 ? 'white':COLORS.purple,
                   width: Scale(11),
                   height: verticalScale(11),
                   borderRadius: Scale(50),
-                },
-              ]}></View>
+                }
+              }></View>
           </TouchableOpacity>
-          <TouchableOpacity
+        <TouchableOpacity
+          onPress={()=>handleFanSpeed({speed:'2',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
-            <View
-              style={[
-                styles.activeFan,
-                {
+               <View
+              style={{
+                backgroundColor: item.fan_speed >= 2 ? 'white':COLORS.purple,
                   width: Scale(14),
                   height: verticalScale(14),
                   borderRadius: Scale(50),
-                },
-              ]}></View>
+                }
+              }></View>
           </TouchableOpacity>
           <TouchableOpacity
+          onPress={()=>handleFanSpeed({speed:'3',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
-            <View
-              style={[
-                styles.activeFan,
-                {
+               <View
+              style={{
+                backgroundColor: item.fan_speed >= 3 ? 'white':COLORS.purple,
                   width: Scale(17),
-                  height: verticalScale(17),
+                  height: verticalScale(18),
                   borderRadius: Scale(50),
-                },
-              ]}></View>
+                }
+              }></View>
           </TouchableOpacity>
           <TouchableOpacity
+          onPress={()=>handleFanSpeed({speed:'4',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
-            <View
-              style={[
-                styles.inactiveFan,
-                {
-                  width: Scale(19),
-                  height: verticalScale(19),
-                  borderRadius: Scale(50),
-                },
-              ]}></View>
-          </TouchableOpacity>
-          <TouchableOpacity
-           style={{top:verticalScale(11)}}
-          >
-            <View
-              style={[
-                styles.inactiveFan,
-                {
+             <View
+              style={{
+                backgroundColor: item.fan_speed >= 4 ? 'white':COLORS.purple,
                   width: Scale(22),
                   height: verticalScale(22),
                   borderRadius: Scale(50),
-                },
-              ]}></View>
+                }
+              }></View>
+          </TouchableOpacity>
+          <TouchableOpacity
+          onPress={()=>handleFanSpeed({speed:'5',switchKey:item.switch_key})}
+           style={{top:verticalScale(11)}}
+          >
+              <View
+              style={{
+                backgroundColor: item.fan_speed >= 5 ? 'white':COLORS.purple,
+                  width: Scale(24),
+                  height: verticalScale(24),
+                  borderRadius: Scale(50),
+                }
+              }></View>
           </TouchableOpacity>
           <Image source={icons.coolicon} style={{transform: [{ rotate: '90deg' }],bottom:verticalScale(22),right:Scale(10)}}/>
         </LinearGradient>
+        </TouchableOpacity>
     )
   }
   
@@ -344,6 +293,7 @@ const res = [
     )
   }
   return (
+    <>
     <View style={[styles.container,{backgroundColor:appTheme('primary')}]}>
       <View style={styles.headerContainer}>
       <Dropdown
@@ -351,7 +301,7 @@ const res = [
           placeholderStyle={[styles.placeholderStyle,{color:appTheme('placeHolder')}]}
           selectedTextStyle={[styles.selectedTextStyle,{color:appTheme('font')}]}
           inputSearchStyle={styles.inputSearchStyle}
-          data={deviceList[0]?.Boards}
+          data={deviceList[0]?.Boards || null}
           maxHeight={200}
           labelField="board_name"
           valueField="board_key"
@@ -370,16 +320,23 @@ const res = [
       </View>
       < View style={styles.SwitchContainer}>
       <FlatList
-            data={res}
+            data={MqttRes?.switchs}
             keyExtractor={item => item.room_key}
-        renderItem={({ item, index }) => (
-             <SwitchButton props={props}/>
+            renderItem={({ item, index }) =>  (
+            ( refreshing == 'Connected' ?<>
+              < SwitchButton item={item} />
+                <Fan_switch item={item} />
+              </> : <View style={{ flex: 1 }}>
+                  <Text>server Is not Connected</Text>
+                </View>)
             )}
-          numColumns={2}
-          ListHeaderComponent={<SwitchLock props={props} />}
-            ListFooterComponent={<Fan_switch props={props} />}
-            //   ListFooterComponent={renderFooter}
-            //   ListEmptyComponent={renderEmpty}
+            numColumns={2}
+            // onRefresh={onRefresh}
+            // refreshing={refreshing}
+          ListHeaderComponent={<SwitchLock item={MqttRes.switchs} />}
+            // ListFooterComponent={<Fan_switch item={item} />}
+              // ListFooterComponent={renderFooter}
+              // ListEmptyComponent={renderEmpty}
             //   onEndReachedThreshold={0.5}
             //   onEndReached = {({distanceFromEnd})=>{
             //       fetchMoreData()
@@ -387,6 +344,8 @@ const res = [
         />
      </View>
     </View>
+      {/* <MqttConnection sendData={onRefresh}/> */}
+      </>
   );
 };
 
@@ -397,7 +356,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent:'center',
     paddingLeft: Scale(20),
     paddingRight: Scale(20),
   },
@@ -429,17 +388,19 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   SwitchContainer: {
-   flex:1,
-    justifyContent: "space-around",
-    alignItems:"center",
+    flex: 1,
+    justifyContent:"space-around",
+    alignItems: "center",
+    flexDirection:"row"
   },
   switch: {
+    marginLeft:Scale(4),
     borderWidth: Scale(1.5),
     flex: 1,
-    marginBottom:verticalScale(15),
+    top:verticalScale(-10),
     height: verticalScale(80),
     borderRadius: Scale(12),
-    justifyContent: 'center',
+    justifyContent:'space-between',
     alignItems: 'center',
     flexDirection: 'row',
     padding:Scale(10)
@@ -474,7 +435,7 @@ const styles = StyleSheet.create({
     borderColor: '#d9d9d9',
   },
   switchLock: {
-   flex:1,
+    flex: 1,
     height: Scale(100),
     alignItems: 'center',
     justifyContent:"space-between",

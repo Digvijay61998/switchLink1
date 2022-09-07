@@ -1,12 +1,13 @@
 import React from "react";
 import { View,TouchableOpacity, StyleSheet, Image } from "react-native";
+import { goBack } from "../../theme/rnnavigation";
 import {Scale,verticalScale,appTheme,appImage,appIcons} from "../constants"
 
 const CustomHeader = ({ navigation }) => {
   
   return (
       <View style={[styles.buttonContainer,{backgroundColor:appTheme('primary')}]}>
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
+        <TouchableOpacity onPress={() => goBack()}>
           <Image style={styles.avatarIcon} source={appIcons('backButton')} />
         </TouchableOpacity>
         <View style={styles.headerTextContainer}>
