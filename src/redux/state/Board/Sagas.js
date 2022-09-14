@@ -59,7 +59,7 @@ function* createBoardToRoom(action) {
       if (response) {
             yield put(BoardAction.createBoardToRoomSuccess({ data:response.data.message }));
         try {
-            yield put(RoomAction.getRoomsList());
+            yield put(RoomAction.getRoomsList('calling Room list API'));
                 yield call(navigate, 'RootBottomTabStack', { screen: 'CustomRooms' });
               } catch (error) {
                   console.log("error: ", error);

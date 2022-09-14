@@ -8,6 +8,9 @@ import {
   Switch,
   TouchableOpacity,
   RefreshControl,
+  SafeAreaView,
+  Alert,
+  NativeModules
 } from 'react-native';
 import React, {useState, useCallback, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -22,7 +25,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getDeviceList} from '../../../../redux/state/Board/Action';
 import {EditSwitch} from '../../../../common/component';
 import {getRoomsList} from '../../../../redux/state/Room/Action';
-import * as Animatable from "react-native-animatable";
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -34,7 +36,7 @@ const CustomRooms = props => {
   const {roomList, isFetching, error} = useSelector(state => state.room);
   const [refreshing, setRefreshing] = useState(false);
 
-  console.log('refreshing', refreshing);
+  console.log('roomList', roomList);
   const dispatch = useDispatch();
 
   function handleSubmitRoomKey(key) {
@@ -53,8 +55,16 @@ const CustomRooms = props => {
 
   useEffect(() => {
     console.log('CustomRooms');
-    dispatch(getRoomsList());
+    dispatch(getRoomsList('calling Room list API'));
   }, [refreshing == true]);
+
+  useEffect(() => {
+    dispatch(
+      getRoomsList(),
+  );
+},[])
+       
+
   const addNewRoom = () => {
     return (
       <TouchableOpacity
@@ -71,9 +81,6 @@ const CustomRooms = props => {
   };
   const RenderSwitches = ({item}) => {
     return (
-      <Animatable.View
-      useNativeDriver
-      animation="zoomInUp">
       <TouchableOpacity
         onPress={() => handleSubmitRoomKey(item.room_key)}
         style={[styles.box, {borderColor: appTheme('inputBorder')}]}>
@@ -120,12 +127,11 @@ const CustomRooms = props => {
           <Image source={ICONS.deleteRoom} resizeMode="contain" />
         </View>
         </TouchableOpacity>
-        </Animatable.View>
     );
   };
   return (
     <>
-      <View style={[styles.container, {backgroundColor: appTheme('primary')}]}>
+      <SafeAreaView style={[styles.container, {backgroundColor: appTheme('primary')}]}>
         <View style={{flex: 1}}>
           <FlatList
             data={roomList}
@@ -151,7 +157,7 @@ const CustomRooms = props => {
             //   }}
           />
         </View>
-      </View>
+      </SafeAreaView>
     </>
   );
 };

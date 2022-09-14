@@ -109,7 +109,7 @@ const EditSwitch = (props) => {
                     style={[styles.dropdown,{backgroundColor:appTheme('input'),color:appTheme('font'),borderColor:appTheme('inputBorder')}]}
                     onChangeText={(val)=>props.handleResEdit(val)}
                     // value={number}
-                        placeholder={''}
+                        placeholder={'Switch Name'}
                         placeholderTextColor={appTheme('font')}
                     keyboardType="alphabet"
                     />
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 8,
           fontSize: Scale(17),
-        fontFamily: 'Montserrat-Thin',
+        fontFamily: 'metropolis.regular',
       },
       icons2:{
         width: Scale(42),

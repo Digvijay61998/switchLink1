@@ -8,23 +8,10 @@
 
 import React,{useEffect,useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Button
+  Platform,
+  Text
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import NetInfo from "@react-native-community/netinfo";
 import {Provider} from 'react-redux';
 import createStore from './src/redux/state/index';
 import RootNavigator from './src/routes/RootNavigator';
@@ -33,22 +20,30 @@ import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-
 const store = createStore();
 
 export default function App() {
+  const [netInfo, setNetInfo] = useState('');
+  useEffect(() => {
+    // Subscribe to network state updates
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setNetInfo(state.isConnected);
+    });
  
+    return () => {
+      // Unsubscribe to network state updates
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
-    // setupNotification();
     isMountedRef.current = true;
     return () => (isMountedRef.current = false);
   }, []);
-  return (
+  return netInfo ==  true ? (
     <Provider store={store}>
       <NavigationContainer ref={navigationRef}>
         <RootNavigator />
       </NavigationContainer>
-    </Provider>
-  );
+    </Provider>):(<Text>Network error</Text>)
 }

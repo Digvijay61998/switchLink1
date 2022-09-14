@@ -1,23 +1,21 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call, all } from "redux-saga/effects";
 import { Alert } from "react-native";
 import API from "../../../services/Api";
 import {
     GET_ROOM_LIST,
-    GET_ROOM_LIST_ERROR,
-  GET_ROOM_LIST_SUCCESS,
   CREATE_ROOM,
 } from "../ActionTypes";
 import * as RoomAction from "./Action";
 import Snackbar from "react-native-snackbar";
 import { navigate, replace, reset } from "../../../theme/rnnavigation";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function* getRoomList(action) {
+  console.log("you are in saga GET_ROOM_LIST",action);
     try {
       const response = yield call(API.get, "/room/user");
         const result = API.handleResponseForMessage(response);
-        console.log("result@@@@@@",result);
+        console.log("result@@@@@@",response);
         if (result) {
             if (result) {
                 yield put(RoomAction.getRoomListSuccess({roomList:result.data}));
@@ -69,10 +67,11 @@ function* createRoom(action) {
       console.log("Saga Responce Error",error);
     }
   }
-  export default function* root() {
-    yield [
+export default function* root() {
+    console.log("yield");
+    yield all([
         yield takeLatest(GET_ROOM_LIST, getRoomList),
         yield takeLatest(CREATE_ROOM, createRoom),
-    ];
+    ]);
   }
   

@@ -1,8 +1,8 @@
 import * as ActionTypes from '../ActionTypes';
 
-export const getRoomsList = payloadData => ({
+export const getRoomsList = payloadData => (console.log("GET_ROOM_LIST Action@@"),{
   type: ActionTypes.GET_ROOM_LIST,
-  payload: payloadData,
+  payload:payloadData
 });
 export const getRoomListError = (error) => ({
   type: ActionTypes.GET_ROOM_LIST_ERROR,

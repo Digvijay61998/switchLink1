@@ -1,10 +1,10 @@
 import React,{useState} from "react";
-import { Text, View ,TouchableOpacity,Image,StyleSheet,Linking,ImageBackground} from "react-native";
-import { appImage, appTheme, IMAGE, Scale, verticalScale } from "../../../../common/constants";
+import { Text, View ,TouchableOpacity,Image,StyleSheet,TextInput,ImageBackground} from "react-native";
+import { appImage, appTheme,appIcons, IMAGE, Scale, verticalScale } from "../../../../common/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
     createBoardSuccess,createBoardError
-  } from "../../../../redux/state/Board/Action";
+} from "../../../../redux/state/Board/Action";
   
   import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
@@ -12,6 +12,7 @@ import { RNCamera } from 'react-native-camera';
 const BarCodeScanner = (props) => {
     const dispatch = useDispatch();
   const { boardName, isFetching, error } = useSelector((state) => state.board);
+const [boardId , setBoardId]=useState()
     console.log("boardName",boardName);
     const handleBoardSubmit = (e) => {
         try{
@@ -31,6 +32,25 @@ const BarCodeScanner = (props) => {
             );
           }
     }
+  const handleTextBoardSubmit = () => {
+      console.log("7CDFA1049708");
+      try{
+          dispatch(
+              createBoardSuccess({
+                  data: { 
+                  boardName:boardName,
+                  macAddress:'7CDFA1049708',
+               }
+            }),
+          );
+        } catch {
+          dispatch(
+            createBoardError({
+                error:'please select the field first',
+            }),
+          );
+        }
+  }
     return(
         <View style={{flex:1,paddingTop:verticalScale(10),width:Scale(380),alignItems:"center",backgroundColor:appTheme('primary')}}>
             {/* <TouchableOpacity
@@ -41,6 +61,25 @@ const BarCodeScanner = (props) => {
                <Text style={{fontSize:Scale(23),height:verticalScale(100),paddingRight:Scale(20),width:Scale(300),color:appTheme('font'),fontFamily:'Montserrat-SemiBold'}}>
               Scan the barcode on the device
         </Text>
+        <View style={{flexDirection:'row',marginTop:verticalScale(-30)}}>
+        <TextInput
+                   style={{color:appTheme('font'),fonstSize:Scale(19),width:Scale(200),borderBottomWidth:Scale(1),borderColor:appTheme('inputBorder'),borderRadius:Scale(8), paddingLeft:Scale(10),fontFamily:"Montserrat-Regular"}}
+                   name="boardId"
+                   keyboardType='email-address'
+                   value={boardId}
+                   autoCapitalize="characters"
+                   onChangeText={(e)=>setBoardId(e)}
+                   placeholder="Mac Address"
+                   placeholderTextColor="#A7B0C0"
+                   autoComplete="cc-number"
+        />
+        <TouchableOpacity
+            onPress={() => handleTextBoardSubmit()}
+            style={{width:Scale(30),height:Scale(30)}}
+          >
+            <Image source={appIcons('verify')} resizeMode="contain" style={{ width: Scale(30), height: Scale(30) }} />
+          </TouchableOpacity>
+          </View>
         <ImageBackground source={appImage('camera')} resizeMode="contain"
           style={{height:verticalScale(250),width:Scale(350),alignItems: "center", justifyContent: "center" }}
         >
@@ -49,7 +88,7 @@ const BarCodeScanner = (props) => {
           >
           <QRCodeScanner
       onRead={(e)=>handleBoardSubmit(e)}
-      flashMode={RNCamera.Constants.FlashMode.torch}
+      // flashMode={RNCamera.Constants.FlashMode.torch}
       topContent={
         <Text style={styles.centerText}>
           Go to{' '}

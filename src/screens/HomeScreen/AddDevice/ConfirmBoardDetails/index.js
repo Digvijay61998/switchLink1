@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useCallback } from "react";
-import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity ,RefreshControl} from "react-native";
+import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View ,TouchableOpacity ,SafeAreaView} from "react-native";
 import { EditSwitch } from "../../../../common/component";
 import { COLORS, ICONS, Scale, verticalScale ,appTheme} from "../../../../common/constants";
 import {
@@ -165,13 +165,13 @@ return(
           </View>
           {confirmSave == true ? 
         <TouchableOpacity
-        style={{ width: Scale(335), height: verticalScale(30),bottom: verticalScale(45) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
+        style={{ width: Scale(335), height: verticalScale(30),marginBottom: verticalScale(45),bottom: verticalScale(35) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
         onPress={() => handleCreateDevice()}
           // props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
         >
        <Text style={{color:appTheme('primary'),fontSize:Scale(15),fontWeight:'500',fontFamily: 'Montserrat-Medium'}}>Confirm and Add Board</Text>
         </TouchableOpacity>:<TouchableOpacity
-        style={{ width: Scale(70), height: verticalScale(30),bottom: verticalScale(45) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
+        style={{ width: Scale(100), height: verticalScale(30),marginBottom: verticalScale(45),bottom: verticalScale(35) , backgroundColor: "black", borderRadius: Scale(8), justifyContent: 'center', alignItems: 'center'}}
         onPress={() => handleCreateDevice()}
           // props.navigation.navigate('RootBottomTabStack', { screen: 'CustomRooms' })}
         >
@@ -182,7 +182,7 @@ return(
 )
 }
     return(
-      <>
+      <SafeAreaView>
         <BoardSwitches props/>
         <EditSwitch
           editSwitch={modelVisible}
@@ -192,7 +192,7 @@ return(
           navigation={props.navigation} />
         {/* <Confirmation confirm={deleteModalVisible} navigation={navigation}/> */}
        
-        </>
+        </SafeAreaView>
     )
     
 };

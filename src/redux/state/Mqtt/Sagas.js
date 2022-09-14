@@ -13,9 +13,9 @@ import  * as  MqttAction from "./Action"
 
 
 function* getMQTTswitch(action) {
-  console.log("action",action)
+  console.log("Action@@@@@@@@",action)
     try {
-      const response = yield call(API.get,'/mqtt/state/'+11);
+      const response = yield call(API.get,'/mqtt/state/'+action.payload.data.BasketKey);
       console.log("saga redux @@response",response);
       const result = API.handleResponseForMessage(response);
       if (result) {

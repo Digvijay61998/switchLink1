@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  ScrollView
 } from 'react-native';
 import {
   CONTAINER,
@@ -106,6 +107,7 @@ const UserSignUp = props => {
           First, let's get to know each other better.
         </Text>
       </View>
+      <ScrollView style={{flex:1}}>
       <Formik
         initialValues={{
           Name: '',
@@ -318,7 +320,8 @@ const UserSignUp = props => {
             </View>
           );
         }}
-      </Formik>
+        </Formik>
+        </ScrollView>
     </SafeAreaView>
   );
 };

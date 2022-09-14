@@ -6,16 +6,20 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  NativeModules,
+  Alert
 } from 'react-native';
 import {CONTAINER,Scale,verticalScale,COLORS,FONTS,ICONS,appTheme} from "../../common/constants"
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, useFormik } from 'formik';
 import LinearGradient from 'react-native-linear-gradient'
 import * as yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   loginAccount,
 } from "../../redux/state/Login/Actions";
+import { reset } from '../../theme/rnnavigation';
 
 export default function UserLogin (props){
 
@@ -36,7 +40,7 @@ export default function UserLogin (props){
           }
         })
       )
-      // props.navigation.replace("HomeNavigator");
+    reset("HomeNavigator");
       // userLoginWithCreds(data)
       return true;
     }
@@ -46,6 +50,7 @@ export default function UserLogin (props){
     }
 
   }
+
    //  VALIDATION SCHEMA
    const validationSchema = yup.object().shape({
        email: yup

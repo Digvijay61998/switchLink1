@@ -7,7 +7,9 @@ import HomeScreen from "../screens/HomeScreen"
 const stack = createStackNavigator();
 
 const AuthNavigator = () => (
-  <stack.Navigator headerMode="none" initialRouteName="UserLogin">
+  <stack.Navigator
+  screenOptions={{ headerShown: false }}
+    initialRouteName="UserLogin">
     <stack.Screen name="UserLogin" component={UserLogin} />
      <stack.Screen name="HomeScreen" component={HomeScreen} />
     <stack.Screen name="UserSignUp" component={UserSignUp} /> 

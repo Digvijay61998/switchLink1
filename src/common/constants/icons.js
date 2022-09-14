@@ -87,7 +87,9 @@ const DarkIcons = {
  fan : require('../../assets/icons/fan.png'),
  camera : require('../../assets/icons/camera.png'),
  alarm : require('../../assets/icons/alarm.png'),
- headerBack : require('../../assets/icons/headerBack.png'),
+  headerBack: require('../../assets/icons/headerBack.png'),
+  verify: require('../../assets/icons/verify.png'),
+  
 
 }
 
@@ -116,7 +118,9 @@ const LightIcons = {
  tv : require('../../assets/icons/tv.png'),
  fan : require('../../assets/icons/fan.png'),
  camera : require('../../assets/icons/camera.png'),
- alarm : require('../../assets/icons/alarm.png'),
+  alarm: require('../../assets/icons/alarm.png'),
+  verify: require('../../assets/icons/verify.png'),
+  headerBack: require('../../assets/icons/headerBack.png'),
 }
  
 

@@ -15,6 +15,7 @@ import {
 } from "../../../../redux/state/Mqtt/Action";
 import Paho from 'paho-mqtt';
 import { goBack } from '../../../../theme/rnnavigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
   const client = new Paho.Client(
       "3.7.137.31",
@@ -31,7 +32,7 @@ const BoardName = (props) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const { switchList, deviceList, isFetching, error } = useSelector((state) => state.board);
-  const { SwitchStatus, mqttData} = useSelector((state) => state.mqtt);
+  const { userId, mqttData} = useSelector((state) => state.mqtt);
   const [refreshing, setRefreshing] = useState();
   const [callBack, setcallBack] = useState(false);
 
@@ -39,32 +40,37 @@ const BoardName = (props) => {
   const [isFocus, setIsFocus] = useState(false);
   const [MqttRes, setMqttRes] = useState([])
 
+
+  console.log("refreshing@@@@",value);
   const onRefresh = useCallback(() => {
     setcallBack(true);
-    wait(3000).then(() => setcallBack(false));
+    wait(1000).then(() => setcallBack(false));
   }, []);
 
   function onMessage(message) {
-    if (message.destinationName === "9812b7b3-9490-4342-9dff-0ea28b9e604e")
-        console.log("JSON.parse(message.payloadString)",JSON.parse(message.payloadString));
-      setMqttRes(JSON.parse(message.payloadString))
+    let MQTTboardKey = (JSON.parse(message.payloadString))
+    if (message.destinationName === userId && MQTTboardKey.board_key == boardKey)
+        setMqttRes(JSON.parse(message.payloadString))
   }
   
-  useEffect(() => {
-      client.connect({
-        onSuccess: () => { 
-          console.log("Connected!");
-          setRefreshing('Connected')
-        client.subscribe("9812b7b3-9490-4342-9dff-0ea28b9e604e");
-        client.onMessageArrived = onMessage;
-      },
-      onFailure: () => {
-        console.log("Failed to connect!"); 
-        setRefreshing('disconnect')
-      }
-      });
-  }, [])
 
+
+  useEffect(() => {
+    userId && client.connect({
+      onSuccess: () => { 
+        console.log("Connected!!!", client);
+     setRefreshing('Connected')
+      client.subscribe(userId);
+        client.onMessageArrived = onMessage;
+    },
+    onFailure: () => {
+      console.log("Failed to connect!"); 
+      setRefreshing('disconnect')
+    }
+    });
+  }, [userId != null]);
+
+  
 
   useEffect(() => {
     dispatch(
@@ -93,9 +99,9 @@ const BoardName = (props) => {
   }, [callBack])
 
 
-  const handleSetData = () => {
+  const handleSetData = async () => {
     if (mqttData) {
-      setMqttRes({switchs:mqttData})
+      setMqttRes({ switchs: mqttData })
     } else {
       onRefresh()
     }
@@ -122,7 +128,6 @@ const BoardName = (props) => {
           }
         }));
     }
- 
   }
   const handleFanSpeed = (val) => {
     dispatch(
@@ -136,8 +141,13 @@ const BoardName = (props) => {
 
   
   const BackHandle = () => {
-      client.disconnect()
-      goBack()
+      try {
+        client.disconnect()
+        goBack()
+      } catch {
+        goBack()
+        console.log("error restart the app");
+      }
   }
 
     const backAction = () => {
@@ -161,8 +171,9 @@ const BoardName = (props) => {
     }, []);
 
   const SwitchButton = ({ item }) => {
-    return item?.switch_type == 'L' && (
+    return item?.switch_type == 'L' && item?.is_fan ==false && (
       <TouchableOpacity
+        key={item?.switch_key}
         onPress={() => handleControllSwitch(item)}
         style={{ width: Scale(160) }}>
         {/* <Text style={{ visibility:"none" }}>{count}</Text> */}
@@ -173,7 +184,7 @@ const BoardName = (props) => {
           style={[styles.switch, { borderColor: appTheme('inputBorder') }]}>
           <View style={{ width: '100%' }}>
             <Image source={ICONS.bulb} style={styles.switchIcons} />
-            <Text style={styles.Switchfont}> {item.switch_name}</Text>
+            <Text style={[styles.Switchfont,{color:item?.switch_state == "ON" ? 'white':'black'}]}> {item.switch_name}</Text>
           </View>
           <Image source={icons.coolicon} style={{ transform: [{ rotate: '90deg' }], bottom: verticalScale(22), right: Scale(10) }} />
         </LinearGradient>
@@ -185,6 +196,7 @@ const BoardName = (props) => {
     console.log("item", item);
     return item?.is_fan == true && (
       <TouchableOpacity
+        key={item.switch_key}
       onPress={() => handleControllSwitch(item)}>
       <LinearGradient
         colors={item?.switch_state == "ON" ? ["#A75EFF", "#A75EFF", "#645CFF", "#645CFF"] : ["#FFFF", "#FFFF", "#FFFF", "#FFFF"]}
@@ -196,6 +208,7 @@ const BoardName = (props) => {
           <Text style={{color: appTheme('primary')}}>{item.switch_name}</Text>
           </View>
           <TouchableOpacity
+           key='1'
           style={{ top: verticalScale(11) }}
           onPress={()=>handleFanSpeed({speed:'1',switchKey:item.switch_key})}
           >
@@ -208,7 +221,8 @@ const BoardName = (props) => {
                 }
               }></View>
           </TouchableOpacity>
-        <TouchableOpacity
+          <TouchableOpacity
+           key='2'
           onPress={()=>handleFanSpeed({speed:'2',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
@@ -222,6 +236,7 @@ const BoardName = (props) => {
               }></View>
           </TouchableOpacity>
           <TouchableOpacity
+           key='3'
           onPress={()=>handleFanSpeed({speed:'3',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
@@ -235,6 +250,7 @@ const BoardName = (props) => {
               }></View>
           </TouchableOpacity>
           <TouchableOpacity
+           key='4'
           onPress={()=>handleFanSpeed({speed:'4',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
@@ -248,6 +264,7 @@ const BoardName = (props) => {
               }></View>
           </TouchableOpacity>
           <TouchableOpacity
+           key='5'
           onPress={()=>handleFanSpeed({speed:'5',switchKey:item.switch_key})}
            style={{top:verticalScale(11)}}
           >
@@ -292,6 +309,19 @@ const BoardName = (props) => {
     </View>
     )
   }
+
+  const renderEmpty = () => {
+    return (
+      <View style={{ flex: 1 ,minHeight:verticalScale(250),alignItems:"center",justifyContent:"center"}}>
+        <Text>No Board Found please </Text>
+        <TouchableOpacity
+        omPress={()=>onRefresh()}
+        >
+          <Text style={{ color:'blue'}}>Try again</Text>
+        </TouchableOpacity>
+             </View>
+    )
+  }
   return (
     <>
     <View style={[styles.container,{backgroundColor:appTheme('primary')}]}>
@@ -317,18 +347,17 @@ const BoardName = (props) => {
           
         />
         {/* <Text style={{fontWeight: '600', fontSize: Scale(24)}}>Board Name</Text> */}
-      </View>
+        </View>
       < View style={styles.SwitchContainer}>
       <FlatList
-            data={MqttRes?.switchs}
+            data={refreshing == 'Connected' ?  MqttRes?.switchs : null}
             keyExtractor={item => item.room_key}
             renderItem={({ item, index }) =>  (
-            ( refreshing == 'Connected' ?<>
+             <>
               < SwitchButton item={item} />
                 <Fan_switch item={item} />
-              </> : <View style={{ flex: 1 }}>
-                  <Text>server Is not Connected</Text>
-                </View>)
+              </>
+                
             )}
             numColumns={2}
             // onRefresh={onRefresh}
@@ -336,7 +365,7 @@ const BoardName = (props) => {
           ListHeaderComponent={<SwitchLock item={MqttRes.switchs} />}
             // ListFooterComponent={<Fan_switch item={item} />}
               // ListFooterComponent={renderFooter}
-              // ListEmptyComponent={renderEmpty}
+              ListEmptyComponent={renderEmpty}
             //   onEndReachedThreshold={0.5}
             //   onEndReached = {({distanceFromEnd})=>{
             //       fetchMoreData()
@@ -389,6 +418,7 @@ const styles = StyleSheet.create({
   },
   SwitchContainer: {
     flex: 1,
+    minHeight:verticalScale(300),
     justifyContent:"space-around",
     alignItems: "center",
     flexDirection:"row"
@@ -415,7 +445,7 @@ const styles = StyleSheet.create({
     fontSize: Scale(14),
     fontWeight: '400',
     letterSpacing: -0.25,
-  },
+},
   FanContainer: {
     borderWidth:Scale(1.5),
     width: '97%',
@@ -453,5 +483,6 @@ const styles = StyleSheet.create({
   switchLockFont: {
     fontSize: Scale(16),
     fontWeight: '400',
+    color:"black"
   },
 });

@@ -1,5 +1,6 @@
 import Immutable from "seamless-immutable";
 import {
+  GET_MQTT_SWITCH_USERID,
   GET_MQTT_SWITCH,
   GET_MQTT_SWITCH_SUCCESS,
   GET_MQTT_SWITCH_ERROR,
@@ -13,6 +14,7 @@ import { createReducer } from "../CreateReducer";
 
 const INITIAL_STATE = Immutable({
   mqttData: null,
+  userId:null,
   SwitchStatus:true,
   isFetching: false,
   error: null,
@@ -21,6 +23,14 @@ const INITIAL_STATE = Immutable({
 const reducers = {
   [GET_MQTT_SWITCH]: (state, action) => {
     return Immutable.merge(state, { mqttData:null, isFetching: true });
+  },
+  [GET_MQTT_SWITCH_USERID]: (state, action) => {
+    console.log("action++@@@@@@@",action);
+    return Immutable.merge(state, {
+      userId: action.payload.data.userId,
+      isFetching: false,
+      error: null,
+    });
   },
   [GET_MQTT_SWITCH_SUCCESS]: (state, action) => {
     console.log("action++@@@@@@@",action);

@@ -27,18 +27,20 @@ function* loginAccount(action) {
         yield put(LoginActions.loginAccountSuccess(result.data));
         try {
           AsyncStorage.setItem('userToken', JSON.stringify(result.data.token));
+           AsyncStorage.setItem("userId",(result.data.userId))
+          yield put(RoomAction.getRoomsList('calling Room list API'));
         } catch (error) {
           console.log('error: ', error);
         }
-        yield call(reset, 'HomeNavigator');
         Snackbar.show({
           text: 'User Login Succesfully',
           duration: 3000,
         });
       }
-    } else yield put(LoginActions.loginAccountError(result));
+    }
+    // else yield put(LoginActions.loginAccountError(result));
   } catch (error) {
-    if (error.response.status == 403) {
+    if (error?.response?.status == 403) {
       yield put(LoginActions.loginAccountError(error.response.data));
       Snackbar.show({
         backgroundColor:"red",
@@ -169,7 +171,7 @@ function* userNewPassword(action) {
     const result = API.handleLoginResponse(response);
     console.log("result@@@@@@@",result);
     if (result) {
-      yield put(RoomAction.getRoomsList());
+      yield put(RoomAction.getRoomsList('calling Room list API'));
       if (result.success == true) {
         Snackbar.show({
           backgroundColor:'green',

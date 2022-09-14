@@ -22,20 +22,13 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const {roomList,isFetching, error } = useSelector((state) => state.room);
   console.log("isFetching",roomList, isFetching, error);
-  
-  useEffect(() => {
-    console.log("CustomRooms");
-    dispatch(
-      getRoomsList(),
-  );
-},[])
-         
+
   return (
     <View style={{flex: 1}}>
       {/* {SetWifiCredentials (props)} */}
       {/* <CreateNewRoom props /> */}
       {/* <AddRoom prop /> */}
-        <CustomRooms navigation={navigation} />
+      <CustomRooms navigation={navigation} />
       {/* {renderHederComponents()} */}
     </View>
   );

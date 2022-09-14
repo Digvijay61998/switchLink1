@@ -17,7 +17,8 @@ const INITIAL_STATE = Immutable({
 });
 
 const reducers = {
-  [GET_ROOM_LIST]: (state, { data }) => {
+  [GET_ROOM_LIST]: (state, action) => {
+    console.log("action",action);
     return Immutable.merge(state, {
       roomList:null,
       isFetching: true,

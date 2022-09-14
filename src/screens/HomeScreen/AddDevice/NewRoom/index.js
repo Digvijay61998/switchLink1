@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,Image,FlatList,TouchableOpacity,TextInput} from 'react-native'
+import { StyleSheet, Text, View ,Image,SafeAreaView,TouchableOpacity,TextInput} from 'react-native'
 import React,{useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, ICONS, Scale, verticalScale, IMAGE ,appTheme} from '../../../../common/constants'
@@ -46,7 +46,7 @@ console.log("error",error);
     
   }
   return (
-    <View style={{flex:1,backgroundColor:appTheme('primary')}}>
+    <SafeAreaView style={{flex:1,backgroundColor:appTheme('primary')}}>
         <View style={{flexDirection:'row',justifyContent:'space-around',backgroundColor:appTheme('primary'),height:verticalScale(130),paddingTop:verticalScale(15),zIndex: 1,}}>
         <Image
               style={styles.locationIcon}
@@ -105,7 +105,7 @@ console.log("error",error);
       
     </View>
     </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -7,22 +7,31 @@ import { useDispatch, useSelector ,connect} from "react-redux";
 import {
   themeChange
 } from "../../redux/state/Theme/Actions";
+import { getMQTTuserId } from '../../redux/state/Mqtt/Action';
 const Splash = (props) => {
   const dispatch = useDispatch();
   async function handleTheme() { 
     const userTheme = await AsyncStorage.getItem("userTheme");
-    console.log("@@@@ User Token================", userTheme);
+    const userId = await AsyncStorage.getItem('userId');
+    console.log("@@@@ User Token================", userId);
     dispatch(
       themeChange({
         data: { theme: userTheme }
       }),
     );
+    dispatch(
+      getMQTTuserId({
+        data: {
+          userId: userId,
+        }
+      }));
   }
 
   async function componentDidMount() {
  
         let userToken = (await AsyncStorage.getItem("userToken"));
-        console.log("@@@@ User Token================", userToken);
+    console.log("@@@@ User Token================", userToken);
+  
     setTimeout(() => {
           console.log("AuthStackScreen is navigated ");
           if (userToken) {
